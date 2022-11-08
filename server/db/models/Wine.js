@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../db");
 
-module.exports = db.define("wine", {
+const Wine = db.define("wine", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -63,3 +63,5 @@ module.exports = db.define("wine", {
       "https://cdn.thecoolist.com/wp-content/uploads/2021/05/Types-of-wine.jpg",
   },
 });
+
+module.exports = Wine
