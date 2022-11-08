@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../db");
 
-module.exports = db.define("cheese", {
+const Cheese = db.define("cheese", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -66,3 +66,5 @@ module.exports = db.define("cheese", {
       "https://images-prod.healthline.com/hlcmsresource/images/AN_images/healthiest-cheese-1296x728-swiss.jpg",
   },
 });
+
+module.exports = Cheese
