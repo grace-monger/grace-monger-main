@@ -1,7 +1,9 @@
 const router = require("express").Router();
-module.exports = router;
 
 router.use("/users", require("./users"));
+
+router.use("/wines", require("./wines"));
+router.use("/cheeses", require("./cheeses"));
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
@@ -9,4 +11,4 @@ router.use((req, res, next) => {
   next(error);
 });
 
-// I should add some routes!
+module.exports = router;
