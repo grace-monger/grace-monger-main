@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const db = require("./database");
+const db = require("../db");
 
 module.exports = db.define("wine", {
   name: {
