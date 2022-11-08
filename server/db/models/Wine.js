@@ -28,7 +28,7 @@ module.exports = db.define("wine", {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isIn: [["red", "white", "orange", "rosé"]],
+      isIn: [["red", "white", "orange", "rosé", "sparkling"]],
     },
   },
   typeOfGrape: {
