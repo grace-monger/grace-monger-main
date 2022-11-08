@@ -10,10 +10,10 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+  // Creating Cheeses
+  const cheeses = await Promise.all([
+    Cheese.create({ username: 'cody', password: '123' }),
+    Cheese.create({ username: 'murphy', password: '123' }),
   ])
 
   console.log(`seeded ${users.length} users`)
