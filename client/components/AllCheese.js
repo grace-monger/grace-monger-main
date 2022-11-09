@@ -12,16 +12,22 @@ const AllCheese = (props) => {
   return (
     <div>
       <h1>All Cheeses</h1>
-      {cheeses.map((singleCheese) => {
-        return (
-          <article key={singleCheese.id}>
-            <Link key={singleCheese.id} to={`/cheeses/${singleCheese.id}`}>
-              <img src={singleCheese.imageUrl} />
-              <h2>{singleCheese.name}</h2>
-            </Link>
-          </article>
-        );
-      })}
+      <div className="element-list">
+        {cheeses.map((singleCheese) => {
+          return (
+            <article key={singleCheese.id} className="single-element">
+              <Link key={singleCheese.id} to={`/cheeses/${singleCheese.id}`}>
+                <img
+                  className="product-img"
+                  width="150px"
+                  src={singleCheese.imageUrl}
+                />
+                <h2>{singleCheese.name}</h2>
+              </Link>
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 };
