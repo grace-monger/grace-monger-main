@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchWinePair } from "../store/singleWine";
-import { fetchSingleWine } from "../store/wines";
+import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 
 const SingleWine = (props) => {
   useEffect(() => {
-    props.fetchSingleWine();
+    props.fetchSingleWine(props.match.params.id);
   }, []);
 
+  console.log(props);
   const { wine } = props;
+
   return (
     <div>
       <h1>Here is one wine:</h1>
@@ -18,7 +19,7 @@ const SingleWine = (props) => {
         <h2>{wine.year}</h2>
         <h2>{wine.type}</h2>
         <h2>{wine.typeOfGrape}</h2>
-        <img width="300px" src={singleWine.imageUrl} />
+        <img width="300px" src={wine.imageUrl} />
         <h2>{wine.price}</h2>
         <p>{wine.tastingNotes}</p>
       </div>
@@ -32,26 +33,26 @@ const SingleWine = (props) => {
         <button className="add-to-cart">Add to cart</button>
       </div>
 
-      <h2>Pairs well with:</h2>
+      {/* <h2>Pairs well with:</h2>
       <div>
         <h2>{winePair.name}</h2>
         <img width="300px" src={winePair.imageUrl} />
-      </div>
+      </div> */}
     </div>
   );
 };
 
 const mapState = (storeState) => {
   return {
-    singleWine: storeState.wine,
-    winePair: storeState.cheese,
+    wine: storeState.singleWineReducer,
+    // winePair: storeState.cheese,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleWine: (id) => dispatch(fetchSingleWine(id)),
-    fetchWinePair: (id) => dispatch(fetchWinePair(id)),
+    // fetchWinePair: (id) => dispatch(fetchWinePair(id)),
   };
 };
 
