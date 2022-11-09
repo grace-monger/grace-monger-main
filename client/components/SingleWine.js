@@ -19,7 +19,7 @@ const SingleWine = (props) => {
         <h2>{wine.typeOfGrape}</h2>
         <img width="300px" src={singleWine.imageUrl} />
         <h2>{wine.price}</h2>
-        <p>{wine.tasingNotes}</p>
+        <p>{wine.tastingNotes}</p>
       </div>
       <div>
         <button className="add-to-cart">Add to cart</button>
