@@ -33,6 +33,10 @@ const SingleWine = (props) => {
       </div>
 
       <h2>Pairs well with:</h2>
+      <div>
+        <h2>{winePair.name}</h2>
+        <img width="300px" src={winePair.imageUrl} />
+      </div>
     </div>
   );
 };
