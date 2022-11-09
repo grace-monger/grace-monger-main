@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 router.use("/users", require("./users"));
+router.use('/order', require('./order'));
 
 router.use("/wines", require("./wines"));
 router.use("/cheeses", require("./cheeses"));
