@@ -10,7 +10,9 @@ const User = require("./models/User");
 //associations could go here!
 
 Cheese.hasOne(Wine);
-Wine.hasOne(Cheese);
+Wine.belongsTo(Cheese);
+Wine.hasOne(Cheese)
+Cheese.belongTo(Wine)
 
 module.exports = {
   db,
