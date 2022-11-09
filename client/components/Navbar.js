@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 
 const Navbar = ({ isLoggedIn }) => {
-
   const handleClick = () => {
     dispatch(logout());
   };
 
   return (
     <div>
-      <img src='cheeseLogo.png' height='100px' width='100px'></img>
+      <img
+        src="cheeseLogo.png"
+        height="100px"
+        width="100px"
+        className="cheeseLogo"
+      ></img>
       <h1>Grace Monger</h1>
       <nav>
         {isLoggedIn ? (
@@ -25,7 +29,7 @@ const Navbar = ({ isLoggedIn }) => {
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
-            <Link to='/'>Home</Link>
+            <Link to="/">Home</Link>
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
