@@ -108,19 +108,20 @@ const wineData = [
       "A racy palate with flavors of bright crushed strawberries and raspberries combine with deep floral notes of lilac and violets.",
     imageUrl:
       "https://cdn.powered-by-nitrosell.com/product_images/19/4564/large-21cero.jpg",
-  }
+  },
 ];
 
 //PAIRINGS
-//Laurent Perrier - Reading Raclette
-//Les Boursicottes Sancerre - Firefly Farms Chevre
-//GD Vajra Ravera Barolo - Jakes Gouda
-//Leth Ried Schafflerberg Gruner Veltliner - Harbison
-//Blacksmith Hell Yeah Pinotage - Hooks Blue
-//Mosca Orange - Snow Camp
-//Gulp Hablo Garnacha - Maple Smoked Cheddar
-//Marinara Red Blend - Parmigiano
-//Gregoletto Prosecco - Appalachian
-//Cedergreen Viola Rose - Fresh Mozzarella
+// wine             Cheeses
+// 1 Laurent Perrier - Reading Raclette 3
+// 2 Les Boursicottes Sancerre - Firefly Farms Chevre 10
+//3 GD Vajra Ravera Barolo - Jakes Gouda 5
+//4 Leth Ried Schafflerberg Gruner Veltliner - Harbison 2
+// 5 Blacksmith Hell Yeah Pinotage - Hooks Blue 4
+// 6 Mosca Orange - Snow Camp 9
+// 7 Gulp Hablo Garnacha - Maple Smoked Cheddar 6
+// 8 Marinara Red Blend - Parmigiano 1
+// 9 Gregoletto Prosecco - Appalachian 7
+// 10 Cedergreen Viola Rose - Fresh Mozzarella id 8
 
 module.exports = wineData;

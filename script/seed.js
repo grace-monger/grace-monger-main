@@ -1,5 +1,5 @@
 "use strict";
-
+const { BulkRecordError } = require("sequelize");
 const { db, User, Cheese, Wine } = require("../server/db");
 const cheeseData = require("./cheeseData");
 const wineData = require("./wineData");
@@ -25,6 +25,13 @@ const seed = async () => {
         return Wine.create(wine);
       })
     );
+
+
+    // await Promise.all(
+    //  cheeseData.map((oneCheese) => {
+    //   Wine.setCheese(oneCheese)
+    // })
+    // )
 
     console.log(`seeded ${cheeseData.length} cheeses`);
     console.log(`seeded ${wineData.length} wines`);
