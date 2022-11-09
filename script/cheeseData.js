@@ -30,7 +30,7 @@ const cheeseData = [
     description:
       "Reading Raclette is a semi-firm wheel of raw cows milk cheese that is washed with saltwater brine as it matures to the tender age of 3-4 months. The paste is pliant and supple, with a heady flavor that favors fruity and milky notes. The melt-in-your-mouth cheese is graced with a kick of saltiness that finishes off on the palate.",
     imageUrl:
-      "https://cdn.shopify.com/s/files/1/1444/2808/products/Reading-Raclette_580x.jpg?v=1560992088",
+      "https://d28niecfu6trh0.cloudfront.net/b2cf7fec-da23-44c4-8929-a99c7a9f2df0@2x.jpg",
   },
   {
     name: "Hooks Blue",
@@ -96,7 +96,7 @@ const cheeseData = [
     description:
       "The cows milk used to make Snow Camp is sourced from a neighboring farm, and transformed into a delicate bloomy rind button. When young, the cheese is bright, lactic and tangy. Over time the cheese softens and the flavors intensify, evoking creme fraiche, mushrooms and cultured butter. Each wheel weighs 4oz and is aged 4-6 weeks.",
     imageUrl:
-      "https://cdn.shopify.com/s/files/1/1444/2808/products/Snow-Camp_580x.jpg?v=1622759269",
+      "https://static.wixstatic.com/media/17b4be_a8f4771c6fd449709c869655c6abe055~mv2.jpg/v1/fill/w_584,h_690,al_c,q_85/17b4be_a8f4771c6fd449709c869655c6abe055~mv2.jpg",
   },
   {
     name: "Firefly Farms Chevre",
@@ -107,7 +107,7 @@ const cheeseData = [
     description:
       "Creamy fresh chevre from the southwestern corner of Maryland. Firefly Farms has been making cheese since 2002, and supports a network of family farms within a 30 mile radius by purchasing their milk and turning it into top quality cheese.",
     imageUrl:
-      "https://cdn.shopify.com/s/files/1/1444/2808/products/fireflyfarmsplainchevreonsaxelbypaperwebsize_580x.jpg?v=1620769242",
+      "https://eurousa.com/wp-content/uploads/076559-firefly-farms-fresh-goat-cheese-01.jpg",
   },
 ];
 
