@@ -25,11 +25,14 @@ const Navbar = ({ isLoggedIn }) => {
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
-            <li><a href='/'>Home</a></li>
+            <Link to='/'>Home</Link>
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <i class="bi bi-search-heart"></i>
+            <i class="bi bi-person"></i>
+            <i class="bi bi-cart4"></i>
           </ul>
         )}
       </nav>
