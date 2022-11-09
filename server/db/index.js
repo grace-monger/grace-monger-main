@@ -12,7 +12,7 @@ const User = require("./models/User");
 Cheese.hasOne(Wine);
 Wine.belongsTo(Cheese);
 Wine.hasOne(Cheese)
-Cheese.belongTo(Wine)
+Cheese.belongsTo(Wine)
 
 module.exports = {
   db,
