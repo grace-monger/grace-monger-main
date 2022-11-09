@@ -26,10 +26,10 @@ const Navbar = ({ isLoggedIn }) => {
             <Link to="/">Home</Link>
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
-            <i class="bi bi-search-heart"></i>
-            <i class="bi bi-person"></i>
+            <i className="bi bi-search-heart"></i>
+            <i className="bi bi-person"></i>
             <Link to="/order">
-              <i class="bi bi-cart4"></i>
+              <i className="bi bi-cart4"></i>
             </Link>
             <a href="#" onClick={handleClick}>
               Logout
@@ -43,10 +43,10 @@ const Navbar = ({ isLoggedIn }) => {
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <i class="bi bi-search-heart"></i>
-            <i class="bi bi-person"></i>
+            <i className="bi bi-search-heart"></i>
+            <i className="bi bi-person"></i>
             <Link to="/order">
-              <i class="bi bi-cart4"></i>
+              <i className="bi bi-cart4"></i>
             </Link>
           </ul>
         )}
