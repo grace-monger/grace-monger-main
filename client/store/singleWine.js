@@ -37,7 +37,7 @@ export const fetchSingleWine = (id) => {
 export const fetchWinePair = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/wines/${id}/cheeses`);
+      const { data } = await axios.get(`/api/wines/${id}`);
     } catch (error) {
       throw error;
     }
