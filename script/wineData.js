@@ -111,4 +111,16 @@ const wineData = [
   }
 ];
 
+//PAIRINGS
+//Laurent Perrier - Reading Raclette
+//Les Boursicottes Sancerre - Firefly Farms Chevre
+//GD Vajra Ravera Barolo - Jakes Gouda
+//Leth Ried Schafflerberg Gruner Veltliner - Harbison
+//Blacksmith Hell Yeah Pinotage - Hooks Blue
+//Mosca Orange - Snow Camp
+//Gulp Hablo Garnacha - Maple Smoked Cheddar
+//Marinara Red Blend - Parmigiano
+//Gregoletto Prosecco - Appalachian
+//Cedergreen Viola Rose - Fresh Mozzarella
+
 module.exports = wineData;
