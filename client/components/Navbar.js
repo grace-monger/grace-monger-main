@@ -25,9 +25,9 @@ const Navbar = ({ isLoggedIn }) => {
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
-            <li>Home</li>
-            <li>Cheeses</li>
-            <li>Wines</li>
+            <li><a href='/'>Home</a></li>
+            <Link to="/cheeses">Cheese</Link>
+            <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </ul>
