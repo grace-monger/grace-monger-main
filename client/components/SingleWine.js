@@ -22,6 +22,12 @@ const SingleWine = (props) => {
         <p>{wine.tastingNotes}</p>
       </div>
       <div>
+        <input
+          type="number"
+          min="0"
+          step="1"
+          className="quantity-incrementor"
+        />
         <button className="add-to-cart">Add to cart</button>
       </div>
     </div>
