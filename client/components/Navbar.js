@@ -10,13 +10,15 @@ const Navbar = ({ isLoggedIn }) => {
 
   return (
     <div>
-      <img
-        src="cheeseLogo.png"
-        height="100px"
-        width="100px"
-        className="cheeseLogo"
-      ></img>
-      <h1>Grace Monger</h1>
+      <header>
+        <img
+          src="cheeseLogo.png"
+          height="100px"
+          width="100px"
+          className="cheeseLogo"
+        ></img>
+        <h1>Grace Monger</h1>
+      </header>
       <nav>
         {isLoggedIn ? (
           <ul>
