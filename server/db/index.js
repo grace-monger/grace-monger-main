@@ -9,8 +9,8 @@ const User = require("./models/User");
 
 //associations could go here!
 
-Cheese.hasMany(Wine);
-Wine.hasMany(Cheese);
+Cheese.hasOne(Wine);
+Wine.hasOne(Cheese);
 
 module.exports = {
   db,
