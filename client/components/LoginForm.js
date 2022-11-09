@@ -5,25 +5,26 @@ import {authenticate} from '../store'
 /**
  * COMPONENT
  */
-const AuthForm = props => {
+const LoginForm = props => {
   const {name, displayName, error} = props
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const formName = evt.target.name
-    const username = evt.target.username.value
+    const userName = evt.target.userName.value
     const password = evt.target.password.value
-    this.props.authenticate(username, password, formName)
+    props.authenticate(userName, password, formName)
   }
 
   return (
     <div>
+    <h3>Log In Here</h3>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="username">
+          <label htmlFor="userName">
             <small>Username</small>
           </label>
-          <input name="username" type="text" />
+          <input name="userName" type="text" />
         </div>
         <div>
           <label htmlFor="password">
@@ -55,19 +56,11 @@ const mapLogin = state => {
   }
 }
 
-const mapSignup = state => {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.auth.error
-  }
-}
-
 const mapDispatch = dispatch => {
   return {
-      authenticate: (username, password, formName) => dispatch(authenticate(username, password, formName))
+      authenticate: (userName, password, formName) => dispatch(authenticate(userName, password, formName))
     }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(LoginForm)
+
