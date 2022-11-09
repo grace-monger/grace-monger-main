@@ -4,7 +4,7 @@ const { Wine } = require("../db");
 // GET route = /api/wines
 WineRouter.get("/", async (req, res, next) => {
   try {
-    const allWines = await Wine.findAll();
+    const allWines = await Wines.findAll();
     res.status(200).send(allWines);
   } catch (error) {
     next(error);
@@ -20,3 +20,5 @@ WineRouter.get("/:id/wines", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = WineRouter;
