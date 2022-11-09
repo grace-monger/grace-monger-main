@@ -20,3 +20,25 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.element-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.single-element {
+  width: 15rem;
+  margin: 0.5rem;
+  padding: 0.5rem; 
+  border: 3px solid black; 
+}
+
+.product-image {
+  width: 60%;
+  margin: auto auto 2rem auto;
+  height: auto; 
+  padding: 0.5rem;
+  background-color: transparent;
+}
