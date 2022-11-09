@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCheeseThunk } from "../store/cheeses";
 import { Link } from "react-router-dom";
 
-// show all cheeses
 const AllCheese = (props) => {
   useEffect(() => {
-    props.getCheese();
+    props.getCheeseThunk();
   }, []);
 
   const { cheeses } = props;
@@ -15,14 +14,12 @@ const AllCheese = (props) => {
       <h1>All Cheeses</h1>
       {cheeses.map((singleCheese) => {
         return (
-          <div key={singleCheese.id}>
+          <article key={singleCheese.id}>
             <Link key={singleCheese.id} to={`/cheeses/${singleCheese.id}`}>
-              <article>
-                <img src={singleCheese.imageUrl} />
-              </article>
+              <img src={singleCheese.imageUrl} />
               <h2>{singleCheese.name}</h2>
             </Link>
-          </div>
+          </article>
         );
       })}
     </div>
@@ -31,13 +28,13 @@ const AllCheese = (props) => {
 
 const mapState = (state) => {
   return {
-    cheeses: state.cheeseReducer,
+    cheeses: state.cheeses,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    getCheese: () => {
+    getCheeseThunk: () => {
       dispatch(getCheeseThunk());
     },
   };

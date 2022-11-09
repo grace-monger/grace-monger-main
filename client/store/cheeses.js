@@ -4,7 +4,7 @@ import axios from "axios"
 const GET_ALL_CHEESES = "GET_ALL_CHEESES";
 
 //action creators
-const getCheeses = (cheeses) => {
+const _getCheese = (cheeses) => {
   return {
     type: GET_ALL_CHEESES,
     cheeses,
@@ -16,7 +16,7 @@ export const getCheeseThunk = () => {
   return async (dispatch) => {
     try {
       const { data: cheeses } = axios.get(`/api/cheeses`);
-      dispatch(getCheeses(cheeses));
+      dispatch(_getCheese(cheeses));
     } catch (error) {
       console.error(error);
     }
