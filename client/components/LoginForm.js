@@ -11,20 +11,20 @@ const LoginForm = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const formName = evt.target.name
-    const username = evt.target.username.value
+    const userName = evt.target.userName.value
     const password = evt.target.password.value
-    props.authenticate(username, password, formName)
+    props.authenticate(userName, password, formName)
   }
 
   return (
     <div>
-    <h3>Sign Up Here</h3>
+    <h3>Log In Here</h3>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="username">
+          <label htmlFor="userName">
             <small>Username</small>
           </label>
-          <input name="username" type="text" />
+          <input name="userName" type="text" />
         </div>
         <div>
           <label htmlFor="password">
@@ -58,7 +58,7 @@ const mapLogin = state => {
 
 const mapDispatch = dispatch => {
   return {
-      authenticate: (username, password, formName) => dispatch(authenticate(username, password, formName))
+      authenticate: (userName, password, formName) => dispatch(authenticate(userName, password, formName))
     }
 }
 
