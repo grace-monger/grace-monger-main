@@ -9,7 +9,7 @@ import singleWineReducer from "./singleWine";
 
 const reducer = combineReducers({
   auth,
-  cheeseReducer,
+  cheeses: cheeseReducer,
   wines: winesReducer,
   singleWineReducer,
 });

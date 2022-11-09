@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getCheeseThunk } from "../store/cheeses";
 import { Link } from "react-router-dom";
@@ -21,7 +21,6 @@ const AllCheese = (props) => {
                 <img src={singleCheese.imageUrl} />
               </article>
               <h2>{singleCheese.name}</h2>
-              <h5>{singleCheese.price}</h5>
             </Link>
           </div>
         );
