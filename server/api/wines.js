@@ -1,10 +1,10 @@
-const WineRouter = require("express").Router();
+const wineRouter = require("express").Router();
 const { Wine } = require("../db");
 
 // GET route = /api/wines
-WineRouter.get("/", async (req, res, next) => {
+wineRouter.get("/", async (req, res, next) => {
   try {
-    const allWines = await Wines.findAll();
+    const allWines = await Wine.findAll();
     res.status(200).send(allWines);
   } catch (error) {
     next(error);
@@ -12,7 +12,7 @@ WineRouter.get("/", async (req, res, next) => {
 });
 
 // GET route = /api/:id
-WineRouter.get("/:id/wines", async (req, res, next) => {
+wineRouter.get("/:id/wines", async (req, res, next) => {
   try {
     const wine = await Wine.findByPk(req.params.id);
     res.json(wine);
@@ -21,4 +21,4 @@ WineRouter.get("/:id/wines", async (req, res, next) => {
   }
 });
 
-module.exports = WineRouter;
+module.exports = wineRouter;
