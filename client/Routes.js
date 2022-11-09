@@ -6,6 +6,7 @@ import AllCheese from "./components/AllCheese";
 import AllWines from "./components/AllWines";
 import SingleWine from "./components/SingleWine";
 import Home from "./components/Home";
+import Order from './components/Order'
 import { me } from "./store";
 
 /**
@@ -34,6 +35,7 @@ class Routes extends Component {
             <Route path="/wines/:id" component={SingleWine} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path='/order' component={Order} />
           </Switch>
         )}
       </div>

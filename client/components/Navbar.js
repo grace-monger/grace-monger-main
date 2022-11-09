@@ -32,7 +32,7 @@ const Navbar = ({ isLoggedIn }) => {
             <Link to="/signup">Sign Up</Link>
             <i class="bi bi-search-heart"></i>
             <i class="bi bi-person"></i>
-            <i class="bi bi-cart4"></i>
+            <Link to='/order'><i class="bi bi-cart4"></i></Link>
           </ul>
         )}
       </nav>
