@@ -26,8 +26,8 @@ const seed = async () => {
       })
     );
 
-    console.log("seeded ${cheeseData.length} cheeses");
-    console.log("seeded ${wineData.length} wines");
+    console.log(`seeded ${cheeseData.length} cheeses`);
+    console.log(`seeded ${wineData.length} wines`);
     console.log("seeded successfully");
   } catch (err) {
     console.log(err);
