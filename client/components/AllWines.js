@@ -19,9 +19,6 @@ const AllWines = (props) => {
               <img width="150px" src={wine.imageUrl} />
               <h2>{wine.name}</h2>
             </Link>
-            <div>
-              <button className="add-to-cart">Add to cart</button>
-            </div>
           </article>
         );
       })}
