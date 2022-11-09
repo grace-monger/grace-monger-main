@@ -3,10 +3,11 @@ const { Cheese } = require("../db");
 
 // console.log("cheese", Cheese)
 
+// Get route for all cheeses 
 cheeseRouter.get("/", async (req, res, next) => {
   try {
     const allCheeses = await Cheese.findAll();
-    res.json(allCheeses);
+    res.status(200).send(allCheeses);
   } catch (error) {
     next(error);
   }
