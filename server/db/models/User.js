@@ -45,6 +45,14 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
+  userType: {
+    type: DataTypes.STRING,
+    defaultValue: 'user',
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   // hashedPassword: {
   //   type: DataTypes.STRING(64),
   //   validate: {
