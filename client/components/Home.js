@@ -1,26 +1,26 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
 /**
  * COMPONENT
  */
-export const Home = props => {
-  const {userName} = props
+export const Home = (props) => {
+  const { userName } = props;
 
   return (
     <div>
-      <h3>Welcome, {userName}</h3>
+      <h3>Welcome {userName}</h3>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    userName: state.auth.userName
-  }
-}
+    userName: state.auth.userName,
+  };
+};
 
-export default connect(mapState)(Home)
+export default connect(mapState)(Home);
