@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSingleWine } from "../store/wines";
 
@@ -18,6 +17,7 @@ const SingleWine = (props) => {
         <h2>{wine.year}</h2>
         <h2>{wine.type}</h2>
         <h2>{wine.typeOfGrape}</h2>
+        <img width="300px" src={singleWine.imageUrl} />
         <h2>{wine.price}</h2>
         <p>{wine.tasingNotes}</p>
       </div>
@@ -27,3 +27,17 @@ const SingleWine = (props) => {
     </div>
   );
 };
+
+const mapState = (storeState) => {
+  return {
+    singleWine: storeState.wine,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    fetchSingleWine: (id) => dispatch(fetchSingleWine(id)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(SingleWine);
