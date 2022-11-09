@@ -19,13 +19,20 @@ const Navbar = ({ isLoggedIn }) => {
       <h1>Grace Monger</h1>
       <nav>
         {isLoggedIn ? (
-          <div>
+          <ul>
             {/* The navbar will show these links after you log in */}
             <Link to="/">Home</Link>
+            <Link to="/cheeses">Cheese</Link>
+            <Link to="/wines">Wine</Link>
+            <i class="bi bi-search-heart"></i>
+            <i class="bi bi-person"></i>
+            <Link to="/order">
+              <i class="bi bi-cart4"></i>
+            </Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-          </div>
+          </ul>
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
@@ -36,7 +43,9 @@ const Navbar = ({ isLoggedIn }) => {
             <Link to="/signup">Sign Up</Link>
             <i class="bi bi-search-heart"></i>
             <i class="bi bi-person"></i>
-            <Link to='/order'><i class="bi bi-cart4"></i></Link>
+            <Link to="/order">
+              <i class="bi bi-cart4"></i>
+            </Link>
           </ul>
         )}
       </nav>
