@@ -23,27 +23,35 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route exact path="/cheeses" component={AllCheese} />
-            <Route exact path="/wines" component={AllWines} />
-            <Route path="/wines/:id" component={SingleWine} />
-            {/* <Route path="/login" component={Login} /> */}
-            <Route path="/order" component={Order} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/cheeses" component={AllCheese} />
-            <Route exact path="/wines" component={AllWines} />
-            <Route path="/wines/:id" component={SingleWine} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/order" component={Order} />
-          </Switch>
-        )}
+        <div id="content">
+          {isLoggedIn ? (
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route exact path="/cheeses" component={AllCheese} />
+              <Route exact path="/wines" component={AllWines} />
+              <Route path="/wines/:id" component={SingleWine} />
+              {/* <Route path="/login" component={Login} /> */}
+              <Route path="/order" component={Order} />
+              <Redirect to="/home" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/cheeses" component={AllCheese} />
+              <Route exact path="/wines" component={AllWines} />
+              <Route path="/wines/:id" component={SingleWine} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/order" component={Order} />
+            </Switch>
+          )}
+        </div>
+        <footer>
+          <p>
+            Authors: Jackie Manginelli, Alison Phanthavong, & Anahis Valenzuela
+          </p>
+          <p>Grace Hopper at FullStack Academy: Grace Shopper Project</p>
+        </footer>
       </div>
     );
   }
