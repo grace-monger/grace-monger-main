@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 // action types
 const GET_ALL_CHEESES = "GET_ALL_CHEESES";
@@ -15,7 +15,7 @@ const _getCheese = (cheeses) => {
 export const getCheeseThunk = () => {
   return async (dispatch) => {
     try {
-      const { data: cheeses } = axios.get(`/api/cheeses`);
+      const { data: cheeses } = await axios.get(`/api/cheeses`);
       dispatch(_getCheese(cheeses));
     } catch (error) {
       console.error(error);
