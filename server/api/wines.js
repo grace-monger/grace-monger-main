@@ -12,7 +12,7 @@ wineRouter.get("/", async (req, res, next) => {
 });
 
 // GET route = /api/:id
-wineRouter.get("/:id/wines", async (req, res, next) => {
+wineRouter.get("/:id", async (req, res, next) => {
   try {
     const wine = await Wine.findByPk(req.params.id);
     res.json(wine);
