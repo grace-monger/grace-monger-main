@@ -1,5 +1,5 @@
 const cheeseRouter = require("express").Router();
-const { Cheese } = require("../db");
+const { Cheese, Wine } = require("../db");
 
 // console.log("cheese", Cheese)
 
@@ -12,5 +12,21 @@ cheeseRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+// get route for single cheese 
+cheeseRouter.get("/id", async (req, res, next) => {
+  try {
+    const cheeseAndPair = await Cheese.findByPk(req.params.id, {
+      include: [
+        {
+          model: Wine
+        }
+      ]
+    })
+    res.status(200).send(cheeseAndPair)
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = cheeseRouter;
