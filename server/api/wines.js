@@ -1,5 +1,5 @@
 const wineRouter = require("express").Router();
-const { Wine } = require("../db");
+const { Wine, Cheese } = require("../db");
 
 // GET route = /api/wines
 wineRouter.get("/", async (req, res, next) => {
@@ -14,8 +14,14 @@ wineRouter.get("/", async (req, res, next) => {
 // GET route = /api/:id
 wineRouter.get("/:id", async (req, res, next) => {
   try {
-    const wine = await Wine.findByPk(req.params.id);
-    res.json(wine);
+    const wineAndPair = await Wine.findByPk(req.params.id, {
+      include: [
+        {
+          model: Cheese,
+        },
+      ],
+    });
+    res.json(wineAndPair);
   } catch (error) {
     next(error);
   }

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { fetchWinePair } from "../store/singleWine";
 import { fetchSingleWine } from "../store/wines";
 
 const SingleWine = (props) => {
@@ -30,6 +31,8 @@ const SingleWine = (props) => {
         />
         <button className="add-to-cart">Add to cart</button>
       </div>
+
+      <h2>Pairs well with:</h2>
     </div>
   );
 };
@@ -37,12 +40,14 @@ const SingleWine = (props) => {
 const mapState = (storeState) => {
   return {
     singleWine: storeState.wine,
+    winePair: storeState.cheese,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleWine: (id) => dispatch(fetchSingleWine(id)),
+    fetchWinePair: (id) => dispatch(fetchWinePair(id)),
   };
 };
 
