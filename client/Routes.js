@@ -7,7 +7,7 @@ import AllCheese from "./components/AllCheese";
 import AllWines from "./components/AllWines";
 import SingleWine from "./components/SingleWine";
 import Home from "./components/Home";
-import Order from './components/Order'
+import Order from "./components/Order";
 import { me } from "./store";
 
 /**
@@ -30,13 +30,13 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/cheeses" component={AllCheese} />
             <Route exact path="/wines" component={AllWines} />
             <Route path="/wines/:id" component={SingleWine} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path='/order' component={Order} />
+            <Route path="/order" component={Order} />
           </Switch>
         )}
       </div>
