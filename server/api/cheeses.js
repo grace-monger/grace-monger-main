@@ -17,11 +17,11 @@ cheeseRouter.get("/", async (req, res, next) => {
 cheeseRouter.get("/:id", async (req, res, next) => {
   try {
     const cheeseAndPair = await Cheese.findByPk(req.params.id, {
-      // include: [
-      //   {
-      //     model: Wine,
-      //   }
-      // ]
+      include: [
+        {
+          model: Wine,
+        }
+      ]
     })
     res.status(200).send(cheeseAndPair)
   } catch (error) {
