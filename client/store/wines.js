@@ -18,7 +18,7 @@ const _getAllWines = (wines) => {
 export const fetchWines = () => {
   return async (dispatch) => {
     try {
-      const { data: wines } = await axios.get("/api/wines");
+      const { data: wines } = await axios.get(`/api/wines`);
       dispatch(_getAllWines(wines));
     } catch (error) {
       throw error;
