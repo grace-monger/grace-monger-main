@@ -8,6 +8,7 @@ import AllWines from "./components/AllWines";
 import SingleWine from "./components/SingleWine";
 import Home from "./components/Home";
 import Order from "./components/Order";
+import Navbar from "./components/Navbar";
 import { me } from "./store";
 
 /**
@@ -19,10 +20,13 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, userId } = this.props;
 
     return (
       <div>
+        <header>
+          <Navbar />
+        </header>
         <div id="content">
           {isLoggedIn ? (
             <Switch>
@@ -65,6 +69,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    userId: state.auth.id,
   };
 };
 

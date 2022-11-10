@@ -9,6 +9,7 @@ const AllWines = (props) => {
   }, []);
 
   const { wines } = props;
+
   return (
     <div>
       <h1>All Wines</h1>

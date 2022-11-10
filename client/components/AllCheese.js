@@ -9,6 +9,7 @@ const AllCheese = (props) => {
   }, []);
 
   const { cheeses } = props;
+
   return (
     <div>
       <h1>All Cheeses</h1>
