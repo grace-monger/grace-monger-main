@@ -6,12 +6,14 @@ import auth from "./auth";
 import winesReducer from "./wines";
 import cheeseReducer from "./cheeses";
 import singleWineReducer from "./singleWine";
+import singleCheeseReducer from "./singleCheese";
 
 const reducer = combineReducers({
   auth,
   cheeses: cheeseReducer,
   wines: winesReducer,
   singleWineReducer,
+  singleCheese: singleCheeseReducer
 });
 
 const middleware = composeWithDevTools(
