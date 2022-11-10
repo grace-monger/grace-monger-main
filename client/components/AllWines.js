@@ -10,18 +10,24 @@ const AllWines = (props) => {
 
   const { wines } = props;
   return (
-    <div className="element-list">
+    <div>
       <h1>All Wines</h1>
-      {wines.map((wine) => {
-        return (
-          <article key={wine.id} className="single-element">
-            <Link to={`/wines/${wine.id}`} key={wine.id}>
-              <img width="150px" src={wine.imageUrl} />
-              <h2>{wine.name}</h2>
-            </Link>
-          </article>
-        );
-      })}
+      <div className="element-list">
+        {wines.map((wine) => {
+          return (
+            <article key={wine.id} className="single-element">
+              <Link to={`/wines/${wine.id}`} key={wine.id}>
+                <img
+                  className="product-img"
+                  width="150px"
+                  src={wine.imageUrl}
+                />
+                <h2>{wine.name}</h2>
+              </Link>
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 };

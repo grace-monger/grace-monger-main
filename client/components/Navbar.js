@@ -10,22 +10,31 @@ const Navbar = ({ isLoggedIn }) => {
 
   return (
     <div>
-      <img
-        src="cheeseLogo.png"
-        height="100px"
-        width="100px"
-        className="cheeseLogo"
-      ></img>
-      <h1>Grace Monger</h1>
+      <header>
+        <img
+          src="cheeseLogo.png"
+          height="100px"
+          width="100px"
+          className="cheeseLogo"
+        ></img>
+        <h1>Grace Monger</h1>
+      </header>
       <nav>
         {isLoggedIn ? (
-          <div>
+          <ul>
             {/* The navbar will show these links after you log in */}
             <Link to="/">Home</Link>
+            <Link to="/cheeses">Cheese</Link>
+            <Link to="/wines">Wine</Link>
+            <i className="bi bi-search-heart"></i>
+            <i className="bi bi-person"></i>
+            <Link to="/order">
+              <i className="bi bi-cart4"></i>
+            </Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-          </div>
+          </ul>
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
@@ -34,9 +43,11 @@ const Navbar = ({ isLoggedIn }) => {
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <i class="bi bi-search-heart"></i>
-            <i class="bi bi-person"></i>
-            <Link to='/order'><i class="bi bi-cart4"></i></Link>
+            <i className="bi bi-search-heart"></i>
+            <i className="bi bi-person"></i>
+            <Link to="/order">
+              <i className="bi bi-cart4"></i>
+            </Link>
           </ul>
         )}
       </nav>
