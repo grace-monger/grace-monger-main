@@ -27,4 +27,15 @@ wineRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+// POST route = '/'
+
+wineRouter.post("/", async (req, res, next) => {
+  try {
+    const newWine = await Wine.create(req.body);
+    res.status(201).send(newWine);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = wineRouter;
