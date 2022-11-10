@@ -1,9 +1,11 @@
 "use strict";
 const { BulkRecordError } = require("sequelize");
-const { db, User, Cheese, Wine } = require("../server/db");
+const { db, User, Cheese, Wine, Order, Order_Wine } = require("../server/db");
 const cheeseData = require("./cheeseData");
 const wineData = require("./wineData");
 const userData = require("./userData");
+const wineCart = require('./wineCart')
+const cartData = require('./cartData')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -33,6 +35,18 @@ const seed = async () => {
       })
     );
 
+    await Promise.all(
+      cartData.map((order) => {
+        return Order.create(order)
+      })
+    )
+
+    await Promise.all(
+      wineCart.map((wine) => {
+        return Order_Wine.create(wine)
+      })
+    )
+
     // await Promise.all(
     //  cheeseData.map((oneCheese) => {
     //   Wine.setCheese(oneCheese)
@@ -42,6 +56,8 @@ const seed = async () => {
     console.log(`seeded ${cheeseData.length} cheeses`);
     console.log(`seeded ${wineData.length} wines`);
     console.log(`seeded ${userData.length} users`);
+    console.log(`seeded ${cartData.length} carts`);
+    console.log(`seeded ${wineCart.length} wines in carts`);
     console.log("seeded successfully");
   } catch (err) {
     console.log(err);
