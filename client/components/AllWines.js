@@ -25,6 +25,8 @@ const AllWines = (props) => {
                 />
                 <h2>{wine.name}</h2>
               </Link>
+              {/* put admin stuff here with a ternary - all wines / all cheeses / single wine (edit) / single cheese (edit)*/}
+              {/* think about security and protecting the route */}
             </article>
           );
         })}
