@@ -31,6 +31,7 @@ class Routes extends Component {
         <div id="content">
           {isLoggedIn ? (
             <Switch>
+              {/* Add another ternary inside of here to render admin views */}
               <Route path="/home" component={Home} />
               <Route exact path="/cheeses" component={AllCheese} />
               <Route exact path="/wines" component={AllWines} />
