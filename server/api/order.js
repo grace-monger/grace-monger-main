@@ -1,10 +1,18 @@
 const orderRouter = require("express").Router();
 const { Order } = require("../db");
 
-orderRouter.get("/:id", async (req, res, next) => {
+orderRouter.get("/", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
-    res.status(200).send(order);
+    // need to query order table with user id using req.params.id
+    // need to query Order_Wines table by order ID and get all of those wines in that table
+    // const userOrder = await Order.findOne({
+    //   where: {
+    //     userId: req.params.
+    //   },
+    // });
+    console.log("THIS IS REQ.PARAMS ID", req.params.id);
+    // res.status(200).send(order);
+    res.sendStatus(200);
   } catch (error) {
     next(error);
   }
