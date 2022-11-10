@@ -10,8 +10,8 @@ const CreateWine = (props) => {
   const [type, setType] = useState("");
   const [typeOfGrape, setTypeOfGrape] = useState("");
   const [tastingNotes, setTastingNotes] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(19.99);
+  const [quantity, setQuantity] = useState(20);
   const [imageUrl, setImageUrl] = useState("");
 
   const handleChange = (event) => {

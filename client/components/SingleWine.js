@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
+import { me } from "../store";
 
 const SingleWine = (props) => {
   useEffect(() => {
     props.fetchSingleWine(props.match.params.id);
   }, []);
 
-  console.log(props);
   const { wine } = props;
 
   return (
@@ -45,6 +45,7 @@ const SingleWine = (props) => {
 const mapState = (storeState) => {
   return {
     wine: storeState.singleWineReducer,
+    userId: storeState.auth.id,
     // winePair: storeState.cheese,
   };
 };

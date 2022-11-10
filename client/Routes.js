@@ -9,6 +9,7 @@ import SingleWine from "./components/SingleWine";
 import SingleCheese from "./components/SingleCheese";
 import Home from "./components/Home";
 import Order from "./components/Order";
+import Navbar from "./components/Navbar";
 import { me } from "./store";
 
 /**
@@ -24,6 +25,9 @@ class Routes extends Component {
 
     return (
       <div>
+        <header>
+          <Navbar />
+        </header>
         <div id="content">
           {isLoggedIn ? (
             <Switch>
