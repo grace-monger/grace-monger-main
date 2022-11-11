@@ -6,6 +6,7 @@ import { connect } from "react-redux";
  */
 const Order = (props) => {
   console.log("HERE ARE PROPS IN ORDER", props);
+
   return (
     <div>
       <h3>This is your Order</h3>
