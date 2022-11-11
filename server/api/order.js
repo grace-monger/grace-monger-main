@@ -1,5 +1,5 @@
 const orderRouter = require("express").Router();
-const { Order, Order_Wines } = require("../db");
+const { Order, Wine, Order_Wines } = require("../db");
 
 orderRouter.get("/:id", async (req, res, next) => {
   try {
@@ -10,7 +10,12 @@ orderRouter.get("/:id", async (req, res, next) => {
         userId: req.params.id,
         fulfilled: false,
       },
+      include: {
+        model: Wine,
+        through: "Order_Wine",
+      },
     });
+    // console.log(userOrder);
     // const wineOrders = await Order_Wines.findAll({
     //   where: {
     //     orderId: userOrder.order.dataValues.id,
