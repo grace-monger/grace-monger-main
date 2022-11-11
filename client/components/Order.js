@@ -2,19 +2,22 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // import { Link } from 'react-router-dom';
 import { fetchOrder } from "../store/order";
-import { me } from '../store'
+// import { me } from "../store";
 
 /**
  * COMPONENT
  */
 const Order = (props) => {
   console.log("HERE ARE PROPS IN ORDER", props);
+  const userId = props.userId
+  console.log('USERID', userId)
+
   useEffect(() => {
-    props.fetchOrder(props.userId);
-  }, [])
+    props.fetchOrder(userId);
+  }, [userId]);
 
   const { order } = props;
-
+  console.log('ORDER', order)
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
@@ -41,15 +44,14 @@ const Order = (props) => {
 const mapState = (storeState) => {
   return {
     userId: storeState.auth.id,
+    order: storeState.order
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchOrder: (userId) => dispatch(fetchOrder(userId))
-  }
-}
+    fetchOrder: (userId) => dispatch(fetchOrder(userId)),
+  };
+};
 
 export default connect(mapState, mapDispatch)(Order);
-
-
