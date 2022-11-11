@@ -1,11 +1,11 @@
 const orderRouter = require("express").Router();
-const { Order, Wine, Order_Wines } = require("../db");
+const { Order, Cheese, Wine, Order_Wines, Order_Cheese } = require("../db");
 
 orderRouter.get("/:id", async (req, res, next) => {
   try {
     // need to query order table with user id using req.params.id
     // need to query Order_Wines table by order ID and get all of those wines in that table
-    const userOrder = await Order.findAll({
+    const wineOrder = await Order.findAll({
       where: {
         userId: req.params.id,
         fulfilled: false,
@@ -15,13 +15,18 @@ orderRouter.get("/:id", async (req, res, next) => {
         through: "Order_Wine",
       },
     });
-    // console.log(userOrder);
-    // const wineOrders = await Order_Wines.findAll({
-    //   where: {
-    //     orderId: userOrder.order.dataValues.id,
-    //   },
-    // });
-    // console.log(userOrder)
+
+    const cheeseOrder = await Order.findAll({
+      where: {
+        userId: req.params.id,
+        fulfilled: false,
+      },
+      include: {
+        model: Cheese,
+        through: "Order_Cheese",
+      },
+    });
+    const userOrder = [wineOrder, cheeseOrder];
     res.status(200).send(userOrder);
   } catch (error) {
     next(error);
