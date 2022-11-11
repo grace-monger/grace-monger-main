@@ -36,6 +36,7 @@ class Routes extends Component {
               <Route exact path="/cheeses" component={AllCheese} />
               <Route exact path="/wines" component={AllWines} />
               <Route path="/wines/:id" component={SingleWine} />
+              <Route path="/cheeses/:id" component={SingleCheese} />
               {/* <Route path="/login" component={Login} /> */}
               <Route path="/order" component={Order} />
               <Redirect to="/home" />
