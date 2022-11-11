@@ -11,7 +11,7 @@ const Order = (props) => {
   console.log("HERE ARE PROPS IN ORDER", props);
   useEffect(() => {
     props.fetchOrder(props.userId);
-  }, []);
+  }, [userId]);
 
   const { order } = props;
   console.log(order);
