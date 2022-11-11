@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Slabo 27px', serif; 
   background-color: #FFFFF0;
 }
 
@@ -32,7 +32,8 @@ form div {
   width: 15rem;
   margin: 0.5rem;
   padding: 0.5rem; 
-  border: 3px solid black; 
+  border: 3px solid #D3D3D3; 
+  border-radius: 25px; 
 }
 
 .product-image {
