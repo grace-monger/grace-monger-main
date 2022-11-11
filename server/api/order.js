@@ -8,16 +8,16 @@ orderRouter.get("/:id", async (req, res, next) => {
     const userOrder = await Order.findAll({
       where: {
         userId: req.params.id,
+        fulfilled: false,
       },
     });
-    const wineOrders = await Order_Wines.findAll({
-      where: {
-        orderId: userOrder.order.dataValues.id,
-      },
-    });
-    console.log("THIS IS userOrder", userOrder);
-    // res.status(200).send(order);
-    res.status(200).send(wineOrders);
+    // const wineOrders = await Order_Wines.findAll({
+    //   where: {
+    //     orderId: userOrder.order.dataValues.id,
+    //   },
+    // });
+    // console.log(userOrder)
+    res.status(200).send(userOrder);
   } catch (error) {
     next(error);
   }
