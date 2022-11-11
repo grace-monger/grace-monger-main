@@ -7,23 +7,22 @@ const SingleCheese = (props) => {
   useEffect(() => {
     props.getSingleCheeseThunk(props.match.params.id);
   }, []);
-console.log(props)
+  console.log(props);
   const { singleCheese } = props;
   return (
-    <div>
+    <div className="big-single">
       <h2>{singleCheese.name}</h2>
-      <img width="300px" src={singleCheese.imageUrl} />
+      <img
+        className="product-image"
+        width="300px"
+        src={singleCheese.imageUrl}
+      />
       <p> Dairy name: {singleCheese.dairyName}</p>
       <p> Milk type: {singleCheese.milkType}</p>
       <p> Family {singleCheese.family}</p>
       <h3> {singleCheese.price}</h3>
       <p>{singleCheese.description}</p>
-      <input
-          type="number"
-          min="0"
-          step="1"
-          className="quantity-incrementor"
-        />
+      <input type="number" min="0" step="1" className="quantity-incrementor" />
       <button className="add-to-cart"> Add to cart</button>
     </div>
   );

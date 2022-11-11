@@ -26,7 +26,7 @@ const AllWines = (props) => {
             <article key={wine.id} className="single-element">
               <Link to={`/wines/${wine.id}`} key={wine.id}>
                 <img
-                  className="product-img"
+                  className="product-image"
                   width="150px"
                   src={wine.imageUrl}
                 />
