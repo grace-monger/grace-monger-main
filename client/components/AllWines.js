@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchWines } from "../store/wines";
+import { fetchWines, deleteWine } from "../store/wines";
+import CreateWine from "./CreateWine";
 
 const AllWines = (props) => {
   useEffect(() => {
     props.fetchWines();
   }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   const { wines } = props;
 
@@ -27,10 +32,17 @@ const AllWines = (props) => {
               </Link>
               {/* put admin stuff here with a ternary - all wines / all cheeses / single wine (edit) / single cheese (edit)*/}
               {/* think about security and protecting the route */}
+              <button
+                className="remove"
+                onClick={() => props.deleteWine(wine.id)}
+              >
+                Remove Wine
+              </button>
             </article>
           );
         })}
       </div>
+      <CreateWine />
     </div>
   );
 };
@@ -44,6 +56,7 @@ const mapState = (storeState) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchWines: () => dispatch(fetchWines()),
+    deleteWine: (id) => dispatch(deleteWine(id)),
   };
 };
 

@@ -38,4 +38,15 @@ wineRouter.post("/", async (req, res, next) => {
   }
 });
 
+// DELETE route = '/:id
+
+wineRouter.delete("/:id", async (req, res, next) => {
+  try {
+    const wine = await Wine.findByPk(req.params.id);
+    await wine.destroy();
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = wineRouter;
