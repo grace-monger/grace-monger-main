@@ -9,11 +9,13 @@ const AllWines = (props) => {
     props.fetchWines();
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  useEffect(() => {
+    props.deleteWine();
+  }, []);
 
   const { wines } = props;
+  const userId = props.userId;
+  console.log(props);
 
   return (
     <div>
@@ -49,6 +51,7 @@ const AllWines = (props) => {
 
 const mapState = (storeState) => {
   return {
+    userId: storeState.auth.id,
     wines: storeState.wines,
   };
 };
