@@ -14,7 +14,7 @@ const Order = (props) => {
   }, [userId]);
 
   const { order } = props;
-  console.log(order);
+  console.log("ORDER", order);
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
