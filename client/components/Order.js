@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // import { Link } from 'react-router-dom';
 import { fetchOrder } from "../store/order";
+import { me } from '../store'
 
 /**
  * COMPONENT
