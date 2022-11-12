@@ -2,11 +2,20 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 import { me } from "../store";
+import { addNewWineOrderThunk } from "../store/order";
 
 const SingleWine = (props) => {
   useEffect(() => {
     props.fetchSingleWine(props.match.params.id);
   }, []);
+
+  console.log("props in singleWine", props);
+  const handleClick = (event) => {
+    // add a thunk here to add product id and userId
+    const userId = props.userId;
+    const productId = props.match.params.id;
+    props.addNewWineOrderThunk({ userId, productId });
+  };
 
   const { wine } = props;
 
@@ -30,7 +39,9 @@ const SingleWine = (props) => {
           step="1"
           className="quantity-incrementor"
         />
-        <button className="add-to-cart">Add to cart</button>
+        <button className="add-to-cart" onClick={handleClick}>
+          Add to cart
+        </button>
       </div>
 
       {/* <h2>Pairs well with:</h2>
@@ -53,6 +64,8 @@ const mapState = (storeState) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleWine: (id) => dispatch(fetchSingleWine(id)),
+    addNewWineOrderThunk: (orderInfo) =>
+      dispatch(addNewWineOrderThunk(orderInfo)),
     // fetchWinePair: (id) => dispatch(fetchWinePair(id)),
   };
 };
