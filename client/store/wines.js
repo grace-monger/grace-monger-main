@@ -53,6 +53,7 @@ export const deleteWine = (id) => {
   return async (dispatch) => {
     const { data: wine } = await axios.delete(`/api/wines/${id}`);
     dispatch(_deleteWine(wine));
+    console.log(wine);
   };
 };
 
