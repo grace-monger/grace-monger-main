@@ -27,6 +27,17 @@ wineRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+// PUT route = '/:id'
+
+wineRouter.put("/:id", async (req, res, next) => {
+  try {
+    const wine = await Wine.findByPk(req.params.id);
+    res.send(await wine.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST route = '/'
 
 wineRouter.post("/", async (req, res, next) => {

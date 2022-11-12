@@ -6,20 +6,20 @@ const EditCheese = (props) => {
   const { singleCheese } = props;
 
   const [cheeseInfo, setCheeseInfo] = useState({
-    name: '',
-    dairyName: '',
-    family: '',
-    milkType: '',
-    treatment: '',
-    description: '',
-    price: '',
-    quantity: '',
-    imageUrl: '',
+    name: "",
+    dairyName: "",
+    family: "",
+    milkType: "",
+    treatment: "",
+    description: "",
+    price: 19.99,
+    quantity: 20,
+    imageUrl: "",
   });
 
   useEffect(() => {
     props.getSingleCheeseThunk(props.singleCheese.id);
-    setCheeseInfo(singleCheese)
+    setCheeseInfo(singleCheese);
   }, []);
 
   const handleChange = (event) => {
