@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
-<<<<<<< EDIT-CHEESE
-=======
 import { me } from "../store";
 import { addNewCheeseOrderThunk } from "../store/order";
->>>>>>> main
 
 const SingleCheese = (props) => {
   useEffect(() => {
     props.getSingleCheeseThunk(props.match.params.id);
   }, []);
 
-<<<<<<< EDIT-CHEESE
-=======
   const handleClick = () => {
     // add a thunk here to add product id and userId
     const userId = props.userId;
@@ -21,7 +16,6 @@ const SingleCheese = (props) => {
     props.addNewCheeseOrderThunk({ userId, productId });
   };
 
->>>>>>> main
   console.log(props);
   const { singleCheese } = props;
 
