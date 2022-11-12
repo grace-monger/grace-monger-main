@@ -35,6 +35,7 @@ const SingleCheese = (props) => {
       <p>{singleCheese.description}</p>
       <input type="number" min="0" step="1" className="quantity-incrementor" />
       <button className="add-to-cart" onClick={handleClick}>Add to cart</button>
+      <h3>Edit This Cheese</h3>
       <EditCheese singleCheese={singleCheese} />
     </div>
   );
