@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchOrder } from "../store/order";
-import wineData from "../../script/wineData";
-// import { me } from "../store";
 
 /**
  * COMPONENT
@@ -22,7 +20,8 @@ const Order = (props) => {
 
   const hasOrder = (order) => {
     if (order.length) {
-      console.log("ORDER WINES", order[0].wines);
+      console.log("ORDER WINES", order[0][0].wines);
+      console.log("ORDER CHEESES", order[1][0].cheeses)
       return true;
     } else {
       return false;
@@ -35,17 +34,35 @@ const Order = (props) => {
     <div>
       {hasOrder(order) ? (
         <div>
-          <h2>this is your cart</h2>
+          <h2>Your Cart</h2>
           <div className="element-list">
-            {order[0].wines.map((wine) => {
+            {order[0][0].wines.map((wine) => {
               return (
                 <article key={wine.id} className="single-element">
+                  <Link key={wine.id} to={`/wines/${wine.id}`}>
                   <img
                     className="product-img"
                     width="150px"
                     src={wine.imageUrl}
                   />
                   <h2>{wine.name}</h2>
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+          <div className="element-list">
+            {order[1][0].cheeses.map((cheese) => {
+              return (
+                <article key={cheese.id} className="single-element">
+                  <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
+                  <img
+                    className="product-img"
+                    width="150px"
+                    src={cheese.imageUrl}
+                  />
+                  <h2>{cheese.name}</h2>
+                  </Link>
                 </article>
               );
             })}
@@ -53,7 +70,8 @@ const Order = (props) => {
         </div>
       ) : (
         <div>
-          <h3>No items in cart</h3>
+          <h3>Your Cart is Empty!</h3>
+          <h6>Please view our products and add to your cart.</h6>
         </div>
       )}
     </div>
