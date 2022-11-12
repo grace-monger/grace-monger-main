@@ -35,20 +35,20 @@ const SingleWine = (props) => {
         />
         <h2>{singleWine.price}</h2>
         <p>{singleWine.tastingNotes}</p>
+        <div>
+          <input
+            type="number"
+            min="0"
+            step="1"
+            className="quantity-incrementor"
+          />
+          <button className="add-to-cart" onClick={handleClick}>
+            Add to cart
+          </button>
+        </div>
+        <h3>Edit This Wine</h3>
+        <EditWine singleWine={singleWine} />
       </div>
-      <div>
-        <input
-          type="number"
-          min="0"
-          step="1"
-          className="quantity-incrementor"
-        />
-        <button className="add-to-cart" onClick={handleClick}>
-          Add to cart
-        </button>
-      </div>
-      <h3>Edit This Wine</h3>
-      <EditWine singleWine={singleWine} />
     </div>
   );
 };
