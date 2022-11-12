@@ -39,4 +39,15 @@ cheeseRouter.put("/:id", async (req, res, next) => {
   }
 });
 
+cheeseRouter.post("/", async (req, res, next) => {
+  try {
+    const createCheese = await Cheese.create(req.body)
+    res.status(201).send(createCheese)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+
 module.exports = cheeseRouter;
