@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { connect } from "react-redux";
 import { applyMiddleware } from "redux";
-import { AddNewCheese } from "../store/cheeses";
+import { addNewCheeseThunk } from "../store/cheeses";
 
 const AddCheeseForm = (props) => {
   const [name, setName] = useState("");
@@ -16,7 +16,7 @@ const AddCheeseForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.addNewCheese({
+    props.addNewCheeseThunk({
       name,
       dairyName,
       family,
@@ -146,7 +146,7 @@ const AddCheeseForm = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    addNewCheese: (cheese) => dispatch(AddNewCheese(cheese)),
+    addNewCheeseThunk: (cheese) => dispatch(addNewCheeseThunk(cheese)),
   };
 };
 

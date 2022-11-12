@@ -3,6 +3,7 @@ import axios from "axios";
 // action types
 const GET_ALL_CHEESES = "GET_ALL_CHEESES";
 const ADD_CHEESE = "ADD_CHEESE";
+const DELETE_CHEESE = "DELETE_CHEESE"
 
 //action creators
 const _getCheese = (cheeses) => {
@@ -19,6 +20,13 @@ const addCheese = (cheese) => {
   };
 };
 
+const deleteCheese = (cheeseToDelete) => {
+  return {
+    type: DELETE_CHEESE,
+    cheeseToDelete
+  }
+}
+
 // thunk creator
 export const getCheeseThunk = () => {
   return async (dispatch) => {
@@ -31,7 +39,7 @@ export const getCheeseThunk = () => {
   };
 };
 
-export const AddNewCheese = (cheese) => {
+export const addNewCheeseThunk = (cheese) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`/api/cheeses`, cheese);
@@ -41,6 +49,8 @@ export const AddNewCheese = (cheese) => {
     }
   };
 };
+
+// export const deleteCheeseThunk
 
 const intialState = [];
 
