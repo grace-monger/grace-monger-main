@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
-import { me } from "../store";
 
 const SingleCheese = (props) => {
   useEffect(() => {
     props.getSingleCheeseThunk(props.match.params.id);
   }, []);
+
   console.log(props);
   const { singleCheese } = props;
+
   return (
     <div className="big-single">
       <h2>{singleCheese.name}</h2>
