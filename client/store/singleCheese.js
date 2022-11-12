@@ -53,7 +53,7 @@ export default function singleCheeseReducer(state = initialState, action) {
     case GET_SINGLE_CHEESE:
       return action.cheese;
     case UPDATE_CHEESE:
-      return state.cheese
+      return action.cheese
     default:
       return state;
   }
