@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getCheeseThunk } from "../store/cheeses";
-import AddCheeseForm from "../components/CreateCheese"
+import { getCheeseThunk, deleteCheeseThunk } from "../store/cheeses";
+import AddCheeseForm from "../components/CreateCheese";
 import { Link } from "react-router-dom";
 
 const AllCheese = (props) => {
@@ -26,16 +26,20 @@ const AllCheese = (props) => {
                 />
                 <h2>{singleCheese.name}</h2>
               </Link>
-              <button className="remove">
-                {/* make thunk to remove a cheese */}
-                {/* add handleclick  */}
+              <button
+                className="remove"
+                name={singleCheese.id}
+                onClick={(event) => {
+                  props.deleteCheeseThunk(event.target.name);
+                }}
+              >
                 Delete Cheese
               </button>
             </article>
           );
         })}
       </div>
-      <AddCheeseForm /> 
+      <AddCheeseForm />
     </div>
   );
 };
@@ -50,6 +54,9 @@ const mapDispatch = (dispatch) => {
   return {
     getCheeseThunk: () => {
       dispatch(getCheeseThunk());
+    },
+    deleteCheeseThunk: (cheeseId) => {
+      dispatch(deleteCheeseThunk(cheeseId));
     },
   };
 };

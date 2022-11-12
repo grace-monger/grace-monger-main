@@ -41,13 +41,25 @@ cheeseRouter.put("/:id", async (req, res, next) => {
 
 cheeseRouter.post("/", async (req, res, next) => {
   try {
-    const createCheese = await Cheese.create(req.body)
-    res.status(201).send(createCheese)
+    const createCheese = await Cheese.create(req.body);
+    res.status(201).send(createCheese);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-
+cheeseRouter.delete("/:id", async (req, res, next) => {
+  try {
+    const cheeseToDelete = await Cheese.findByPk(req.params.id);
+    await cheeseToDelete.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).send(cheeseToDelete);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = cheeseRouter;
