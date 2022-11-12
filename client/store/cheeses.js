@@ -3,6 +3,7 @@ import axios from "axios";
 // action types
 const GET_ALL_CHEESES = "GET_ALL_CHEESES";
 const ADD_CHEESE = "ADD_CHEESE";
+const DELETE_CHEESE = "DELETE_CHEESE"
 
 //action creators
 const _getCheese = (cheeses) => {
@@ -19,6 +20,13 @@ const addCheese = (cheese) => {
   };
 };
 
+const deleteCheese = (cheeseToDelete) => {
+  return {
+    type: DELETE_CHEESE,
+    cheeseToDelete
+  }
+}
+
 // thunk creator
 export const getCheeseThunk = () => {
   return async (dispatch) => {
@@ -31,7 +39,7 @@ export const getCheeseThunk = () => {
   };
 };
 
-export const AddNewCheese = (cheese) => {
+export const addNewCheeseThunk = (cheese) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`/api/cheeses`, cheese);
@@ -42,6 +50,17 @@ export const AddNewCheese = (cheese) => {
   };
 };
 
+export const deleteCheeseThunk = (cheeseId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(`api/cheeses/${cheeseId}`)
+      dispatch(deleteCheese(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 const intialState = [];
 
 export default function cheeseReducer(state = intialState, action) {
@@ -50,6 +69,8 @@ export default function cheeseReducer(state = intialState, action) {
       return action.cheeses;
     case ADD_CHEESE:
       return [...state, action.cheese];
+    case DELETE_CHEESE: 
+      return state.filter((cheese) => cheese.id !== action.cheeseToDelete.id)
     default:
       return state;
   }
