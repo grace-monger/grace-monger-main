@@ -18,6 +18,7 @@ const SingleCheese = (props) => {
 
   console.log(props);
   const { singleCheese } = props;
+
   return (
     <div className="big-single">
       <h2>{singleCheese.name}</h2>
