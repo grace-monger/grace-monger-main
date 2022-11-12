@@ -9,13 +9,8 @@ const AllWines = (props) => {
     props.fetchWines();
   }, []);
 
-  useEffect(() => {
-    props.deleteWine();
-  }, []);
-
   const { wines } = props;
   const userId = props.userId;
-  console.log(props);
 
   return (
     <div>
@@ -53,6 +48,7 @@ const mapState = (storeState) => {
   return {
     userId: storeState.auth.id,
     wines: storeState.wines,
+    wine: storeState.wine,
   };
 };
 

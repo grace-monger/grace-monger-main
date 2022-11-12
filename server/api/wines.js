@@ -44,6 +44,7 @@ wineRouter.delete("/:id", async (req, res, next) => {
   try {
     const wine = await Wine.findByPk(req.params.id);
     await wine.destroy();
+    res.send(wine);
   } catch (error) {
     next(error);
   }
