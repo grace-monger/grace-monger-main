@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 import { me } from "../store";
 import { addNewWineOrderThunk } from "../store/order";
+import EditWine from "./EditWine";
 
 const SingleWine = (props) => {
   useEffect(() => {
     props.fetchSingleWine(props.match.params.id);
   }, []);
 
-  console.log("props in singleWine", props);
   const handleClick = (event) => {
     // add a thunk here to add product id and userId
     const userId = props.userId;
@@ -17,20 +17,24 @@ const SingleWine = (props) => {
     props.addNewWineOrderThunk({ userId, productId });
   };
 
-  const { wine } = props;
+  const { singleWine } = props;
 
   return (
     <div>
       <h1>Here is one wine:</h1>
       <div className="big-single">
-        <h2>{wine.name}</h2>
-        <h2>{wine.region}</h2>
-        <h2>{wine.year}</h2>
-        <h2>{wine.type}</h2>
-        <h2>{wine.typeOfGrape}</h2>
-        <img className="product-image" width="300px" src={wine.imageUrl} />
-        <h2>{wine.price}</h2>
-        <p>{wine.tastingNotes}</p>
+        <h2>{singleWine.name}</h2>
+        <h2>{singleWine.region}</h2>
+        <h2>{singleWine.year}</h2>
+        <h2>{singleWine.type}</h2>
+        <h2>{singleWine.typeOfGrape}</h2>
+        <img
+          className="product-image"
+          width="300px"
+          src={singleWine.imageUrl}
+        />
+        <h2>{singleWine.price}</h2>
+        <p>{singleWine.tastingNotes}</p>
       </div>
       <div>
         <input
@@ -43,20 +47,16 @@ const SingleWine = (props) => {
           Add to cart
         </button>
       </div>
-
-      {/* <h2>Pairs well with:</h2>
-      <div>
-        <h2>{winePair.name}</h2>
-        <img width="300px" src={winePair.imageUrl} />
-      </div> */}
+      <h3>Edit This Wine</h3>
+      <EditWine singleWine={singleWine} />
     </div>
   );
 };
 
-const mapState = (storeState) => {
+const mapState = (state) => {
   return {
-    wine: storeState.singleWineReducer,
-    userId: storeState.auth.id,
+    singleWine: state.singleWineReducer,
+    userId: state.auth.id,
     // winePair: storeState.cheese,
   };
 };
