@@ -36,10 +36,27 @@ form div {
   border-radius: 25px; 
 }
 
+.big-single-container {
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: flex-start;
+}
+
+.big-single {
+  width: 40rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: 	#FFEFD5;
+  border: 3px solid #D3D3D3; 
+  border-radius: 25px; 
+}
+
 .product-image {
   width: 60%;
   margin: auto auto 2rem auto;
   height: auto; 
   padding: 0.5rem;
   background-color: transparent;
+  border-radius: 25px;
 }

@@ -19,7 +19,7 @@ const AllCheese = (props) => {
             <article key={singleCheese.id} className="single-element">
               <Link key={singleCheese.id} to={`/cheeses/${singleCheese.id}`}>
                 <img
-                  className="product-img"
+                  className="product-image"
                   width="150px"
                   src={singleCheese.imageUrl}
                 />

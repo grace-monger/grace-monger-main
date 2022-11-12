@@ -80,7 +80,7 @@ const CreateWine = (props) => {
         <label htmlFor="type">Type:</label>
         <input type="text" name="type" value={type} onChange={handleChange} />
 
-        <label htmlFor="typeOfGrape">Type:</label>
+        <label htmlFor="typeOfGrape">Type of Grape:</label>
         <input
           type="text"
           name="typeOfGrape"

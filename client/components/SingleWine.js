@@ -28,7 +28,7 @@ const SingleWine = (props) => {
         <h2>{wine.year}</h2>
         <h2>{wine.type}</h2>
         <h2>{wine.typeOfGrape}</h2>
-        <img width="300px" src={wine.imageUrl} />
+        <img className="product-image" width="300px" src={wine.imageUrl} />
         <h2>{wine.price}</h2>
         <p>{wine.tastingNotes}</p>
       </div>

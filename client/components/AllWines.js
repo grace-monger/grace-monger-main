@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchWines } from "../store/wines";
+import { fetchWines, deleteWine } from "../store/wines";
+import CreateWine from "./CreateWine";
 
 const AllWines = (props) => {
   useEffect(() => {
     props.fetchWines();
   }, []);
 
+  useEffect(() => {
+    props.deleteWine();
+  }, []);
+
   const { wines } = props;
+  const userId = props.userId;
+  console.log(props);
 
   return (
     <div>
@@ -19,7 +26,7 @@ const AllWines = (props) => {
             <article key={wine.id} className="single-element">
               <Link to={`/wines/${wine.id}`} key={wine.id}>
                 <img
-                  className="product-img"
+                  className="product-image"
                   width="150px"
                   src={wine.imageUrl}
                 />
@@ -27,16 +34,24 @@ const AllWines = (props) => {
               </Link>
               {/* put admin stuff here with a ternary - all wines / all cheeses / single wine (edit) / single cheese (edit)*/}
               {/* think about security and protecting the route */}
+              <button
+                className="remove"
+                onClick={() => props.deleteWine(wine.id)}
+              >
+                Remove Wine
+              </button>
             </article>
           );
         })}
       </div>
+      <CreateWine />
     </div>
   );
 };
 
 const mapState = (storeState) => {
   return {
+    userId: storeState.auth.id,
     wines: storeState.wines,
   };
 };
@@ -44,6 +59,7 @@ const mapState = (storeState) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchWines: () => dispatch(fetchWines()),
+    deleteWine: (id) => dispatch(deleteWine(id)),
   };
 };
 

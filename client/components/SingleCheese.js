@@ -19,9 +19,13 @@ const SingleCheese = (props) => {
   console.log(props);
   const { singleCheese } = props;
   return (
-    <div>
+    <div className="big-single">
       <h2>{singleCheese.name}</h2>
-      <img width="300px" src={singleCheese.imageUrl} />
+      <img
+        className="product-image"
+        width="300px"
+        src={singleCheese.imageUrl}
+      />
       <p> Dairy name: {singleCheese.dairyName}</p>
       <p> Milk type: {singleCheese.milkType}</p>
       <p> Family {singleCheese.family}</p>
