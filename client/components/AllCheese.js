@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCheeseThunk } from "../store/cheeses";
+import AddCheeseForm from "../components/CreateCheese"
 import { Link } from "react-router-dom";
 
 const AllCheese = (props) => {
@@ -34,6 +35,7 @@ const AllCheese = (props) => {
           );
         })}
       </div>
+      <AddCheeseForm /> 
     </div>
   );
 };
