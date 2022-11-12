@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
 import { me } from "../store";
 import { addNewCheeseOrderThunk } from "../store/order";
+import EditCheese from './EditCheese'
 
 const SingleCheese = (props) => {
   useEffect(() => {
@@ -34,6 +35,8 @@ const SingleCheese = (props) => {
       <p>{singleCheese.description}</p>
       <input type="number" min="0" step="1" className="quantity-incrementor" />
       <button className="add-to-cart" onClick={handleClick}>Add to cart</button>
+      <h3>Edit This Cheese</h3>
+      <EditCheese singleCheese={singleCheese} />
     </div>
   );
 };

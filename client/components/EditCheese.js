@@ -3,25 +3,24 @@ import { connect } from "react-redux";
 import { updateThisCheese, getSingleCheeseThunk } from "../store/singleCheese";
 
 const EditCheese = (props) => {
-  useEffect(() => {
-    props.getSingleCheeseThunk(props.singleCheese.id);
-  }, []);
-
-  console.log("EDIT CHEESE PROPS", props);
   const { singleCheese } = props;
-  console.log("single cheese", singleCheese);
 
   const [cheeseInfo, setCheeseInfo] = useState({
-    name: "",
-    dairyName: "",
-    family: "",
-    milkType: "",
-    treatment: "",
-    description: "",
-    price: "",
-    quantity: "",
-    imageUrl: "",
+    name: '',
+    dairyName: '',
+    family: '',
+    milkType: '',
+    treatment: '',
+    description: '',
+    price: '',
+    quantity: '',
+    imageUrl: '',
   });
+
+  useEffect(() => {
+    props.getSingleCheeseThunk(props.singleCheese.id);
+    setCheeseInfo(singleCheese)
+  }, []);
 
   const handleChange = (event) => {
     setCheeseInfo({ ...cheeseInfo, [event.target.name]: event.target.value });
@@ -29,7 +28,7 @@ const EditCheese = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.updateThisCheese({ ...props.singleCheese, ...cheeseInfo });
+    props.updateThisCheese({ ...singleCheese, ...cheeseInfo });
     setCheeseInfo({
       name: "",
       dairyName: "",
@@ -43,19 +42,22 @@ const EditCheese = (props) => {
     });
   };
 
-    const {name, dairyName, family, milkType, treatment, description, price, quantity, imageUrl} = singleCheese
-
   return (
     <div>
       <form onSubmit={handleSubmit} id="edit-cheese-form">
         <label htmlFor="name">Cheese Name:</label>
-        <input type="text" name="name" value={name} onChange={handleChange} />
+        <input
+          type="text"
+          name="name"
+          defaultValue={singleCheese.name}
+          onChange={handleChange}
+        />
 
         <label htmlFor="dairyName">Dairy Name:</label>
         <input
           type="text"
           name="dairyName"
-          value={dairyName}
+          defaultValue={singleCheese.dairyName}
           onChange={handleChange}
         />
 
@@ -63,7 +65,7 @@ const EditCheese = (props) => {
         <input
           type="text"
           name="family"
-          value={family}
+          defaultValue={singleCheese.family}
           onChange={handleChange}
         />
 
@@ -71,7 +73,7 @@ const EditCheese = (props) => {
         <input
           type="text"
           name="milkType"
-          value={milkType}
+          defaultValue={singleCheese.milkType}
           onChange={handleChange}
         />
 
@@ -79,7 +81,7 @@ const EditCheese = (props) => {
         <input
           type="text"
           name="treatment"
-          value={treatment}
+          defaultValue={singleCheese.treatment}
           onChange={handleChange}
         />
 
@@ -87,7 +89,7 @@ const EditCheese = (props) => {
         <input
           type="text"
           name="description"
-          value={description}
+          defaultValue={singleCheese.description}
           onChange={handleChange}
         />
 
@@ -95,7 +97,7 @@ const EditCheese = (props) => {
         <input
           type="number"
           name="price"
-          value={price}
+          defaultValue={singleCheese.price}
           onChange={handleChange}
         />
 
@@ -103,7 +105,7 @@ const EditCheese = (props) => {
         <input
           type="number"
           name="quantity"
-          value={quantity}
+          defaultValue={singleCheese.quantity}
           onChange={handleChange}
         />
 
@@ -111,7 +113,7 @@ const EditCheese = (props) => {
         <input
           type="text"
           name="imageUrl"
-          value={imageUrl}
+          defaultValue={singleCheese.imageUrl}
           onChange={handleChange}
         />
 

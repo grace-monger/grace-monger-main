@@ -34,13 +34,13 @@ export const getSingleCheeseThunk = (id) => {
 };
 
 export const updateThisCheese = (cheese) => {
-  // return async (dispatch) => {
-  //   const { data: updated } = await axios.put(
-  //     `/api/cheeses/${cheese.id}`,
-  //     cheese
-  //   );
-  //   dispatch(updateCheese(updated));
-  // };
+  return async (dispatch) => {
+    const { data: updated } = await axios.put(
+      `/api/cheeses/${cheese.id}`,
+      cheese
+    );
+    dispatch(updateCheese(updated));
+  };
   console.log(cheese)
 };
 
