@@ -25,6 +25,11 @@ const AllCheese = (props) => {
                 />
                 <h2>{singleCheese.name}</h2>
               </Link>
+              <button className="remove">
+                {/* make thunk to remove a cheese */}
+                {/* add handleclick  */}
+                Delete Cheese
+              </button>
             </article>
           );
         })}

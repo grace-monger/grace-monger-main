@@ -41,8 +41,6 @@ export const fetchOrder = (userId) => {
 };
 
 export const addNewCheeseOrderThunk = (orderInfo) => {
-  console.log("info in thunk", orderInfo);
-  // product id is a string here
   return async (dispatch) => {
     try {
       const { data: order } = await axios.post(`/api/order/cheese`, orderInfo);
@@ -54,11 +52,9 @@ export const addNewCheeseOrderThunk = (orderInfo) => {
 };
 
 export const addNewWineOrderThunk = (orderInfo) => {
-  console.log("in add wine thunk", orderInfo);
   return async (dispatch) => {
     try {
       const { data: order } = await axios.post(`/api/order/wine`, orderInfo);
-      console.log("order from backend", order)
       dispatch(addWineOrder(order));
     } catch (error) {
       console.log(error);
@@ -74,9 +70,9 @@ export default function orderReducer(state = initialState, action) {
     case GET_ORDER:
       return action.order;
     case ADD_CHEESE_ORDER:
-      return action.cheeseOrder;
+      return [...state, action.cheeseOrder];
     case ADD_WINE_ORDER:
-      return action.wineOrder;
+      return [...state, action.wineOrder];
     default:
       return state;
   }
