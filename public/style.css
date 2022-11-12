@@ -60,3 +60,17 @@ form div {
   background-color: transparent;
   border-radius: 25px;
 }
+
+.add-to-cart {
+  background-color: orange; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
