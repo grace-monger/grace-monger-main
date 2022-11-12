@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
+<<<<<<< EDIT-CHEESE
+=======
+import { me } from "../store";
+import { addNewCheeseOrderThunk } from "../store/order";
+>>>>>>> main
 
 const SingleCheese = (props) => {
   useEffect(() => {
     props.getSingleCheeseThunk(props.match.params.id);
   }, []);
 
+<<<<<<< EDIT-CHEESE
+=======
+  const handleClick = () => {
+    // add a thunk here to add product id and userId
+    const userId = props.userId;
+    const productId = props.match.params.id;
+    props.addNewCheeseOrderThunk({ userId, productId });
+  };
+
+>>>>>>> main
   console.log(props);
   const { singleCheese } = props;
 
@@ -24,7 +39,7 @@ const SingleCheese = (props) => {
       <h3> {singleCheese.price}</h3>
       <p>{singleCheese.description}</p>
       <input type="number" min="0" step="1" className="quantity-incrementor" />
-      <button className="add-to-cart"> Add to cart</button>
+      <button className="add-to-cart" onClick={handleClick}>Add to cart</button>
     </div>
   );
 };
@@ -39,6 +54,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getSingleCheeseThunk: (id) => dispatch(getSingleCheeseThunk(id)),
+    addNewCheeseOrderThunk: (orderInfo) => dispatch(addNewCheeseOrderThunk(orderInfo))
   };
 };
 
