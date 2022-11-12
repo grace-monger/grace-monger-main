@@ -8,12 +8,12 @@ const EditWine = (props) => {
   const [wineInfo, setWineInfo] = useState({
     name: "",
     region: "",
-    year: "",
+    year: 0,
     type: "",
     typeOfGrape: "",
     tastingNotes: "",
-    price: "",
-    quantity: "",
+    price: 19.99,
+    quantity: 20,
     imageUrl: "",
   });
 
@@ -32,12 +32,12 @@ const EditWine = (props) => {
     setWineInfo({
       name: "",
       region: "",
-      year: "",
+      year: 0,
       type: "",
       typeOfGrape: "",
       tastingNotes: "",
-      price: "",
-      quantity: "",
+      price: 19.99,
+      quantity: 20,
       imageUrl: "",
     });
   };
