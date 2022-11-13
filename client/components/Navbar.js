@@ -9,8 +9,8 @@ const Navbar = ({ isLoggedIn, userId }) => {
   };
 
   return (
-    <div>
-      <header>
+    <div className="nav-bar">
+      <header className="header">
         <img
           src="cheeseLogo.png"
           height="100px"
@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn, userId }) => {
         ></img>
         <h1>Grace Monger</h1>
       </header>
-      <nav>
+      <nav className="navigations">
         {isLoggedIn ? (
           <ul>
             {/* The navbar will show these links after you log in */}
