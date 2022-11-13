@@ -36,7 +36,7 @@ const SingleCheese = (props) => {
       <button className="add-to-cart" onClick={handleClick}>
         Add to cart
       </button>
-      {props.authInfo == "admin" ? (
+      {props.userType == "admin" ? (
         <div>
           <h3>Edit This Cheese</h3>
           <EditCheese singleCheese={singleCheese} />
@@ -52,7 +52,7 @@ const mapState = (state) => {
   return {
     singleCheese: state.singleCheese,
     userId: state.auth.id,
-    authInfo: state.auth.userType,
+    userType: state.auth.userType,
   };
 };
 

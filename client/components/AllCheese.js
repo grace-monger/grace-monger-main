@@ -27,7 +27,7 @@ const AllCheese = (props) => {
                 />
                 <h2>{singleCheese.name}</h2>
               </Link>
-              {props.authInfo == "admin" ? (
+              {props.userType == "admin" ? (
                 <button
                   className="remove"
                   name={singleCheese.id}
@@ -44,7 +44,7 @@ const AllCheese = (props) => {
           );
         })}
       </div>
-      {props.authInfo == "admin" ? <AddCheeseForm /> : <h1></h1>}
+      {props.userType == "admin" ? <AddCheeseForm /> : <h1></h1>}
     </div>
   );
 };
@@ -52,7 +52,7 @@ const AllCheese = (props) => {
 const mapState = (state) => {
   return {
     cheeses: state.cheeses,
-    authInfo: state.auth.userType,
+    userType: state.auth.userType,
   };
 };
 
