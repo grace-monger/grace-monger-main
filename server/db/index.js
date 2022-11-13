@@ -5,8 +5,8 @@ const db = require("./db");
 const Cheese = require("./models/Cheese");
 const Wine = require("./models/Wine");
 const Order = require("./models/Order");
-const Order_Wine = require('./models/Order_Wine')
-const Order_Cheese = require('./models/Order_Cheese')
+const Order_Wine = require("./models/Order_Wine");
+const Order_Cheese = require("./models/Order_Cheese");
 
 const User = require("./models/User");
 
@@ -28,5 +28,5 @@ module.exports = {
   Wine,
   Order,
   Order_Wine,
-  Order_Cheese
+  Order_Cheese,
 };
