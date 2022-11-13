@@ -35,7 +35,7 @@ const AllCheese = (props) => {
                     props.deleteCheeseThunk(event.target.name);
                   }}
                 >
-                  Delete Cheese
+                  Remove
                 </button>
               ) : (
                 <h1></h1>

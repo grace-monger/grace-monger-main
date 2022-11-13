@@ -100,3 +100,17 @@ form div {
 .add-to-cart:active {
   background-color: darkblue;
 }
+
+.remove {
+  background-color: orangered; 
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Slabo 27px', serif; 
+  font-size: 14px;
+  border-radius: 15px;
+}
