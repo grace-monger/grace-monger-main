@@ -3,37 +3,26 @@ const { Order, Cheese, Order_Cheese } = require("../db");
 
 cheeseOrderRouter.get("/:id", async (req, res, next) => {
   try {
-    const userOrder = await Order.findAll({
+    const cheeseOrder = await Order_Cheese.findOne({
       where: {
-        userId: req.params.id,
-        fulfilled: false,
-      },
-      include: {
-        model: Cheese,
-        through: "Order_Cheese",
+        cheeseId: req.params.id,
       },
     });
-    res.status(200).send(userOrder);
+    res.status(200).send(cheeseOrder);
   } catch (error) {
     next(error);
   }
 });
 
-// Delete entire cart route - not just one single item
 cheeseOrderRouter.delete("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findOne({
+    const cheeseOrder = await Order_Cheese.findOne({
       where: {
-        userId: req.params.id,
-        fulfilled: false,
-      },
-      include: {
-        model: Cheese,
-        through: "Order_Cheese",
+        cheeseId: req.params.id,
       },
     });
-    await order.destroy();
-    res.send(order);
+    await cheeseOrder.destroy();
+    res.send(cheeseOrder);
   } catch (error) {
     next(error);
   }
