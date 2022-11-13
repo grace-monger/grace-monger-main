@@ -42,6 +42,7 @@ const Order = (props) => {
                     />
                     <h2>{wine.name}</h2>
                   </Link>
+                  <button>Remove from Cart</button>
                 </article>
               );
             })}
@@ -58,6 +59,7 @@ const Order = (props) => {
                     />
                     <h2>{cheese.name}</h2>
                   </Link>
+                  <button>Remove from Cart</button>
                 </article>
               );
             })}
