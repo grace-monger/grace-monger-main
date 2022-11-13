@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_ORDER = "GET_ORDER";
 const ADD_CHEESE_ORDER = "ADD_CHEESE_ORDER";
 const ADD_WINE_ORDER = "ADD_WINE_ORDER";
+const CLEAR_ORDER = "CLEAR_ORDER";
 
 //ACTION CREATORS
 const getOrder = (order) => {
@@ -24,6 +25,13 @@ const addWineOrder = (wineOrder) => {
   return {
     type: ADD_WINE_ORDER,
     wineOrder,
+  };
+};
+
+const _clearOrder = (order) => {
+  return {
+    type: CLEAR_ORDER,
+    order,
   };
 };
 
@@ -62,6 +70,13 @@ export const addNewWineOrderThunk = (orderInfo) => {
   };
 };
 
+export const clearOrder = (id) => {
+  return async (dispatch) => {
+    const { data: order } = await axios.delete(`/api/order/${id}`);
+    dispatch(_clearOrder(order));
+  };
+};
+
 //REDUCER
 const initialState = [];
 
@@ -73,6 +88,8 @@ export default function orderReducer(state = initialState, action) {
       return [...state, action.cheeseOrder];
     case ADD_WINE_ORDER:
       return [...state, action.wineOrder];
+    case CLEAR_ORDER:
+      return state.filter((order) => order.id !== action.order.id);
     default:
       return state;
   }
