@@ -36,16 +36,29 @@ orderRouter.get("/:id", async (req, res, next) => {
 // Delete entire cart route - not just one single item
 orderRouter.delete("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findOne({
-      where: {
-        userId: req.params.id,
-        fulfilled: false,
-      },
-      include: {
-        model: Wine,
-        through: "Order_Wine",
-      },
-    });
+    const order = await Order.findByPk(req.params.id);
+    // const cheeseOrder = await Order.findAll({
+    //   where: {
+    //     userId: req.params.id,
+    //     fulfilled: false,
+    //   },
+    //   include: {
+    //     model: Cheese,
+    //     through: "Order_Cheese",
+    //   },
+    // });
+    // const wineOrder = await Order.findAll({
+    //   where: {
+    //     userId: req.params.id,
+    //     fulfilled: false,
+    //   },
+    //   include: {
+    //     model: Wine,
+    //     through: "Order_Wine",
+    //   },
+    // });
+    // await cheeseOrder.destroy();
+    // await wineOrder.destroy();
     await order.destroy();
     res.send(order);
   } catch (error) {

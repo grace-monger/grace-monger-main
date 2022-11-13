@@ -1,27 +1,22 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
-import { fetchOrder } from "../store/order";
+import { Link } from "react-router-dom";
+import { fetchOrder, clearOrder } from "../store/order";
 
 /**
  * COMPONENT
  */
 const Order = (props) => {
-  console.log("HERE ARE PROPS IN ORDER", props);
   const userId = props.userId;
-  console.log("USERID", userId);
 
   useEffect(() => {
     props.fetchOrder(userId);
   }, [userId]);
 
   const { order } = props;
-  console.log("ORDER", order);
 
   const hasOrder = (order) => {
     if (order.length) {
-      console.log("ORDER WINES", order[0][0].wines);
-      console.log("ORDER CHEESES", order[1][0].cheeses)
       return true;
     } else {
       return false;
@@ -40,12 +35,12 @@ const Order = (props) => {
               return (
                 <article key={wine.id} className="single-element">
                   <Link key={wine.id} to={`/wines/${wine.id}`}>
-                  <img
-                    className="product-img"
-                    width="150px"
-                    src={wine.imageUrl}
-                  />
-                  <h2>{wine.name}</h2>
+                    <img
+                      className="product-img"
+                      width="150px"
+                      src={wine.imageUrl}
+                    />
+                    <h2>{wine.name}</h2>
                   </Link>
                 </article>
               );
@@ -56,12 +51,12 @@ const Order = (props) => {
               return (
                 <article key={cheese.id} className="single-element">
                   <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
-                  <img
-                    className="product-img"
-                    width="150px"
-                    src={cheese.imageUrl}
-                  />
-                  <h2>{cheese.name}</h2>
+                    <img
+                      className="product-img"
+                      width="150px"
+                      src={cheese.imageUrl}
+                    />
+                    <h2>{cheese.name}</h2>
                   </Link>
                 </article>
               );
@@ -74,6 +69,14 @@ const Order = (props) => {
           <h6>Please view our products and add to your cart.</h6>
         </div>
       )}
+      <div>
+        <button
+          className="clear-cart"
+          onClick={() => props.clearOrder(order[0][0].id)}
+        >
+          Clear Cart
+        </button>
+      </div>
     </div>
   );
 };
@@ -88,6 +91,7 @@ const mapState = (storeState) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchOrder: (userId) => dispatch(fetchOrder(userId)),
+    clearOrder: (id) => dispatch(clearOrder(id)),
   };
 };
 
