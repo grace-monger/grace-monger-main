@@ -11,7 +11,7 @@ const AllWines = (props) => {
 
   const { wines } = props;
   const userId = props.userId;
-
+  console.log("props in all wines", props);
   return (
     <div>
       <h1>All Wines</h1>
@@ -29,17 +29,21 @@ const AllWines = (props) => {
               </Link>
               {/* put admin stuff here with a ternary - all wines / all cheeses / single wine (edit) / single cheese (edit)*/}
               {/* think about security and protecting the route */}
-              <button
-                className="remove"
-                onClick={() => props.deleteWine(wine.id)}
-              >
-                Remove Wine
-              </button>
+              {props.userType == "admin" ? (
+                <button
+                  className="remove"
+                  onClick={() => props.deleteWine(wine.id)}
+                >
+                  Remove Wine
+                </button>
+              ) : (
+                <h1></h1>
+              )}
             </article>
           );
         })}
       </div>
-      <CreateWine />
+     {props.userType == "admin" ? <CreateWine /> : <h1></h1> }
     </div>
   );
 };
@@ -49,6 +53,7 @@ const mapState = (storeState) => {
     userId: storeState.auth.id,
     wines: storeState.wines,
     wine: storeState.wine,
+    userType: storeState.auth.userType,
   };
 };
 

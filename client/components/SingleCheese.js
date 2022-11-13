@@ -17,7 +17,6 @@ const SingleCheese = (props) => {
     props.addNewCheeseOrderThunk({ userId, productId });
   };
 
-  console.log(props);
   const { singleCheese } = props;
 
   return (
@@ -37,8 +36,14 @@ const SingleCheese = (props) => {
       <button className="add-to-cart" onClick={handleClick}>
         Add to cart
       </button>
-      <h3>Edit This Cheese</h3>
-      <EditCheese singleCheese={singleCheese} />
+      {props.userType == "admin" ? (
+        <div>
+          <h3>Edit This Cheese</h3>
+          <EditCheese singleCheese={singleCheese} />
+        </div>
+      ) : (
+        <h1></h1>
+      )}
     </div>
   );
 };
@@ -47,6 +52,7 @@ const mapState = (state) => {
   return {
     singleCheese: state.singleCheese,
     userId: state.auth.id,
+    userType: state.auth.userType,
   };
 };
 

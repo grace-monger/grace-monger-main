@@ -46,8 +46,14 @@ const SingleWine = (props) => {
             Add to cart
           </button>
         </div>
-        <h3>Edit This Wine</h3>
-        <EditWine singleWine={singleWine} />
+        {props.userType == "admin" ? (
+          <div>
+            <h3>Edit This Wine</h3>
+            <EditWine singleWine={singleWine} />
+          </div>
+        ) : (
+          <h1></h1>
+        )}
       </div>
     </div>
   );
@@ -57,6 +63,7 @@ const mapState = (state) => {
   return {
     singleWine: state.singleWineReducer,
     userId: state.auth.id,
+    userType: state.auth.userType,
     // winePair: storeState.cheese,
   };
 };
