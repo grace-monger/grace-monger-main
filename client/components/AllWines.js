@@ -34,7 +34,7 @@ const AllWines = (props) => {
                   className="remove"
                   onClick={() => props.deleteWine(wine.id)}
                 >
-                  Remove Wine
+                  Remove
                 </button>
               ) : (
                 <h1></h1>
