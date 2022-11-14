@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrder, clearOrder, updateCheeseQuantityThunk} from "../store/order";
+import { fetchOrder, clearOrder } from "../store/order";
+// import {updateCheeseQuantityThunk} from "../store/order"
 
 /**
  * COMPONENT
@@ -13,20 +14,20 @@ const Order = (props) => {
     props.fetchOrder(userId);
   }, [userId]);
 
-  const [cheeseQuantity, changeCheeseQuantity] = useState(1)
+  // const [cheeseQuantity, changeCheeseQuantity] = useState(1)
 
   const { order } = props;
-  
-  const handleCheeseQuantityChanges = (event) => {
-    changeCheeseQuantity(event.target.value)
-  }
 
-  const handleCheeseQuantityClick = (event) => {
-    const orderId = parseInt(event.target.name)
-    const productId = parseInt(event.target.value)
-    const quantity = parseInt(cheeseQuantity)
-    props.updateCheese({orderId, productId, quantity})
-  }
+  // const handleCheeseQuantityChanges = (event) => {
+  //   changeCheeseQuantity(event.target.value)
+  // }
+
+  // const handleCheeseQuantityClick = (event) => {
+  //   const orderId = parseInt(event.target.name)
+  //   const productId = parseInt(event.target.value)
+  //   const quantity = parseInt(cheeseQuantity)
+  //   props.updateCheese({orderId, productId, quantity})
+  // }
 
   const hasOrder = (order) => {
     if (order.length) {
@@ -72,8 +73,21 @@ const Order = (props) => {
                     />
                     <h2>{cheese.name}</h2>
                   </Link>
-                  <input type="number" min="0" step="1" className="quantity-incrementor" placeholder="Change quantity" onChange={handleCheeseQuantityChanges}/>
-                  <button name={order[1][0].id} value={cheese.id} onClick={handleCheeseQuantityClick}>Change Quantity</button>
+                  {/* <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    className="quantity-incrementor"
+                    placeholder="Change quantity"
+                    onChange={handleCheeseQuantityChanges}
+                  />
+                  <button
+                    name={order[1][0].id}
+                    value={cheese.id}
+                    onClick={handleCheeseQuantityClick}
+                  >
+                    Change Quantity
+                  </button> */}
                   <br></br>
                   <button>Remove from Cart</button>
                 </article>
@@ -110,9 +124,9 @@ const mapDispatch = (dispatch) => {
   return {
     fetchOrder: (userId) => dispatch(fetchOrder(userId)),
     clearOrder: (id) => dispatch(clearOrder(id)),
-    updateCheese: (infoToUpdate) => {
-      dispatch(updateCheeseQuantityThunk(infoToUpdate))
-    }
+    // updateCheese: (infoToUpdate) => {
+    //   dispatch(updateCheeseQuantityThunk(infoToUpdate));
+    // },
   };
 };
 

@@ -4,7 +4,7 @@ import axios from "axios";
 const GET_ORDER = "GET_ORDER";
 const ADD_CHEESE_ORDER = "ADD_CHEESE_ORDER";
 const ADD_WINE_ORDER = "ADD_WINE_ORDER";
-const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY";
+// const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY";
 const CLEAR_ORDER = "CLEAR_ORDER";
 
 //ACTION CREATORS
@@ -36,13 +36,13 @@ const _clearOrder = (order) => {
   };
 };
 
-// info should include orderId, productId, and quantity
-const updateCheeseQuantity = (infoToUpdate) => {
-  return {
-    type: UPDATE_CHEESE_QUANTITY,
-    infoToUpdate,
-  };
-};
+// // info should include orderId, productId, and quantity
+// const updateCheeseQuantity = (infoToUpdate) => {
+//   return {
+//     type: UPDATE_CHEESE_QUANTITY,
+//     infoToUpdate,
+//   };
+// };
 
 //THUNKS
 export const fetchOrder = (userId) => {
@@ -86,17 +86,17 @@ export const clearOrder = (id) => {
   };
 };
 
-// infoToUpdate is productId, OrderId, and quantity
-export const updateCheeseQuantityThunk = (infoToUpdate) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
-      dispatch(updateCheeseQuantity(data));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
+// // infoToUpdate is productId, OrderId, and quantity
+// export const updateCheeseQuantityThunk = (infoToUpdate) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
+//       dispatch(updateCheeseQuantity(data));
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// };
 
 //REDUCER
 const initialState = [];
@@ -111,8 +111,8 @@ export default function orderReducer(state = initialState, action) {
       return [...state, action.wineOrder];
     case CLEAR_ORDER:
       return state.filter((order) => order.id !== action.order.id);
-    case UPDATE_CHEESE_QUANTITY: 
-      return [...state, action.infoToUpdate]
+    // case UPDATE_CHEESE_QUANTITY: 
+    //   return [...state, action.infoToUpdate]
     default:
       return state;
   }
