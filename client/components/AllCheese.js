@@ -14,7 +14,7 @@ const AllCheese = (props) => {
 
   return (
     <div>
-      <h1>All Cheeses</h1>
+      <h2>Cheeses</h2>
       <div className="element-list">
         {cheeses.map((singleCheese) => {
           return (
