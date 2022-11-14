@@ -8,6 +8,7 @@ import cheeseReducer from "./cheeses";
 import singleWineReducer from "./singleWine";
 import singleCheeseReducer from "./singleCheese";
 import orderReducer from "./order";
+import usersReducer from "./users";
 
 const reducer = combineReducers({
   auth,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   singleWineReducer,
   singleCheese: singleCheeseReducer,
   order: orderReducer,
+  users: usersReducer
 });
 
 const middleware = composeWithDevTools(
