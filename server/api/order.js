@@ -145,4 +145,21 @@ orderRouter.post("/wine", async (req, res, next) => {
   }
 });
 
+// orderRouter.put("/updateCheese", async (req, res, next) => {
+//   try {
+//     const findCheeseOrder = await Order_Cheese.findOne({
+//       where: {
+//         orderId: req.body.orderId,
+//         cheeseId: req.body.productId,
+//       },
+//     });
+
+//     await findCheeseOrder.update(req.body)
+
+//     res.send(findCheeseOrder)
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 module.exports = orderRouter;
