@@ -90,7 +90,7 @@ export const clearOrder = (id) => {
 export const updateCheeseQuantityThunk = (infoToUpdate) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/order/updateCheese/${infoToUpdate.productId}`, infoToUpdate);
+      const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
       dispatch(updateCheeseQuantity(data));
     } catch (error) {
       console.error(error);

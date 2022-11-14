@@ -178,7 +178,7 @@ orderRouter.post("/wine", async (req, res, next) => {
   }
 });
 
-orderRouter.put("/updateCheese/:id", async (req, res, next) => {
+orderRouter.put("/updateCheese", async (req, res, next) => {
   try {
     const findCheeseOrder = await Order_Cheese.findOne({
       where: {
@@ -188,7 +188,7 @@ orderRouter.put("/updateCheese/:id", async (req, res, next) => {
     });
 
     await findCheeseOrder.update(req.body)
-    
+
     res.send(findCheeseOrder)
   } catch (error) {
     next(error);

@@ -16,17 +16,12 @@ const Order = (props) => {
   const [cheeseQuantity, changeCheeseQuantity] = useState(1)
 
   const { order } = props;
-  console.log("this is props", props)
   
   const handleCheeseQuantityChanges = (event) => {
     changeCheeseQuantity(event.target.value)
   }
 
   const handleCheeseQuantityClick = (event) => {
-    // console.log("this is product id", cheeseId)
-    console.log("orderId", event.target.name)
-    console.log("product id", event.target.value)
-    console.log("quantity", cheeseQuantity)
     const orderId = parseInt(event.target.name)
     const productId = parseInt(event.target.value)
     const quantity = parseInt(cheeseQuantity)
