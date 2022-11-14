@@ -40,29 +40,21 @@ const AddCheeseForm = (props) => {
 
   const handleChanges = (event) => {
     if (event.target.name === "name") {
-        setName(event.target.value);
-
+      setName(event.target.value);
     } else if (event.target.name === "dairyName") {
-        setDairyName(event.target.value);
-
+      setDairyName(event.target.value);
     } else if (event.target.name === "family") {
       setFamily(event.target.value);
-
     } else if (event.target.name === "milkType") {
       setMilkType(event.target.value);
-
     } else if (event.target.name === "treatment") {
       setTreatment(event.target.value);
-
     } else if (event.target.name === "description") {
       setDescription(event.target.value);
-
     } else if (event.target.name === "price") {
       setPrice(event.target.value);
-
     } else if (event.target.name === "quantity") {
       setQuantity(event.target.value);
-
     } else if (event.target.name === "imageUrl") {
       setImageUrl(event.target.value);
     }
@@ -108,9 +100,10 @@ const AddCheeseForm = (props) => {
         />
 
         <label htmlFor="description">Description:</label>
-        <input
+        <textarea
           type="text"
           name="description"
+          row="5"
           value={description}
           onChange={handleChanges}
         />

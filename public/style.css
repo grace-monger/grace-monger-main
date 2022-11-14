@@ -21,6 +21,16 @@ form div {
   display: inline-block;
 }
 
+input {
+  width: 80%;
+  padding: 10px 20px;
+}
+
+textarea {
+  width: 80%;
+  padding: 10px 20px;
+}
+
 .nav-bar {
   background-color: 	#ffe4b5;
   display: flex; 
