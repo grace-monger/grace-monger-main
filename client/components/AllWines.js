@@ -14,7 +14,7 @@ const AllWines = (props) => {
   console.log("props in all wines", props);
   return (
     <div>
-      <h1>All Wines</h1>
+      <h2>Wines</h2>
       <div className="element-list">
         {wines.map((wine) => {
           return (
@@ -43,7 +43,7 @@ const AllWines = (props) => {
           );
         })}
       </div>
-     {props.userType == "admin" ? <CreateWine /> : <h1></h1> }
+      {props.userType == "admin" ? <CreateWine /> : <h1></h1>}
     </div>
   );
 };

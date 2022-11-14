@@ -56,7 +56,9 @@ const Order = (props) => {
                     />
                     <h2>{wine.name}</h2>
                   </Link>
-                  <button>Remove from Cart</button>
+                  <button onClick={() => props.clearOrder(wine.id)}>
+                    Remove from Cart
+                  </button>
                 </article>
               );
             })}
@@ -90,6 +92,10 @@ const Order = (props) => {
                   </button> */}
                   <br></br>
                   <button>Remove from Cart</button>
+                  <button onClick={() => props.clearOrder(cheese.id)}>
+                    Remove from Cart
+                  </button>
+
                 </article>
               );
             })}
