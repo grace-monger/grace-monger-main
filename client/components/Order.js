@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOrder, clearOrder } from "../store/order";
@@ -13,7 +13,28 @@ const Order = (props) => {
     props.fetchOrder(userId);
   }, [userId]);
 
+  const [cheeseQuantity, changeCheeseQuantity] = useState(1)
+
   const { order } = props;
+  
+  const handleCheeseQuantityChanges = (event) => {
+    changeCheeseQuantity(event.target.value)
+  }
+
+  const handleCheeseQuantityClick = (event) => {
+    // console.log("this is product id", cheeseId)
+    console.log("orderId", event.target.name)
+    console.log("product id", event.target.value)
+    console.log("quantity", cheeseQuantity)
+    
+
+   // send to post thunk here 
+   // send cheeseQuantity to thunk 
+   // cheeseQuantity is quantity
+   // cheeseInfo.id is productId
+   // event.target.name is orderId
+   // send Product id, orderId, and quantity
+  }
 
   const hasOrder = (order) => {
     if (order.length) {
@@ -59,6 +80,9 @@ const Order = (props) => {
                     />
                     <h2>{cheese.name}</h2>
                   </Link>
+                  <input type="number" min="0" step="1" className="quantity-incrementor" placeholder="Change quantity" onChange={handleCheeseQuantityChanges}/>
+                  <button name={order[1][0].id} value={cheese.id} onClick={handleCheeseQuantityClick}>Change Quantity</button>
+                  <br></br>
                   <button>Remove from Cart</button>
                 </article>
               );

@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_ORDER = "GET_ORDER";
 const ADD_CHEESE_ORDER = "ADD_CHEESE_ORDER";
 const ADD_WINE_ORDER = "ADD_WINE_ORDER";
+const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY"
 const CLEAR_ORDER = "CLEAR_ORDER";
 
 //ACTION CREATORS
@@ -34,6 +35,14 @@ const _clearOrder = (order) => {
     order,
   };
 };
+
+// info should include orderId, productId, and quantity 
+const updateCheeseQuantity = (infoToUpdate) => {
+  return {
+    type: UPDATE_CHEESE_QUANTITY, 
+    infoToUpdate,
+  }
+}
 
 //THUNKS
 export const fetchOrder = (userId) => {
@@ -76,6 +85,8 @@ export const clearOrder = (id) => {
     dispatch(_clearOrder(order));
   };
 };
+
+
 
 //REDUCER
 const initialState = [];
