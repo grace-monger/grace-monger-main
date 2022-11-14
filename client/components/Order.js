@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrder, clearOrder } from "../store/order";
+import { fetchOrder, clearOrder, updateCheeseQuantityThunk} from "../store/order";
 
 /**
  * COMPONENT
@@ -16,6 +16,7 @@ const Order = (props) => {
   const [cheeseQuantity, changeCheeseQuantity] = useState(1)
 
   const { order } = props;
+  console.log("this is props", props)
   
   const handleCheeseQuantityChanges = (event) => {
     changeCheeseQuantity(event.target.value)
@@ -26,14 +27,10 @@ const Order = (props) => {
     console.log("orderId", event.target.name)
     console.log("product id", event.target.value)
     console.log("quantity", cheeseQuantity)
-    
-
-   // send to post thunk here 
-   // send cheeseQuantity to thunk 
-   // cheeseQuantity is quantity
-   // cheeseInfo.id is productId
-   // event.target.name is orderId
-   // send Product id, orderId, and quantity
+    const orderId = parseInt(event.target.name)
+    const productId = parseInt(event.target.value)
+    const quantity = parseInt(cheeseQuantity)
+    props.updateCheese({orderId, productId, quantity})
   }
 
   const hasOrder = (order) => {
@@ -118,6 +115,9 @@ const mapDispatch = (dispatch) => {
   return {
     fetchOrder: (userId) => dispatch(fetchOrder(userId)),
     clearOrder: (id) => dispatch(clearOrder(id)),
+    updateCheese: (infoToUpdate) => {
+      dispatch(updateCheeseQuantityThunk(infoToUpdate))
+    }
   };
 };
 
