@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrder, clearOrder } from "../store/order";
+import {
+  fetchOrder,
+  removeWineOrderThunk,
+  removeCheeseOrderThunk,
+} from "../store/order";
 // import {updateCheeseQuantityThunk} from "../store/order"
 
 /**
@@ -9,14 +13,13 @@ import { fetchOrder, clearOrder } from "../store/order";
  */
 const Order = (props) => {
   const userId = props.userId;
+  const { order } = props;
 
   useEffect(() => {
     props.fetchOrder(userId);
   }, [userId]);
 
   // const [cheeseQuantity, changeCheeseQuantity] = useState(1)
-
-  const { order } = props;
 
   // const handleCheeseQuantityChanges = (event) => {
   //   changeCheeseQuantity(event.target.value)
@@ -28,6 +31,20 @@ const Order = (props) => {
   //   const quantity = parseInt(cheeseQuantity)
   //   props.updateCheese({orderId, productId, quantity})
   // }
+
+  const handleWineRemove = (event) => {
+    const orderId = parseInt(event.target.name);
+    const productId = parseInt(event.target.value);
+    const id = `${orderId}-${productId}`;
+    props.removeWineOrderThunk(id);
+  };
+
+  const handleCheeseRemove = (event) => {
+    const orderId = parseInt(event.target.name);
+    const productId = parseInt(event.target.value);
+    const id = `${orderId}-${productId}`;
+    props.removeCheeseOrderThunk(id);
+  };
 
   const hasOrder = (order) => {
     if (order.length) {
@@ -56,7 +73,11 @@ const Order = (props) => {
                     />
                     <h2>{wine.name}</h2>
                   </Link>
-                  <button onClick={() => props.clearOrder(wine.id)}>
+                  <button
+                    name={order[0][0].id}
+                    value={wine.id}
+                    onClick={handleWineRemove}
+                  >
                     Remove from Cart
                   </button>
                 </article>
@@ -91,8 +112,11 @@ const Order = (props) => {
                     Change Quantity
                   </button> */}
                   <br></br>
-                  <button>Remove from Cart</button>
-                  <button onClick={() => props.clearOrder(cheese.id)}>
+                  <button
+                    name={order[0][0].id}
+                    value={cheese.id}
+                    onClick={handleCheeseRemove}
+                  >
                     Remove from Cart
                   </button>
                 </article>
@@ -130,7 +154,8 @@ const mapState = (storeState) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchOrder: (userId) => dispatch(fetchOrder(userId)),
-    clearOrder: (id) => dispatch(clearOrder(id)),
+    removeWineOrderThunk: (id) => dispatch(removeWineOrderThunk(id)),
+    removeCheeseOrderThunk: (id) => dispatch(removeCheeseOrderThunk(id)),
     // updateCheese: (infoToUpdate) => {
     //   dispatch(updateCheeseQuantityThunk(infoToUpdate));
     // },
