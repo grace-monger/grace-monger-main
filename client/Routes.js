@@ -40,8 +40,10 @@ class Routes extends Component {
               <Route path="/cheeses/:id" component={SingleCheese} />
               {/* <Route path="/login" component={Login} /> */}
               <Route path="/order" component={Order} />
+              {userType == "admin" ? (
+                <Route exact path="/users/all" component={AllUsers} />
+              ) : null}
               <Redirect to="/home" />
-              {userType == 'admin' ? <Route exact path="/users/all" component={AllUsers} /> : null}
             </Switch>
           ) : (
             <Switch>
@@ -75,7 +77,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    userType: state.auth.userType
+    userType: state.auth.userType,
   };
 };
 
