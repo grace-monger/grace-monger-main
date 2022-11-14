@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import Order from "./components/Order";
 import Navbar from "./components/Navbar";
 import { me } from "./store";
+import Checkout from "./components/Checkout";
 
 /**
  * COMPONENT
@@ -40,6 +41,7 @@ class Routes extends Component {
               <Route path="/cheeses/:id" component={SingleCheese} />
               {/* <Route path="/login" component={Login} /> */}
               <Route path="/order" component={Order} />
+              <Route path='/checkout' component={Checkout} />
               {userType == "admin" ? (
                 <Route exact path="/users/all" component={AllUsers} />
               ) : null}
@@ -55,6 +57,7 @@ class Routes extends Component {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/order" component={Order} />
+              <Route path='/checkout' component={Checkout} />
             </Switch>
           )}
         </div>
