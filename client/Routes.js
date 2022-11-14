@@ -5,6 +5,7 @@ import { Login } from "./components/LoginForm";
 import { Signup } from "./components/SignUpForm";
 import AllCheese from "./components/AllCheese";
 import AllWines from "./components/AllWines";
+import AllUsers from "./components/AllUsers";
 import SingleWine from "./components/SingleWine";
 import SingleCheese from "./components/SingleCheese";
 import Home from "./components/Home";
@@ -21,7 +22,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, userType } = this.props;
 
     return (
       <div>
@@ -40,6 +41,7 @@ class Routes extends Component {
               {/* <Route path="/login" component={Login} /> */}
               <Route path="/order" component={Order} />
               <Redirect to="/home" />
+              {userType == 'admin' ? <Route exact path="/users/all" component={AllUsers} /> : null}
             </Switch>
           ) : (
             <Switch>
@@ -73,6 +75,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    userType: state.auth.userType
   };
 };
 

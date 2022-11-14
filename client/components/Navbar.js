@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ isLoggedIn, userId }) => {
+const Navbar = ({ isLoggedIn, userType }) => {
   const handleClick = () => {
     logout();
   };
@@ -26,6 +26,7 @@ const Navbar = ({ isLoggedIn, userId }) => {
             <Link to="/">Home</Link>
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
+            {userType == 'admin' ? <Link to='users/all'>Users</Link> : null}
             <i className="bi bi-search-heart"></i>
             <i className="bi bi-person"></i>
             <Link to="/order">
@@ -63,6 +64,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
+    userType: state.auth.userType
   };
 };
 
