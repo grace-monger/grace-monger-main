@@ -86,9 +86,10 @@ const EditCheese = (props) => {
         />
 
         <label htmlFor="description">Description:</label>
-        <input
+        <textarea
           type="text"
           name="description"
+          rows="5"
           defaultValue={singleCheese.description}
           onChange={handleChange}
         />

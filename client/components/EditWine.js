@@ -86,9 +86,10 @@ const EditWine = (props) => {
         />
 
         <label htmlFor="tastingNotes">Tasting Notes:</label>
-        <input
+        <textarea
           type="text"
           name="tastingNotes"
+          rows="5"
           defaultValue={singleWine.tastingNotes}
           onChange={handleChange}
         />
