@@ -95,10 +95,18 @@ const Order = (props) => {
                   <button onClick={() => props.clearOrder(cheese.id)}>
                     Remove from Cart
                   </button>
-
                 </article>
               );
             })}
+          </div>
+          <button
+            className="clear-cart"
+            onClick={() => props.clearOrder(order[0][0].id)}
+          >
+            Clear Cart
+          </button>
+          <div>
+            <button>CHECKOUT</button>
           </div>
         </div>
       ) : (
@@ -107,14 +115,7 @@ const Order = (props) => {
           <h6>Please view our products and add to your cart.</h6>
         </div>
       )}
-      <div>
-        <button
-          className="clear-cart"
-          onClick={() => props.clearOrder(order[0][0].id)}
-        >
-          Clear Cart
-        </button>
-      </div>
+      <div></div>
     </div>
   );
 };
