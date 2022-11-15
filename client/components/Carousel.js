@@ -32,16 +32,18 @@ const Carousel = () => {
   }, [index]);
 
   return (
-    <div className="slideshow">
-      <div
-        className="slideshowSlider"
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
-        {photos.map((photo, index) => (
-          <div className="slide" key={index}>
-            <img src={photo} />
-          </div>
-        ))}
+    <div className="slideshow-container">
+      <div className="slideshow">
+        <div
+          className="slideshowSlider"
+          style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+        >
+          {photos.map((photo, index) => (
+            <div className="slide" key={index}>
+              <img src={photo} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

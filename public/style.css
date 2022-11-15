@@ -45,6 +45,7 @@ footer {
   top: 0;
   width: 100%;
   align-items: center;
+  overflow: hidden; 
 }
 
 .header {
@@ -138,6 +139,11 @@ h2 {
 }
 
 /* Slideshow */
+
+.slideshow-container {
+  display: flex; 
+  align-items: center;
+}
 
 .slideshow {
   margin: 0 auto;
