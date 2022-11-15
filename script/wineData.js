@@ -109,6 +109,26 @@ const wineData = [
     imageUrl:
       "https://cdn.powered-by-nitrosell.com/product_images/19/4564/large-21cero.jpg",
   },
+  {
+    name: "Cervidae (Sean's Spawn)",
+    region: "Stag's Leap District, California (a.k.a Sean's backyard)",
+    year: "2022",
+    type: "red",
+    typeOfGrape: "Merlot",
+    price: "55",
+    tastingNotes:
+      "Juicy plum and raspberry combine with savoury spice, smooth tannins, and oak for a lush, polished texture",
+  },
+  {
+    name: "Lumos (Sean's Spawn)",
+    region: "Manchuela, Spain",
+    year: "2022",
+    type: "white",
+    typeOfGrape: "Macabeo Sauvignon Blanc",
+    price: "35",
+    tastingNotes:
+      "Macabeo and Sauvignon Blanc are perfect partners in this bright and balanced blend. Together they show aromas of citrus and tropical fruit, with soft white blossom. The palate is lush and layered with pronounced flavors of green apple, pear, grapefruit, and tropical fruit, with light notes of honeysuckle and grass. Fresh and flavorful with lively acidity, elegant complexity, and medium persistence.",
+  },
 ];
 
 //PAIRINGS
