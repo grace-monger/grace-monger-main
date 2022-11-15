@@ -4,7 +4,8 @@ import axios from "axios";
 const GET_ORDER = "GET_ORDER";
 const ADD_CHEESE_ORDER = "ADD_CHEESE_ORDER";
 const ADD_WINE_ORDER = "ADD_WINE_ORDER";
-// const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY";
+const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY";
+const UPDATE_WINE_QUANTITY = "UPDATE_WINE_QUANTITY";
 const REMOVE_WINE_ORDER = "REMOVE_WINE_ORDER";
 const REMOVE_CHEESE_ORDER = "REMOVE_CHEESE_ORDER";
 
@@ -52,12 +53,19 @@ const removeCheeseOrder = (cheeseOrder) => {
 // };
 
 // // info should include orderId, productId, and quantity
-// const updateCheeseQuantity = (infoToUpdate) => {
-//   return {
-//     type: UPDATE_CHEESE_QUANTITY,
-//     infoToUpdate,
-//   };
-// };
+const updateCheeseQuantity = (infoToUpdate) => {
+  return {
+    type: UPDATE_CHEESE_QUANTITY,
+    infoToUpdate,
+  };
+};
+
+const updateWineQuantity = (infoToUpdate) => {
+  return {
+    type: UPDATE_WINE_QUANTITY,
+    infoToUpdate,
+  };
+};
 
 //THUNKS
 export const fetchOrder = (userId) => {
@@ -76,6 +84,7 @@ export const addNewCheeseOrderThunk = (orderInfo) => {
   return async (dispatch) => {
     try {
       const { data: order } = await axios.post(`/api/order/cheese`, orderInfo);
+      console.log("data from back", order);
       dispatch(addCheeseOrder(order));
     } catch (error) {
       console.log(error);
@@ -127,17 +136,29 @@ export const removeCheeseOrderThunk = (id) => {
 // };
 
 // infoToUpdate is productId, OrderId, and quantity
-// export const updateCheeseQuantityThunk = (infoToUpdate) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
-//       console.log("data from put", data)
-//       dispatch(updateCheeseQuantity(data));
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
+export const updateCheeseQuantityThunk = (infoToUpdate) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
+      console.log("data from put", data);
+      dispatch(updateCheeseQuantity(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const updateWineQuantityThunk = (infoToUpdate) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/order/updateWine`, infoToUpdate);
+      console.log("data from put", data);
+      dispatch(updateWineQuantity(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
 //REDUCER
 const initialState = [];
@@ -156,8 +177,25 @@ export default function orderReducer(state = initialState, action) {
       return state[1].filter((cheese) => cheese.id !== action.cheeseOrder.id);
     // case CLEAR_ORDER:
     //   return state.filter((order) => order.id !== action.order.id);
-    // case UPDATE_CHEESE_QUANTITY:
-    //   return [...state, action.infoToUpdate]
+
+    case UPDATE_CHEESE_QUANTITY:
+      console.log(state[1][0].cheeses)
+      state[1][0].cheeses.map((cheese) => {
+        if (cheese.Order_Cheese.cheeseId == action.infoToUpdate.cheeseId) {
+          cheese.Order_Cheese.quantity = action.infoToUpdate.quantity;
+          return cheese.Order_Cheese;
+        }
+        return cheese.Order_Cheese;
+      });
+
+    case UPDATE_WINE_QUANTITY: 
+    state[0][0].wines.map((wine) => {
+      if (wine.Order_Wine.wineId == action.infoToUpdate.wineId) {
+        wine.Order_Wine.quantity = action.infoToUpdate.quantity;
+        return wine.Order_Wine;
+      }
+      return wine.Order_Wine;
+    });
     default:
       return state;
   }

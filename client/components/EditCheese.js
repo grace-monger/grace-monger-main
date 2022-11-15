@@ -42,6 +42,7 @@ const EditCheese = (props) => {
       imageUrl: "",
       wineId: "",
     });
+    window.location.reload()
   };
 
   return (

@@ -7,7 +7,10 @@ import {
   removeCheeseOrderThunk,
 } from "../store/order";
 import Checkout from "./Checkout";
-// import {updateCheeseQuantityThunk} from "../store/order"
+import {
+  updateCheeseQuantityThunk,
+  updateWineQuantityThunk,
+} from "../store/order";
 
 /**
  * COMPONENT
@@ -16,6 +19,9 @@ const Order = (props) => {
   const userId = props.userId;
   const { order } = props;
   let orderWinesAndCheeses;
+
+  const [wineQuantity, changeWineQuantity] = useState(1);
+  const [cheeseQuantity, changeCheeseQuantity] = useState(1);
 
   let [cart, setCart] = useState([]);
   let localCart = window.localStorage.getItem("cart");
@@ -35,24 +41,36 @@ const Order = (props) => {
     orderWinesAndCheeses = JSON.parse(localCart);
   }
 
-  // const [cheeseQuantity, changeCheeseQuantity] = useState(1)
+  const handleCheeseQuantityChanges = (event) => {
+    changeCheeseQuantity(event.target.value);
+  };
 
-  // const handleCheeseQuantityChanges = (event) => {
-  //   changeCheeseQuantity(event.target.value)
-  // }
+  const handleWineQuantityChanges = (event) => {
+    changeWineQuantity(event.target.value);
+  };
 
-  // const handleCheeseQuantityClick = (event) => {
-  //   const orderId = parseInt(event.target.name)
-  //   const productId = parseInt(event.target.value)
-  //   const quantity = parseInt(cheeseQuantity)
-  //   props.updateCheese({orderId, productId, quantity})
-  // }
+  const handleCheeseQuantityClick = (event) => {
+    const orderId = parseInt(event.target.name);
+    const productId = parseInt(event.target.value);
+    const quantity = parseInt(cheeseQuantity);
+    props.updateCheese({ orderId, productId, quantity });
+    window.location.reload();
+  };
+
+  const handleWineQuantityClick = (event) => {
+    const orderId = parseInt(event.target.name);
+    const productId = parseInt(event.target.value);
+    const quantity = parseInt(cheeseQuantity);
+    props.updateWine({ orderId, productId, quantity });
+    window.location.reload();
+  };
 
   const handleWineRemove = (event) => {
     const orderId = parseInt(event.target.name);
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
     props.removeWineOrderThunk(id);
+    window.location.reload();
   };
 
   const handleCheeseRemove = (event) => {
@@ -60,6 +78,7 @@ const Order = (props) => {
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
     props.removeCheeseOrderThunk(id);
+    window.location.reload();
   };
 
   const handleProductRemove = (event) => {
@@ -84,9 +103,10 @@ const Order = (props) => {
       return false;
     }
   };
-  
+
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
+  console.log("array", orderWinesAndCheeses);
   return (
     <div>
       {props.isLoggedIn ? (
@@ -106,6 +126,22 @@ const Order = (props) => {
                         />
                         <h2>{wine.name}</h2>
                       </Link>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        className="quantity-incrementor"
+                        placeholder="Change quantity"
+                        onChange={handleWineQuantityChanges}
+                      />
+                      <p> Quantity: {wine.Order_Wine.quantity}</p>
+                      <button
+                        name={order[0][0].id}
+                        value={wine.id}
+                        onClick={handleWineQuantityClick}
+                      >
+                        Change Quantity
+                      </button>
                       <button
                         name={order[0][0].id}
                         value={wine.id}
@@ -119,6 +155,10 @@ const Order = (props) => {
               </div>
               <div className="element-list">
                 {order[1][0].cheeses.map((cheese) => {
+                  console.log(
+                    "state in order",
+                    props.order[1][0].cheeses[0].Order_Cheese.quantity
+                  );
                   return (
                     <article key={cheese.id} className="single-element">
                       <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
@@ -129,21 +169,23 @@ const Order = (props) => {
                         />
                         <h2>{cheese.name}</h2>
                       </Link>
-                      {/* <input
-                    type="number"
-                    min="0"
-                    step="1"
-                    className="quantity-incrementor"
-                    placeholder="Change quantity"
-                    onChange={handleCheeseQuantityChanges}
-                  /> */}
-                  {/* <button
-                    name={order[1][0].id}
-                    value={cheese.id}
-                    onClick={handleCheeseQuantityClick}
-                  >
-                    Change Quantity
-                  </button> */}
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        className="quantity-incrementor"
+                        placeholder="Change quantity"
+                        onChange={handleCheeseQuantityChanges}
+                      />
+                      {/* cheese.Order_Cheese.quantity */}
+                      <p> Quantity: {cheese.Order_Cheese.quantity}</p>
+                      <button
+                        name={order[1][0].id}
+                        value={cheese.id}
+                        onClick={handleCheeseQuantityClick}
+                      >
+                        Change Quantity
+                      </button>
                       <br></br>
                       <button
                         name={order[0][0].id}
@@ -156,12 +198,6 @@ const Order = (props) => {
                   );
                 })}
               </div>
-              <button
-                className="clear-cart"
-                onClick={() => props.clearOrder(order[0][0].id)}
-              >
-                Clear Cart
-              </button>
               <div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
@@ -177,28 +213,40 @@ const Order = (props) => {
         </div>
       ) : (
         <div>
-          {orderWinesAndCheeses.map((product) => {
-            return (
-              <article key={product.id} className="single-element">
-                <Link key={product.id} to={`/${product.type}s/${product.id}`}>
-                  <img
-                    className="product-img"
-                    width="150px"
-                    src={product.imageUrl}
-                  />
-                  <h2>{product.name}</h2>
-                </Link>
-                <button value={product.id} onClick={handleProductRemove}>
-                  Remove from Cart
-                </button>
-              </article>
-            );
-          })}
-          <div>
+          {orderWinesAndCheeses.length ? (
+            <div>
+              {orderWinesAndCheeses.map((product) => {
+                return (
+                  <article key={product.id} className="single-element">
+                    <Link
+                      key={product.id}
+                      to={`/${product.type}s/${product.id}`}
+                    >
+                      <img
+                        className="product-img"
+                        width="150px"
+                        src={product.imageUrl}
+                      />
+                      <h2>{product.name}</h2>
+                    </Link>
+                    <button value={product.id} onClick={handleProductRemove}>
+                      Remove from Cart
+                    </button>
+                  </article>
+                );
+              })}
+              <div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
               </div>
+            </div>
+          ) : (
+            <div>
+              <h3>Your Cart is Empty!</h3>
+              <h6>Please view our products and add to your cart.</h6>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -218,9 +266,12 @@ const mapDispatch = (dispatch) => {
     fetchOrder: (userId) => dispatch(fetchOrder(userId)),
     removeWineOrderThunk: (id) => dispatch(removeWineOrderThunk(id)),
     removeCheeseOrderThunk: (id) => dispatch(removeCheeseOrderThunk(id)),
-    // updateCheese: (infoToUpdate) => {
-    //   dispatch(updateCheeseQuantityThunk(infoToUpdate));
-    // },
+    updateCheese: (infoToUpdate) => {
+      dispatch(updateCheeseQuantityThunk(infoToUpdate));
+    },
+    updateWine: (infoToUpdate) => {
+      dispatch(updateWineQuantityThunk(infoToUpdate));
+    },
   };
 };
 

@@ -3,6 +3,7 @@ const { reset } = require("nodemon");
 const { Order, Cheese, Wine, Order_Wine, Order_Cheese } = require("../db");
 
 orderRouter.get("/:id", async (req, res, next) => {
+  console.log("get all orders in get route backend")
   try {
     const wineOrder = await Order.findAll({
       where: {
@@ -180,21 +181,38 @@ orderRouter.post("/wine", async (req, res, next) => {
   }
 });
 
-// orderRouter.put("/updateCheese", async (req, res, next) => {
-//   try {
-//     const findCheeseOrder = await Order_Cheese.findOne({
-//       where: {
-//         orderId: req.body.orderId,
-//         cheeseId: req.body.productId,
-//       },
-//     });
+orderRouter.put("/updateCheese", async (req, res, next) => {
+  try {
+    const findCheeseOrder = await Order_Cheese.findOne({
+      where: {
+        orderId: req.body.orderId,
+        cheeseId: req.body.productId,
+      },
+    });
 
-//     await findCheeseOrder.update(req.body)
+    await findCheeseOrder.update(req.body)
 
-//     res.send(findCheeseOrder)
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    res.send(findCheeseOrder)
+  } catch (error) {
+    next(error);
+  }
+});
+
+orderRouter.put("/updateWine", async (req, res, next) => {
+  try {
+    const findWineOrder = await Order_Wine.findOne({
+      where: {
+        orderId: req.body.orderId,
+        wineId: req.body.productId,
+      },
+    });
+
+    await findWineOrder.update(req.body)
+
+    res.send(findWineOrder)
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = orderRouter;
