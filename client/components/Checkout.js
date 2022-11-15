@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 /**
  * COMPONENT
@@ -9,8 +9,17 @@ export const Checkout = (props) => {
 
   return (
     <div>
-      <h3>Thanks for your purchase, {userName}!</h3>
-      <h4>Your order has been confirmed.</h4>
+      {userName ? (
+        <div>
+          <h3>Thanks for your purchase, {userName}!</h3>
+          <h4>Your order has been confirmed.</h4>
+        </div>
+      ) : (
+        <div>
+          <h3>Thanks for your purchase!</h3>
+          <h4>Your order has been confirmed.</h4>
+        </div>
+      )}
     </div>
   );
 };
