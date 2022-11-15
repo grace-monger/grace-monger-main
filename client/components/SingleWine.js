@@ -49,7 +49,7 @@ const SingleWine = (props) => {
         id: props.singleWine.id,
         name: props.singleWine.name,
         imageUrl: props.singleWine.imageUrl,
-        type: 'wine',
+        type: "wine",
         quantity: parseInt(quantity),
       });
     }
@@ -62,31 +62,24 @@ const SingleWine = (props) => {
   // };
 
   const { singleWine } = props;
-  const cheese = singleWine.cheeseId
-  
+  const cheese = singleWine.cheeseId;
+
   return (
     <div>
       <div className="big-single">
+        <h2>{singleWine.name}</h2>
         <img
           className="product-image"
           width="300px"
           src={singleWine.imageUrl}
         />
-        <h2>Wine name:{singleWine.name}</h2>
-        <h2>Region: {singleWine.region}</h2>
-        <h2>Year:{singleWine.year}</h2>
-        <h2>Type: {singleWine.type}</h2>
-        <h2>Type of grape:{singleWine.typeOfGrape}</h2>
-        <h2>{singleWine.price}</h2>
+        <p>Region: {singleWine.region}</p>
+        <p>Year: {singleWine.year}</p>
+        <p>Type: {singleWine.type}</p>
+        <p>Type of grape: {singleWine.typeOfGrape}</p>
+        <h2>${singleWine.price}</h2>
         <p>{singleWine.tastingNotes}</p>
         <div>
-          {/* <input
-            type="number"
-            min="0"
-            step="1"
-            className="quantity-incrementor"
-            onChange={handleChange}
-          /> */}
           <button className="add-to-cart" onClick={handleClick}>
             Add to cart
           </button>
@@ -100,7 +93,7 @@ const SingleWine = (props) => {
           <h1></h1>
         )}
       </div>
-      <PairedCheese cheese={cheese}/>
+      <PairedCheese cheese={cheese} />
     </div>
   );
 };
