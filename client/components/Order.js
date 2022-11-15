@@ -91,46 +91,43 @@ const Order = (props) => {
     <div>
       {props.isLoggedIn ? (
         <div>
-          {" "}
-          {hasOrder(order) ? (
-            <div>
-              <h2>Your Cart</h2>
-              <div className="element-list">
-                {order[0][0].wines.map((wine) => {
-                  return (
-                    <article key={wine.id} className="single-element">
-                      <Link key={wine.id} to={`/wines/${wine.id}`}>
-                        <img
-                          className="product-img"
-                          width="150px"
-                          src={wine.imageUrl}
-                        />
-                        <h2>{wine.name}</h2>
-                      </Link>
-                      <button
-                        name={order[0][0].id}
-                        value={wine.id}
-                        onClick={handleWineRemove}
-                      >
-                        Remove from Cart
-                      </button>
-                    </article>
-                  );
-                })}
-              </div>
-              <div className="element-list">
-                {order[1][0].cheeses.map((cheese) => {
-                  return (
-                    <article key={cheese.id} className="single-element">
-                      <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
-                        <img
-                          className="product-img"
-                          width="150px"
-                          src={cheese.imageUrl}
-                        />
-                        <h2>{cheese.name}</h2>
-                      </Link>
-                      <input
+          <h2>Your Cart</h2>
+          <div className="element-list">
+            {order[0][0].wines.map((wine) => {
+              return (
+                <article key={wine.id} className="single-element">
+                  <Link key={wine.id} to={`/wines/${wine.id}`}>
+                    <img
+                      className="product-img"
+                      width="150px"
+                      src={wine.imageUrl}
+                    />
+                    <h2>{wine.name}</h2>
+                  </Link>
+                  <button
+                    name={order[0][0].id}
+                    value={wine.id}
+                    onClick={handleWineRemove}
+                  >
+                    Remove from Cart
+                  </button>
+                </article>
+              );
+            })}
+          </div>
+          <div className="element-list">
+            {order[1][0].cheeses.map((cheese) => {
+              return (
+                <article key={cheese.id} className="single-element">
+                  <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
+                    <img
+                      className="product-img"
+                      width="150px"
+                      src={cheese.imageUrl}
+                    />
+                    <h2>{cheese.name}</h2>
+                  </Link>
+                  <input
                     type="number"
                     min="0"
                     step="1"
@@ -145,36 +142,27 @@ const Order = (props) => {
                   >
                     Change Quantity
                   </button>
-                      <br></br>
-                      <button
-                        name={order[0][0].id}
-                        value={cheese.id}
-                        onClick={handleCheeseRemove}
-                      >
-                        Remove from Cart
-                      </button> */}
-                    </article>
-                  );
-                })}
-              </div>
-              <button
-                className="clear-cart"
-                onClick={() => props.clearOrder(order[0][0].id)}
-              >
-                Clear Cart
-              </button>
-              <div>
-                <button className="checkout" onClick={checkOut}>
-                  CHECKOUT
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <h3>Your Cart is Empty!</h3>
-              <h6>Please view our products and add to your cart.</h6>
-            </div>
-          )}
+                  <br></br>
+                  <button
+                    name={order[0][0].id}
+                    value={cheese.id}
+                    onClick={handleCheeseRemove}
+                  >
+                    Remove from Cart
+                  </button> */}
+                </article>
+              );
+            })}
+          </div>
+          <button
+            className="clear-cart"
+            onClick={() => props.clearOrder(order[0][0].id)}
+          >
+            Clear Cart
+          </button>
+          <div>
+            <button>CHECKOUT</button>
+          </div>
         </div>
       ) : (
         <div>
