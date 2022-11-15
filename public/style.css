@@ -1,6 +1,6 @@
 body {
-  font-family: 'Syne Mono', monospace;
-  background-color: #FFFFF0;
+  font-family: "Syne Mono", monospace;
+  background-color: #fffff0;
 }
 
 a {
@@ -31,9 +31,15 @@ textarea {
   padding: 10px 20px;
 }
 
+footer {
+  background-color: darkred;
+  padding: 30px;
+  text-align: center;
+}
+
 .nav-bar {
-  background-color: 	#ffe4b5;
-  display: flex; 
+  background-color: #ffe4b5;
+  display: flex;
   flex-direction: column;
   align-content: center;
   top: 0;
@@ -58,16 +64,16 @@ textarea {
 .single-element {
   width: 15rem;
   margin: 0.5rem;
-  padding: 0.5rem; 
-  border: 3px solid #D3D3D3; 
+  padding: 0.5rem;
+  border: 3px solid #d3d3d3;
   border-radius: 25px;
   align-items: center;
 }
 
 .big-single-container {
-  display: flex; 
-  flex-direction: row; 
-  flex-wrap: wrap; 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
 }
 
@@ -75,22 +81,22 @@ textarea {
   width: 40rem;
   margin: 0.5rem;
   padding: 0.5rem;
-  background-color: 	#FFEFD5;
-  border: 3px solid #D3D3D3; 
-  border-radius: 25px; 
+  background-color: #ffefd5;
+  border: 3px solid #d3d3d3;
+  border-radius: 25px;
 }
 
 .product-image {
   width: 75%;
   margin: auto auto 2rem auto;
-  height: auto; 
+  height: auto;
   padding: 0.5rem;
   background-color: transparent;
   border-radius: 25px;
 }
 
 .add-to-cart {
-  background-color: #6495ED; /* Green */
+  background-color: #6495ed; /* Green */
   border: none;
   color: white;
   padding: 10px 10px;
@@ -98,7 +104,7 @@ textarea {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-family: 'Slabo 27px', serif; 
+  font-family: "Slabo 27px", serif;
   font-size: 14px;
   border-radius: 15px;
 }
@@ -113,7 +119,7 @@ textarea {
 }
 
 .remove {
-  background-color: orangered; 
+  background-color: orangered;
   border: none;
   color: white;
   padding: 10px 10px;
@@ -121,12 +127,13 @@ textarea {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-family: 'Slabo 27px', serif; 
+  font-family: "Slabo 27px", serif;
   font-size: 14px;
   border-radius: 15px;
 }
 
-h3, h2{ 
+h3,
+h2 {
   text-align: center;
 }
 
@@ -136,7 +143,7 @@ h3, h2{
   margin: 0 auto;
   overflow: hidden;
   width: 90%;
-  height: 60%
+  height: 60%;
 }
 
 .slideshowSlider {
@@ -170,4 +177,70 @@ h3, h2{
 
 .slideshowDot.active {
   background-color: #6a0dad;
+}
+
+/* TICKER */
+* {
+  box-sizing: border-box;
+}
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-wrap {
+  position: static;
+  width: 100%;
+  overflow: hidden;
+  height: 2.5rem;
+  background-color: darkred;
+  padding-left: 100%;
+  box-sizing: content-box;
+}
+
+.ticker {
+  display: inline-block;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  white-space: nowrap;
+  padding-right: 100%;
+  box-sizing: content-box;
+
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  animation-name: ticker;
+  -webkit-animation-duration: 30s;
+  animation-duration: 30s;
+}
+
+.ticker__item {
+  display: inline-block;
+  font-family: 'Nabla', cursive;
+  padding: 0 1rem;
+  font-size: 1.5rem;
 }
