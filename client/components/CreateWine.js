@@ -63,6 +63,7 @@ const CreateWine = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit} id="edit-wine-form">
+        <h2>Add a new wine:</h2>
         <label htmlFor="name">Wine Name:</label>
         <input type="text" name="name" value={name} onChange={handleChange} />
 
