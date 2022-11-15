@@ -6,6 +6,7 @@ import {
   removeWineOrderThunk,
   removeCheeseOrderThunk,
 } from "../store/order";
+import Checkout from "./Checkout";
 // import {updateCheeseQuantityThunk} from "../store/order"
 
 /**
@@ -14,10 +15,25 @@ import {
 const Order = (props) => {
   const userId = props.userId;
   const { order } = props;
+  let orderWinesAndCheeses;
+
+  let [cart, setCart] = useState([]);
+  let localCart = window.localStorage.getItem("cart");
 
   useEffect(() => {
-    props.fetchOrder(userId);
-  }, [userId]);
+    if (props.isLoggedIn) {
+      props.fetchOrder(userId);
+    } else {
+      localCart = JSON.parse(localCart);
+      if (localCart) {
+        setCart(localCart);
+      }
+    }
+  }, [userId, localCart]);
+
+  if (localCart) {
+    orderWinesAndCheeses = JSON.parse(localCart);
+  }
 
   // const [cheeseQuantity, changeCheeseQuantity] = useState(1)
 
@@ -46,6 +62,21 @@ const Order = (props) => {
     props.removeCheeseOrderThunk(id);
   };
 
+  const handleProductRemove = (event) => {
+    const productId = parseInt(event.target.value);
+    let cartCopy = [...cart];
+
+    cartCopy = cartCopy.filter((product) => product.id != productId);
+    setCart(cartCopy);
+
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", cartString);
+  };
+
+  const checkOut = () => {
+    location.href = "http://localhost:8080/checkout";
+  };
+
   const hasOrder = (order) => {
     if (order.length) {
       return true;
@@ -53,12 +84,12 @@ const Order = (props) => {
       return false;
     }
   };
-  // const orderWines = order[0].wines
+
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
     <div>
-      {hasOrder(order) ? (
+      {props.isLoggedIn ? (
         <div>
           <h2>Your Cart</h2>
           <div className="element-list">
@@ -135,11 +166,25 @@ const Order = (props) => {
         </div>
       ) : (
         <div>
-          <h3>Your Cart is Empty!</h3>
-          <h6>Please view our products and add to your cart.</h6>
+          {orderWinesAndCheeses.map((product) => {
+            return (
+              <article key={product.id} className="single-element">
+                <Link key={product.id} to={`/${product.type}s/${product.id}`}>
+                  <img
+                    className="product-img"
+                    width="150px"
+                    src={product.imageUrl}
+                  />
+                  <h2>{product.name}</h2>
+                </Link>
+                <button value={product.id} onClick={handleProductRemove}>
+                  Remove from Cart
+                </button>
+              </article>
+            );
+          })}
         </div>
       )}
-      <div></div>
     </div>
   );
 };
@@ -148,6 +193,7 @@ const mapState = (storeState) => {
   return {
     userId: storeState.auth.id,
     order: storeState.order,
+    isLoggedIn: !!storeState.auth.id,
   };
 };
 

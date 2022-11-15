@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 import { me } from "../store";
@@ -6,15 +6,58 @@ import { addNewWineOrderThunk } from "../store/order";
 import EditWine from "./EditWine";
 
 const SingleWine = (props) => {
+  let [cart, setCart] = useState([]);
+  let [quantity, setQuantity] = useState("");
+
+  let localCart = localStorage.getItem("cart");
+
+  const addToGuestCart = (item) => {
+    let cartCopy = [...cart];
+    let { id } = item;
+    let existingItem = cartCopy.find((cartItem) => cartItem.id == id);
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    } else {
+      cartCopy.push(item);
+    }
+
+    setCart(cartCopy);
+
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", stringCart);
+  };
+
   useEffect(() => {
     props.fetchSingleWine(props.match.params.id);
+    localCart = JSON.parse(localCart);
+
+    if (localCart) {
+      setCart(localCart);
+    }
   }, []);
 
   const handleClick = (event) => {
-    // add a thunk here to add product id and userId
-    const userId = props.userId;
-    const productId = props.match.params.id;
-    props.addNewWineOrderThunk({ userId, productId });
+    if (props.isLoggedIn) {
+      // add a thunk here to add product id and userId
+      const userId = props.userId;
+      const productId = props.match.params.id;
+      props.addNewWineOrderThunk({ userId, productId });
+    } else {
+      addToGuestCart({
+        id: props.singleWine.id,
+        name: props.singleWine.name,
+        imageUrl: props.singleWine.imageUrl,
+        type: 'wine',
+        quantity: parseInt(quantity),
+      });
+    }
+  };
+
+  const handleChange = (event) => {
+    if (event.target.className === "quantity-incrementor") {
+      setQuantity(event.target.value);
+    }
   };
 
   const { singleWine } = props;
@@ -41,6 +84,7 @@ const SingleWine = (props) => {
             min="0"
             step="1"
             className="quantity-incrementor"
+            onChange={handleChange}
           />
           <button className="add-to-cart" onClick={handleClick}>
             Add to cart
@@ -64,6 +108,7 @@ const mapState = (state) => {
     singleWine: state.singleWineReducer,
     userId: state.auth.id,
     userType: state.auth.userType,
+    isLoggedIn: !!state.auth.id,
     // winePair: storeState.cheese,
   };
 };
