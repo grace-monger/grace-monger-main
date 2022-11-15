@@ -4,6 +4,7 @@ import { getSingleCheeseThunk } from "../store/singleCheese";
 import { me } from "../store";
 import { addNewCheeseOrderThunk } from "../store/order";
 import EditCheese from "./EditCheese";
+import PairedWine from "./PairedWine";
 
 const SingleCheese = (props) => {
   let [cart, setCart] = useState([]);
@@ -61,6 +62,7 @@ const SingleCheese = (props) => {
   // };
 
   const { singleCheese } = props;
+  const wine = singleCheese.wineId
 
   return (
     <div className="big-single">
@@ -93,6 +95,7 @@ const SingleCheese = (props) => {
       ) : (
         <h1></h1>
       )}
+      <PairedWine wine={wine} />
     </div>
   );
 };
