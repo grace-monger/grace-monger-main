@@ -4,6 +4,7 @@ import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 import { me } from "../store";
 import { addNewWineOrderThunk } from "../store/order";
 import EditWine from "./EditWine";
+import PairedCheese from "./PairedCheese";
 
 const SingleWine = (props) => {
   let [cart, setCart] = useState([]);
@@ -54,43 +55,43 @@ const SingleWine = (props) => {
     }
   };
 
-  const handleChange = (event) => {
-    if (event.target.className === "quantity-incrementor") {
-      setQuantity(event.target.value);
-    }
-  };
+  // const handleChange = (event) => {
+  //   if (event.target.className === "quantity-incrementor") {
+  //     setQuantity(event.target.value);
+  //   }
+  // };
 
   const { singleWine } = props;
-
+  const cheese = singleWine.cheeseId
+  
   return (
     <div>
-      <h1>Here is one wine:</h1>
       <div className="big-single">
-        <h2>{singleWine.name}</h2>
-        <h2>{singleWine.region}</h2>
-        <h2>{singleWine.year}</h2>
-        <h2>{singleWine.type}</h2>
-        <h2>{singleWine.typeOfGrape}</h2>
         <img
           className="product-image"
           width="300px"
           src={singleWine.imageUrl}
         />
+        <h2>Wine name:{singleWine.name}</h2>
+        <h2>Region: {singleWine.region}</h2>
+        <h2>Year:{singleWine.year}</h2>
+        <h2>Type: {singleWine.type}</h2>
+        <h2>Type of grape:{singleWine.typeOfGrape}</h2>
         <h2>{singleWine.price}</h2>
         <p>{singleWine.tastingNotes}</p>
         <div>
-          <input
+          {/* <input
             type="number"
             min="0"
             step="1"
             className="quantity-incrementor"
             onChange={handleChange}
-          />
+          /> */}
           <button className="add-to-cart" onClick={handleClick}>
             Add to cart
           </button>
         </div>
-        {props.userType == "admin" ? (
+        {props.isAdmin ? (
           <div>
             <h3>Edit This Wine</h3>
             <EditWine singleWine={singleWine} />
@@ -99,6 +100,7 @@ const SingleWine = (props) => {
           <h1></h1>
         )}
       </div>
+      <PairedCheese cheese={cheese}/>
     </div>
   );
 };
@@ -107,7 +109,7 @@ const mapState = (state) => {
   return {
     singleWine: state.singleWineReducer,
     userId: state.auth.id,
-    userType: state.auth.userType,
+    isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
     // winePair: storeState.cheese,
   };

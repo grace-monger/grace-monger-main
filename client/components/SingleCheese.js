@@ -4,6 +4,7 @@ import { getSingleCheeseThunk } from "../store/singleCheese";
 import { me } from "../store";
 import { addNewCheeseOrderThunk } from "../store/order";
 import EditCheese from "./EditCheese";
+import PairedWine from "./PairedWine";
 
 const SingleCheese = (props) => {
   let [cart, setCart] = useState([]);
@@ -54,13 +55,14 @@ const SingleCheese = (props) => {
     }
   };
 
-  const handleChange = (event) => {
-    if (event.target.className === "quantity-incrementor") {
-      setQuantity(event.target.value);
-    }
-  };
+  // const handleChange = (event) => {
+  //   if (event.target.className === "quantity-incrementor") {
+  //     setQuantity(event.target.value);
+  //   }
+  // };
 
   const { singleCheese } = props;
+  const wine = singleCheese.wineId
 
   return (
     <div className="big-single">
@@ -75,17 +77,17 @@ const SingleCheese = (props) => {
       <p> Family {singleCheese.family}</p>
       <h3> {singleCheese.price}</h3>
       <p>{singleCheese.description}</p>
-      <input
+      {/* <input
         type="number"
         min="0"
         step="1"
         className="quantity-incrementor"
         onChange={handleChange}
-      />
+      /> */}
       <button className="add-to-cart" onClick={handleClick}>
         Add to cart
       </button>
-      {props.userType == "admin" ? (
+      {props.isAdmin ? (
         <div>
           <h3>Edit This Cheese</h3>
           <EditCheese singleCheese={singleCheese} />
@@ -93,6 +95,7 @@ const SingleCheese = (props) => {
       ) : (
         <h1></h1>
       )}
+      <PairedWine wine={wine} />
     </div>
   );
 };
@@ -101,7 +104,7 @@ const mapState = (state) => {
   return {
     singleCheese: state.singleCheese,
     userId: state.auth.id,
-    userType: state.auth.userType,
+    isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
   };
 };

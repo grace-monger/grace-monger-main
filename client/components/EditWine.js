@@ -15,6 +15,7 @@ const EditWine = (props) => {
     price: 19.99,
     quantity: 20,
     imageUrl: "",
+    cheeseId: "",
   });
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const EditWine = (props) => {
       price: 19.99,
       quantity: 20,
       imageUrl: "",
+      cheeseId: "",
     });
     // window.location.reload()
   };
@@ -116,6 +118,14 @@ const EditWine = (props) => {
           type="text"
           name="imageUrl"
           defaultValue={singleWine.imageUrl}
+          onChange={handleChange}
+        />
+
+        <label htmlFor="cheeseId">Cheese ID:</label>
+        <input
+          type="text"
+          name="cheeseId"
+          defaultValue={singleWine.cheeseId}
           onChange={handleChange}
         />
 

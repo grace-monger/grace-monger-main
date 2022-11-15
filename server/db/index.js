@@ -12,9 +12,9 @@ const User = require("./models/User");
 
 //associations could go here!
 
-Cheese.hasOne(Wine);
+Cheese.hasOne(Wine, {foreignKey: 'cheeseId'});
 Wine.belongsTo(Cheese);
-Wine.hasOne(Cheese);
+Wine.hasOne(Cheese, {foreignKey: 'wineId'});
 Cheese.belongsTo(Wine);
 
 User.hasMany(Order);

@@ -45,6 +45,7 @@ footer {
   top: 0;
   width: 100%;
   align-items: center;
+  overflow: hidden; 
 }
 
 .header {
@@ -71,9 +72,9 @@ footer {
 }
 
 .big-single-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
   justify-content: flex-start;
 }
 
@@ -81,9 +82,9 @@ footer {
   width: 40rem;
   margin: 0.5rem;
   padding: 0.5rem;
-  background-color: #ffefd5;
-  border: 3px solid #d3d3d3;
-  border-radius: 25px;
+  background-color: 	#FFEFD5;
+  border: 3px solid #D3D3D3; 
+  border-radius: 25px; 
 }
 
 .product-image {
@@ -138,6 +139,11 @@ h2 {
 }
 
 /* Slideshow */
+
+.slideshow-container {
+  display: flex; 
+  align-items: center;
+}
 
 .slideshow {
   margin: 0 auto;
