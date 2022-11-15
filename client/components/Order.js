@@ -17,22 +17,22 @@ const Order = (props) => {
   const { order } = props;
   let orderWinesAndCheeses;
 
-  let [cart, setCart] = useState([])
-  let localCart = window.localStorage.getItem('cart')
+  let [cart, setCart] = useState([]);
+  let localCart = window.localStorage.getItem("cart");
 
   useEffect(() => {
     if (props.isLoggedIn) {
       props.fetchOrder(userId);
     } else {
-      localCart = JSON.parse(localCart)
+      localCart = JSON.parse(localCart);
       if (localCart) {
-        setCart(localCart)
+        setCart(localCart);
       }
     }
   }, [userId, localCart]);
 
   if (localCart) {
-    orderWinesAndCheeses = JSON.parse(localCart)
+    orderWinesAndCheeses = JSON.parse(localCart);
   }
 
   // const [cheeseQuantity, changeCheeseQuantity] = useState(1)
@@ -49,10 +49,10 @@ const Order = (props) => {
   // }
 
   const handleWineRemove = (event) => {
-      const orderId = parseInt(event.target.name);
-      const productId = parseInt(event.target.value);
-      const id = `${orderId}-${productId}`;
-      props.removeWineOrderThunk(id);
+    const orderId = parseInt(event.target.name);
+    const productId = parseInt(event.target.value);
+    const id = `${orderId}-${productId}`;
+    props.removeWineOrderThunk(id);
   };
 
   const handleCheeseRemove = (event) => {
@@ -63,15 +63,15 @@ const Order = (props) => {
   };
 
   const handleProductRemove = (event) => {
-    const productId = parseInt(event.target.value)
-    let cartCopy = [...cart]
+    const productId = parseInt(event.target.value);
+    let cartCopy = [...cart];
 
-    cartCopy = cartCopy.filter(product => product.id != productId)
-    setCart(cartCopy)
+    cartCopy = cartCopy.filter((product) => product.id != productId);
+    setCart(cartCopy);
 
-    let cartString = JSON.stringify(cartCopy)
-    localStorage.setItem('cart', cartString)
-  }
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", cartString);
+  };
 
   const checkOut = () => {
     location.href = "http://localhost:8080/checkout";
@@ -189,7 +189,9 @@ const Order = (props) => {
                   />
                   <h2>{product.name}</h2>
                 </Link>
-                <button value={product.id} onClick={handleProductRemove}>Remove from Cart</button>
+                <button value={product.id} onClick={handleProductRemove}>
+                  Remove from Cart
+                </button>
               </article>
             );
           })}
