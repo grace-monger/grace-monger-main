@@ -22,10 +22,10 @@ const Order = (props) => {
 
   const [wineQuantity, changeWineQuantity] = useState(1);
   const [cheeseQuantity, changeCheeseQuantity] = useState(1);
-  
+
   let [cart, setCart] = useState([]);
   let localCart = window.localStorage.getItem("cart");
-  
+
   useEffect(() => {
     if (props.isLoggedIn) {
       props.fetchOrder(userId);
@@ -36,7 +36,7 @@ const Order = (props) => {
       }
     }
   }, [userId, localCart]);
-  
+
   if (localCart) {
     orderWinesAndCheeses = JSON.parse(localCart);
   }
@@ -44,7 +44,6 @@ const Order = (props) => {
   const handleCheeseQuantityChanges = (event) => {
     changeCheeseQuantity(event.target.value);
   };
-
 
   const handleWineQuantityChanges = (event) => {
     changeWineQuantity(event.target.value);
@@ -55,7 +54,7 @@ const Order = (props) => {
     const productId = parseInt(event.target.value);
     const quantity = parseInt(cheeseQuantity);
     props.updateCheese({ orderId, productId, quantity });
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleWineQuantityClick = (event) => {
@@ -63,7 +62,7 @@ const Order = (props) => {
     const productId = parseInt(event.target.value);
     const quantity = parseInt(cheeseQuantity);
     props.updateWine({ orderId, productId, quantity });
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleWineRemove = (event) => {
@@ -71,7 +70,7 @@ const Order = (props) => {
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
     props.removeWineOrderThunk(id);
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleCheeseRemove = (event) => {
@@ -79,7 +78,7 @@ const Order = (props) => {
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
     props.removeCheeseOrderThunk(id);
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleProductRemove = (event) => {
@@ -107,6 +106,7 @@ const Order = (props) => {
 
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
+  console.log("array", orderWinesAndCheeses);
   return (
     <div>
       {props.isLoggedIn ? (
@@ -198,12 +198,6 @@ const Order = (props) => {
                   );
                 })}
               </div>
-              {/* <button
-                className="clear-cart"
-                onClick={() => props.clearOrder(order[0][0].id)}
-              >
-                Clear Cart
-              </button> */}
               <div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
@@ -219,28 +213,40 @@ const Order = (props) => {
         </div>
       ) : (
         <div>
-          {orderWinesAndCheeses.map((product) => {
-            return (
-              <article key={product.id} className="single-element">
-                <Link key={product.id} to={`/${product.type}s/${product.id}`}>
-                  <img
-                    className="product-img"
-                    width="150px"
-                    src={product.imageUrl}
-                  />
-                  <h2>{product.name}</h2>
-                </Link>
-                <button value={product.id} onClick={handleProductRemove}>
-                  Remove from Cart
+          {orderWinesAndCheeses.length ? (
+            <div>
+              {orderWinesAndCheeses.map((product) => {
+                return (
+                  <article key={product.id} className="single-element">
+                    <Link
+                      key={product.id}
+                      to={`/${product.type}s/${product.id}`}
+                    >
+                      <img
+                        className="product-img"
+                        width="150px"
+                        src={product.imageUrl}
+                      />
+                      <h2>{product.name}</h2>
+                    </Link>
+                    <button value={product.id} onClick={handleProductRemove}>
+                      Remove from Cart
+                    </button>
+                  </article>
+                );
+              })}
+              <div>
+                <button className="checkout" onClick={checkOut}>
+                  CHECKOUT
                 </button>
-              </article>
-            );
-          })}
-          <div>
-            <button className="checkout" onClick={checkOut}>
-              CHECKOUT
-            </button>
-          </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h3>Your Cart is Empty!</h3>
+              <h6>Please view our products and add to your cart.</h6>
+            </div>
+          )}
         </div>
       )}
     </div>

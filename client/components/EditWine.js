@@ -40,6 +40,7 @@ const EditWine = (props) => {
       quantity: 20,
       imageUrl: "",
     });
+    // window.location.reload()
   };
 
   return (

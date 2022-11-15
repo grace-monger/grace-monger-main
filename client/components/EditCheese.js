@@ -40,6 +40,7 @@ const EditCheese = (props) => {
       quantity: "",
       imageUrl: "",
     });
+    window.location.reload()
   };
 
   return (
