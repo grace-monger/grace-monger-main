@@ -84,14 +84,13 @@ const Order = (props) => {
       return false;
     }
   };
-
+  
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
     <div>
       {props.isLoggedIn ? (
         <div>
-          {" "}
           {hasOrder(order) ? (
             <div>
               <h2>Your Cart</h2>
@@ -130,21 +129,21 @@ const Order = (props) => {
                         />
                         <h2>{cheese.name}</h2>
                       </Link>
-                      <input
+                      {/* <input
                     type="number"
                     min="0"
                     step="1"
                     className="quantity-incrementor"
                     placeholder="Change quantity"
                     onChange={handleCheeseQuantityChanges}
-                  />
+                  /> */}
                   {/* <button
                     name={order[1][0].id}
                     value={cheese.id}
                     onClick={handleCheeseQuantityClick}
                   >
                     Change Quantity
-                  </button>
+                  </button> */}
                       <br></br>
                       <button
                         name={order[0][0].id}
@@ -152,7 +151,7 @@ const Order = (props) => {
                         onClick={handleCheeseRemove}
                       >
                         Remove from Cart
-                      </button> */}
+                      </button>
                     </article>
                   );
                 })}
@@ -195,6 +194,11 @@ const Order = (props) => {
               </article>
             );
           })}
+          <div>
+                <button className="checkout" onClick={checkOut}>
+                  CHECKOUT
+                </button>
+              </div>
         </div>
       )}
     </div>
