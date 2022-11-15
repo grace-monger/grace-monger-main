@@ -164,7 +164,6 @@ export const updateWineQuantityThunk = (infoToUpdate) => {
 const initialState = [];
 
 export default function orderReducer(state = initialState, action) {
-  console.log("in reducer", state)
   switch (action.type) {
     case GET_ORDER:
       return action.order;
@@ -178,7 +177,9 @@ export default function orderReducer(state = initialState, action) {
       return state[1].filter((cheese) => cheese.id !== action.cheeseOrder.id);
     // case CLEAR_ORDER:
     //   return state.filter((order) => order.id !== action.order.id);
+
     case UPDATE_CHEESE_QUANTITY:
+      console.log(state[1][0].cheeses)
       state[1][0].cheeses.map((cheese) => {
         if (cheese.Order_Cheese.cheeseId == action.infoToUpdate.cheeseId) {
           cheese.Order_Cheese.quantity = action.infoToUpdate.quantity;
@@ -186,6 +187,7 @@ export default function orderReducer(state = initialState, action) {
         }
         return cheese.Order_Cheese;
       });
+
     case UPDATE_WINE_QUANTITY: 
     state[0][0].wines.map((wine) => {
       if (wine.Order_Wine.wineId == action.infoToUpdate.wineId) {
