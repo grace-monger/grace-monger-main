@@ -7,6 +7,7 @@ import EditWine from "./EditWine";
 import PairedCheese from "./PairedCheese";
 
 const SingleWine = (props) => {
+  let pairing;
   let [cart, setCart] = useState([]);
   let [quantity, setQuantity] = useState("");
 
@@ -60,9 +61,14 @@ const SingleWine = (props) => {
   //     setQuantity(event.target.value);
   //   }
   // };
-
   const { singleWine } = props;
   const cheese = singleWine.cheeseId;
+  
+  if (singleWine.cheeseId) {
+    pairing = <PairedCheese cheese={cheese} />;
+  } else {
+    pairing = <p>Currently, this wine has no pairings.</p>;
+  }
 
   return (
     <div>
@@ -93,7 +99,7 @@ const SingleWine = (props) => {
           <h1></h1>
         )}
       </div>
-      <PairedCheese cheese={cheese} />
+      {pairing}
     </div>
   );
 };
