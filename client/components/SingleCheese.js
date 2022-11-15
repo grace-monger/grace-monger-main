@@ -55,47 +55,36 @@ const SingleCheese = (props) => {
     }
   };
 
-  // const handleChange = (event) => {
-  //   if (event.target.className === "quantity-incrementor") {
-  //     setQuantity(event.target.value);
-  //   }
-  // };
-
   const { singleCheese } = props;
-  const wine = singleCheese.wineId
+  const wine = singleCheese.wineId;
 
   return (
-    <div className="big-single">
-      <h2>{singleCheese.name}</h2>
-      <img
-        className="product-image"
-        width="300px"
-        src={singleCheese.imageUrl}
-      />
-      <p> Dairy name: {singleCheese.dairyName}</p>
-      <p> Milk type: {singleCheese.milkType}</p>
-      <p> Family {singleCheese.family}</p>
-      <h3> {singleCheese.price}</h3>
-      <p>{singleCheese.description}</p>
-      {/* <input
-        type="number"
-        min="0"
-        step="1"
-        className="quantity-incrementor"
-        onChange={handleChange}
-      /> */}
-      <button className="add-to-cart" onClick={handleClick}>
-        Add to cart
-      </button>
+    <div>
+      <div className="big-single">
+        <h2>{singleCheese.name}</h2>
+        <img
+          className="product-image"
+          width="300px"
+          src={singleCheese.imageUrl}
+        />
+        <p> Dairy name: {singleCheese.dairyName}</p>
+        <p> Milk type: {singleCheese.milkType}</p>
+        <p> Family {singleCheese.family}</p>
+        <h3>${singleCheese.price}</h3>
+        <p>{singleCheese.description}</p>
+        <button className="add-to-cart" onClick={handleClick}>
+          Add to cart
+        </button>
+      </div>
       {props.isAdmin ? (
         <div>
           <h3>Edit This Cheese</h3>
           <EditCheese singleCheese={singleCheese} />
         </div>
-      ) : (
-        <h1></h1>
-      )}
-      <PairedWine wine={wine} />
+      ) : null}
+      <div>
+        <PairedWine wine={wine} />
+      </div>
     </div>
   );
 };
