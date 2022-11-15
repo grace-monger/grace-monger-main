@@ -2,28 +2,47 @@ import React from "react";
 
 const photos = [
   "pexels-nastyasensei-821365.jpg",
-  "pexels-ray-piedra-1545529.jpg",
+  "pexels-rodnae-productions-6004726.jpg",
   "pexels-polina-tankilevitch-4187777.jpg",
 ];
+const delay = 5000;
 
 const Carousel = () => {
+  const [index, setIndex] = React.useState(0);
+  const timeoutRef = React.useRef(null);
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  React.useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === photos.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
+
   return (
     <div className="slideshow">
-      <div className="slideshowSlider">
-        <img width="100%" src="pexels-nastyasensei-821365.jpg" />
+      <div
+        className="slideshowSlider"
+        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+      >
+        {photos.map((photo, index) => (
+          <div className="slide" key={index}>
+            <img src={photo} />
+          </div>
+        ))}
       </div>
-      <div className="mySlides fade">
-        <img width="100%" src="pexels-ray-piedra-1545529.jpg" />
-      </div>
-      <div className="mySlides fade">
-        <img width="100%" src="pexels-polina-tankilevitch-4187777.jpg" />
-      </div>
-      {/* <a className="prev" onClick={plusSlides(-1)}>
-        &#10094;
-      </a>
-      <a className="next" onClick={plusSlides(1)}>
-        &#10095;
-      </a> */}
     </div>
   );
 };
