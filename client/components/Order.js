@@ -96,7 +96,7 @@ const Order = (props) => {
                     />
                     <h2>{cheese.name}</h2>
                   </Link>
-                  {/* <input
+                  <input
                     type="number"
                     min="0"
                     step="1"
@@ -104,13 +104,13 @@ const Order = (props) => {
                     placeholder="Change quantity"
                     onChange={handleCheeseQuantityChanges}
                   />
-                  <button
+                  {/* <button
                     name={order[1][0].id}
                     value={cheese.id}
                     onClick={handleCheeseQuantityClick}
                   >
                     Change Quantity
-                  </button> */}
+                  </button>
                   <br></br>
                   <button
                     name={order[0][0].id}
@@ -118,7 +118,7 @@ const Order = (props) => {
                     onClick={handleCheeseRemove}
                   >
                     Remove from Cart
-                  </button>
+                  </button> */}
                 </article>
               );
             })}

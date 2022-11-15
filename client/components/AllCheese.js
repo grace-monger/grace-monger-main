@@ -9,7 +9,6 @@ const AllCheese = (props) => {
     props.getCheeseThunk();
   }, []);
 
-  console.log("props in all cheese", props);
   const { cheeses } = props;
 
   return (
@@ -27,7 +26,7 @@ const AllCheese = (props) => {
                 />
                 <h2>{singleCheese.name}</h2>
               </Link>
-              {props.userType == "admin" ? (
+              {props.isAdmin ? (
                 <button
                   className="remove"
                   name={singleCheese.id}
@@ -44,7 +43,7 @@ const AllCheese = (props) => {
           );
         })}
       </div>
-      {props.userType == "admin" ? <AddCheeseForm /> : <h1></h1>}
+      {props.isAdmin ? <AddCheeseForm /> : <h1></h1>}
     </div>
   );
 };
@@ -52,7 +51,7 @@ const AllCheese = (props) => {
 const mapState = (state) => {
   return {
     cheeses: state.cheeses,
-    userType: state.auth.userType,
+    isAdmin: state.auth.isAdmin
   };
 };
 
