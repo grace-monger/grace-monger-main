@@ -130,7 +130,7 @@ const Order = (props) => {
                         />
                         <h2>{cheese.name}</h2>
                       </Link>
-                      {/* <input
+                      <input
                     type="number"
                     min="0"
                     step="1"
@@ -144,7 +144,7 @@ const Order = (props) => {
                     onClick={handleCheeseQuantityClick}
                   >
                     Change Quantity
-                  </button> */}
+                  </button>
                       <br></br>
                       <button
                         name={order[0][0].id}
