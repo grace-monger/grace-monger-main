@@ -138,7 +138,7 @@ const Order = (props) => {
                     placeholder="Change quantity"
                     onChange={handleCheeseQuantityChanges}
                   />
-                  <button
+                  {/* <button
                     name={order[1][0].id}
                     value={cheese.id}
                     onClick={handleCheeseQuantityClick}
@@ -152,7 +152,7 @@ const Order = (props) => {
                         onClick={handleCheeseRemove}
                       >
                         Remove from Cart
-                      </button>
+                      </button> */}
                     </article>
                   );
                 })}
