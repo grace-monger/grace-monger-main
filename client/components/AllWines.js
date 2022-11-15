@@ -29,7 +29,7 @@ const AllWines = (props) => {
               </Link>
               {/* put admin stuff here with a ternary - all wines / all cheeses / single wine (edit) / single cheese (edit)*/}
               {/* think about security and protecting the route */}
-              {props.userType == "admin" ? (
+              {props.isAdmin ? (
                 <button
                   className="remove"
                   onClick={() => props.deleteWine(wine.id)}
@@ -43,7 +43,7 @@ const AllWines = (props) => {
           );
         })}
       </div>
-      {props.userType == "admin" ? <CreateWine /> : <h1></h1>}
+      {props.isAdmin ? <CreateWine /> : <h1></h1>}
     </div>
   );
 };
@@ -53,7 +53,7 @@ const mapState = (storeState) => {
     userId: storeState.auth.id,
     wines: storeState.wines,
     wine: storeState.wine,
-    userType: storeState.auth.userType,
+    isAdmin: storeState.auth.isAdmin,
   };
 };
 

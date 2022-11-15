@@ -53,6 +53,10 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
+  isAdmin: {
+    type: DataTypes.BOOLEAN, 
+    defaultValue: false,
+  }
   // hashedPassword: {
   //   type: DataTypes.STRING(64),
   //   validate: {

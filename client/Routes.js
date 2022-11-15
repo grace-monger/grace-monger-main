@@ -23,7 +23,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn, userType } = this.props;
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <div>
@@ -42,7 +42,7 @@ class Routes extends Component {
               {/* <Route path="/login" component={Login} /> */}
               <Route path="/order" component={Order} />
               <Route path='/checkout' component={Checkout} />
-              {userType == "admin" ? (
+              {isAdmin ? (
                 <Route exact path="/users/all" component={AllUsers} />
               ) : null}
               <Redirect to="/home" />
@@ -80,7 +80,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    userType: state.auth.userType,
+    isAdmin: state.auth.isAdmin,
   };
 };
 

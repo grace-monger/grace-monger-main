@@ -6,6 +6,7 @@ const userData = [
     email: "jmanginelli11@gmail.com",
     password: "password",
     userType: "admin",
+    isAdmin: true,
   },
   {
     fullName: "Alison Phanthavong",

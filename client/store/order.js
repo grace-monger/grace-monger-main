@@ -126,11 +126,12 @@ export const removeCheeseOrderThunk = (id) => {
 //   };
 // };
 
-// // infoToUpdate is productId, OrderId, and quantity
+// infoToUpdate is productId, OrderId, and quantity
 // export const updateCheeseQuantityThunk = (infoToUpdate) => {
 //   return async (dispatch) => {
 //     try {
 //       const { data } = await axios.put(`/api/order/updateCheese`, infoToUpdate);
+//       console.log("data from put", data)
 //       dispatch(updateCheeseQuantity(data));
 //     } catch (error) {
 //       console.error(error);
