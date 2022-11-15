@@ -62,6 +62,7 @@ class Routes extends Component {
           )}
         </div>
         <footer>
+          <p>&copy; 2022 Grace Monger</p>
           <p>
             Authors: Jackie Manginelli, Alison Phanthavong, & Anahis Valenzuela
           </p>

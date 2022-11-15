@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ isLoggedIn, userType }) => {
+const Navbar = ({ isLoggedIn, isAdmin }) => {
   const handleClick = () => {
     logout();
   };
@@ -19,6 +19,15 @@ const Navbar = ({ isLoggedIn, userType }) => {
         ></img>
         <h1>Grace Monger</h1>
       </header>
+      <div className="ticker-wrap">
+        <div className="ticker">
+          <div className="ticker__item">ALERT! NEW WINES!</div>
+          <div className="ticker__item">Sean's Wines in Store Now!</div>
+          <div className="ticker__item">ALERT! NEW WINES!</div>
+          <div className="ticker__item">Sean's Wines in Store Now!</div>
+          <div className="ticker__item">ALERT! NEW WINE!</div>
+        </div>
+      </div>
       <nav className="navigations">
         {isLoggedIn ? (
           <ul>
@@ -26,8 +35,7 @@ const Navbar = ({ isLoggedIn, userType }) => {
             <Link to="/">Home</Link>
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
-            {userType == 'admin' ? <Link to='users/all'>Users</Link> : null}
-            <i className="bi bi-search-heart"></i>
+            {isAdmin ? <Link to="users/all">Users</Link> : null}
             <i className="bi bi-person"></i>
             <Link to="/order">
               <i className="bi bi-cart4"></i>
@@ -44,7 +52,6 @@ const Navbar = ({ isLoggedIn, userType }) => {
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <i className="bi bi-search-heart"></i>
             <i className="bi bi-person"></i>
             <Link to="/order">
               <i className="bi bi-cart4"></i>
@@ -64,7 +71,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
-    userType: state.auth.userType
+    isAdmin: state.auth.isAdmin,
   };
 };
 
