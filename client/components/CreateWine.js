@@ -123,7 +123,7 @@ const CreateWine = (props) => {
           onChange={handleChange}
         />
 
-        <button type="submit">Submit</button>
+        <button className="submit" type="submit">Submit</button>
       </form>
     </div>
   );
