@@ -9,6 +9,7 @@ export const Checkout = (props) => {
 
   return (
     <div>
+      <img className='thank-you' src='thankyou.png' height='200px' width='200px'></img>
       {userName ? (
         <div>
           <h3>Thanks for your purchase, {userName}!</h3>
