@@ -4,22 +4,21 @@ const { expect } = require("chai");
 const request = require("supertest");
 const {
   db,
-  models: { User },
+  models: { Order, Order_Wine, Order_Cheese },
 } = require("../db");
 const seed = require("../../script/seed");
 const app = require("../app");
 
-describe("User routes", () => {
+describe("Order routes", () => {
   beforeEach(async () => {
     await seed();
   });
 
-  describe("/api/users/", () => {
-    it("GET /api/users", async () => {
-      const res = await request(app).get("/api/users").expect(200);
+  describe("/api/orders/", () => {
+    it("GET /api/orders", async () => {
+      const res = await request(app).get("/api/orders").expect(200);
 
       expect(res.body).to.be.an("array");
-      expect(res.body.length).to.equal(2);
     });
   }); // end describe('/api/users')
 }); // end describe('User routes')
