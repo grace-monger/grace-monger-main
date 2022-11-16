@@ -6,6 +6,7 @@ const ADD_CHEESE_ORDER = "ADD_CHEESE_ORDER";
 const ADD_WINE_ORDER = "ADD_WINE_ORDER";
 const UPDATE_CHEESE_QUANTITY = "UPDATE_CHEESE_QUANTITY";
 const UPDATE_WINE_QUANTITY = "UPDATE_WINE_QUANTITY";
+const FULFILL_ORDER = "FULFILL_ORDER";
 const REMOVE_WINE_ORDER = "REMOVE_WINE_ORDER";
 const REMOVE_CHEESE_ORDER = "REMOVE_CHEESE_ORDER";
 
@@ -64,6 +65,13 @@ const updateWineQuantity = (infoToUpdate) => {
   return {
     type: UPDATE_WINE_QUANTITY,
     infoToUpdate,
+  };
+};
+
+const _fulfillOrder = (order) => {
+  return {
+    type: FULFILL_ORDER,
+    order,
   };
 };
 
@@ -152,10 +160,20 @@ export const updateWineQuantityThunk = (infoToUpdate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(`/api/order/updateWine`, infoToUpdate);
-      console.log("data from put", data);
       dispatch(updateWineQuantity(data));
     } catch (error) {
       console.error(error);
+    }
+  };
+};
+
+export const fulfillOrder = (infoToUpdate) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/order/updateOrder`, infoToUpdate);
+      dispatch(_fulfillOrder(data));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -177,9 +195,8 @@ export default function orderReducer(state = initialState, action) {
       return state[1].filter((cheese) => cheese.id !== action.cheeseOrder.id);
     // case CLEAR_ORDER:
     //   return state.filter((order) => order.id !== action.order.id);
-
     case UPDATE_CHEESE_QUANTITY:
-      console.log(state[1][0].cheeses)
+      console.log(state[1][0].cheeses);
       state[1][0].cheeses.map((cheese) => {
         if (cheese.Order_Cheese.cheeseId == action.infoToUpdate.cheeseId) {
           cheese.Order_Cheese.quantity = action.infoToUpdate.quantity;
@@ -188,14 +205,16 @@ export default function orderReducer(state = initialState, action) {
         return cheese.Order_Cheese;
       });
 
-    case UPDATE_WINE_QUANTITY: 
-    state[0][0].wines.map((wine) => {
-      if (wine.Order_Wine.wineId == action.infoToUpdate.wineId) {
-        wine.Order_Wine.quantity = action.infoToUpdate.quantity;
+    case UPDATE_WINE_QUANTITY:
+      state[0][0].wines.map((wine) => {
+        if (wine.Order_Wine.wineId == action.infoToUpdate.wineId) {
+          wine.Order_Wine.quantity = action.infoToUpdate.quantity;
+          return wine.Order_Wine;
+        }
         return wine.Order_Wine;
-      }
-      return wine.Order_Wine;
-    });
+      });
+    // case FULFILL_ORDER:
+    //   return action.order;
     default:
       return state;
   }
