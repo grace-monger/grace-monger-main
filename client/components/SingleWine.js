@@ -14,6 +14,7 @@ const SingleWine = (props) => {
   let pairing;
   let quantity;
   let [cart, setCart] = useState([]);
+  let [showMessage, setShowMessage] = useState(false)
 
   let localCart = localStorage.getItem("cart");
 
@@ -78,6 +79,7 @@ const SingleWine = (props) => {
         quantity: parseInt(quantity),
       });
     }
+    setShowMessage(true)
   };
 
   const { singleWine } = props;
@@ -108,6 +110,7 @@ const SingleWine = (props) => {
           <button className="add-to-cart" onClick={handleClick}>
             Add to cart
           </button>
+          {showMessage && <p>Added To Cart</p>}
         </div>
         {props.isAdmin ? (
           <div>

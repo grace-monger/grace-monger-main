@@ -7,9 +7,11 @@ import EditCheese from "./EditCheese";
 import PairedWine from "./PairedWine";
 
 const SingleCheese = (props) => {
+
   let pairing;
   let quantity;
   let [cart, setCart] = useState([]);
+  let [showMessage, setShowMessage] = useState(false)
 
   let localCart = localStorage.getItem("cart");
 
@@ -74,6 +76,7 @@ const SingleCheese = (props) => {
         quantity: parseInt(quantity),
       });
     }
+    setShowMessage(true)
   };
 
   const { singleCheese } = props;
@@ -102,6 +105,7 @@ const SingleCheese = (props) => {
         <button className="add-to-cart" onClick={handleClick}>
           Add to cart
         </button>
+        {showMessage && <p>Added To Cart</p>}
       </div>
       {props.isAdmin ? (
         <div>
