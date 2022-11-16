@@ -20,12 +20,12 @@ const Order = (props) => {
   const userId = props.userId;
   const { order } = props;
   let orderWinesAndCheeses;
-  let cheeseTotal = 0;
-  let wineTotal = 0;
+  let total = 0;
 
   const [wineQuantity, changeWineQuantity] = useState(1);
   const [cheeseQuantity, changeCheeseQuantity] = useState(1);
   const [productQuantity, changeProductQuantity] = useState(1);
+  const [renderTotal, setRenderTotal] = useState(0)
 
   let [cart, setCart] = useState([]);
   let localCart = window.localStorage.getItem("cart");
@@ -52,7 +52,9 @@ const Order = (props) => {
         setCart(localCart);
       }
     }
-  }, [userId, localCart]);
+    calculateTotal(order);
+    setRenderTotal(total)
+  }, [userId, localCart, productQuantity, order.length]);
 
   if (localCart) {
     orderWinesAndCheeses = JSON.parse(localCart);
@@ -126,14 +128,41 @@ const Order = (props) => {
   const checkOut = () => {
     const fulfilled = true;
     props.fulfillOrder({ userId, fulfilled });
+    window.localStorage.removeItem('cart')
     location.href = "https://grace-monger.onrender.com/checkout";
   };
 
   const hasOrder = (order) => {
-    if (order.length) {
+    if (order.length && order[0] && order[0].length) {
       return true;
     } else {
       return false;
+    }
+  };
+
+  const calculateTotal = (order) => {
+    if (props.isLoggedIn) {
+      if (hasOrder(order)) {
+        let winePricesArray = [];
+        let cheesePricesArray = [];
+        order[0][0].wines.forEach((element) =>
+          winePricesArray.push(parseInt(element.price) * element.Order_Wine.quantity)
+        );
+        order[1][0].cheeses.forEach((element) =>
+          cheesePricesArray.push(parseInt(element.price) * element.Order_Cheese.quantity)
+        );
+        console.log('WINE', winePricesArray)
+        console.log('CHEESE', cheesePricesArray)
+        total =
+          winePricesArray.reduce((a, b) => a + b) +
+          cheesePricesArray.reduce((a, b) => a + b);
+      }
+    } else {
+      let productPricesArray = [];
+      localCart.forEach((element) =>
+        productPricesArray.push(parseInt(element.price * element.quantity))
+      );
+      total = productPricesArray.reduce((a, b) => a + b);
     }
   };
 
@@ -149,7 +178,6 @@ const Order = (props) => {
               <h2>Your Cart</h2>
               <div className="element-list">
                 {order[0][0].wines.map((wine) => {
-                  wineTotal += parseInt(wine.price) * wineQuantity;
                   return (
                     <article key={wine.id} className="single-element">
                       <Link key={wine.id} to={`/wines/${wine.id}`}>
@@ -168,7 +196,7 @@ const Order = (props) => {
                         placeholder="Change quantity"
                         onChange={handleWineQuantityChanges}
                       />
-                      <p>${wine.price}</p>
+                      <p>Price: ${wine.price}</p>
                       <p> Quantity: {wine.Order_Wine.quantity}</p>
                       <button
                         className="quantity"
@@ -192,10 +220,6 @@ const Order = (props) => {
               </div>
               <div className="element-list">
                 {order[1][0].cheeses.map((cheese) => {
-                  //props.order[1][0].cheeses[0].Order_Cheese
-                  console.log("qty", cheeseQuantity);
-                  cheeseTotal += parseInt(cheese.price) * cheeseQuantity;
-                  console.log("cheese total", cheeseTotal);
                   return (
                     <article key={cheese.id} className="single-element">
                       <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
@@ -214,7 +238,7 @@ const Order = (props) => {
                         placeholder="Change quantity"
                         onChange={handleCheeseQuantityChanges}
                       />
-                      <p>${cheese.price}</p>
+                      <p>Price: ${cheese.price}</p>
                       {/* cheese.Order_Cheese.quantity */}
                       <p> Quantity: {cheese.Order_Cheese.quantity}</p>
                       <button
@@ -239,12 +263,10 @@ const Order = (props) => {
                 })}
               </div>
               <div className="ch">
+              <div className="subtotal">Subtotal: ${renderTotal}</div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
-              </div>
-              <div className="subtotal">
-                Subtotal:$ {cheeseTotal + wineTotal}
               </div>
             </div>
           ) : (
@@ -257,7 +279,7 @@ const Order = (props) => {
       ) : (
         <div>
           {orderWinesAndCheeses.length ? (
-            <div>
+            <div className='element-list'>
               {orderWinesAndCheeses.map((product) => {
                 return (
                   <article key={product.id} className="single-element">
@@ -281,6 +303,7 @@ const Order = (props) => {
                       onChange={handleProductQuantityChanges}
                     />
                     {/* cheese.Order_Cheese.quantity */}
+                    <p>Price: ${product.price}</p>
                     <p> Quantity: {product.quantity} </p>
                     <button
                       className="quantity"
@@ -301,10 +324,10 @@ const Order = (props) => {
                 );
               })}
               <div className="ch">
+              <div>Subtotal: ${renderTotal}</div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
-                <div>Subtotal:</div>
               </div>
             </div>
           ) : (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
@@ -9,11 +9,38 @@ import {
 } from "../store/order";
 
 const PairedCheese = (props) => {
-  let quantity;
+  let quantity = 1;
+  let newQuantity;
+  let [cart, setCart] = useState([]);
+  let [showMessage, setShowMessage] = useState(false)
+
+  let localCart = localStorage.getItem("cart");
+
+  const addToGuestCart = (item) => {
+    let cartCopy = [...cart];
+    let { id } = item;
+    let existingItem = cartCopy.find((cartItem) => cartItem.id == id);
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    } else {
+      cartCopy.push(item);
+    }
+
+    setCart(cartCopy);
+
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", stringCart);
+  };
 
   useEffect(() => {
     props.getSingleCheeseThunk(props.cheese);
     props.fetchOrder(props.userId);
+    localCart = JSON.parse(localCart);
+
+    if (localCart) {
+      setCart(localCart);
+    }
   }, [props.cheese, props.userId]);
 
   const handleClick = () => {
@@ -28,7 +55,7 @@ const PairedCheese = (props) => {
           let cheese = array[i];
 
           if (cheese.id === parseInt(productId)) {
-            quantity = cheese.Order_Cheese.quantity + 1;
+            newQuantity = cheese.Order_Cheese.quantity + 1;
             return true;
           }
         }
@@ -48,8 +75,10 @@ const PairedCheese = (props) => {
         imageUrl: props.singleCheese.imageUrl,
         type: "cheese",
         quantity: parseInt(quantity),
+        price: props.singleCheese.price
       });
     }
+    setShowMessage(true)
   };
 
   const { singleCheese } = props;
@@ -61,7 +90,7 @@ const PairedCheese = (props) => {
         {
           <Link to={`/cheeses/${singleCheese.id}`} key={singleCheese.id}>
             <div>
-              <img src={singleCheese.imageUrl} width="350px" />
+              <img src={singleCheese.imageUrl} className='product-image' width="350px" />
               <h3>{singleCheese.name}</h3>
             </div>
           </Link>
@@ -69,6 +98,7 @@ const PairedCheese = (props) => {
         <button className="add-to-cart" onClick={handleClick}>
           Add to cart
         </button>
+        {showMessage && <p>Added To Cart</p>}
       </div>
     </div>
   );

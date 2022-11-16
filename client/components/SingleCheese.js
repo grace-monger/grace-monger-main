@@ -75,6 +75,7 @@ const SingleCheese = (props) => {
         imageUrl: props.singleCheese.imageUrl,
         type: "cheese",
         quantity: parseInt(quantity),
+        price: props.singleCheese.price
       });
     }
     setShowMessage(true)
