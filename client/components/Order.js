@@ -118,7 +118,7 @@ const Order = (props) => {
               <h2>Your Cart</h2>
               <div className="element-list">
                 {order[0][0].wines.map((wine) => {
-                  wineTotal += parseInt(wine.price)
+                  wineTotal += parseInt(wine.price) * wineQuantity
                   return (
                     <article key={wine.id} className="single-element">
                       <Link key={wine.id} to={`/wines/${wine.id}`}>
@@ -147,7 +147,7 @@ const Order = (props) => {
                       >
                         Change Quantity
                       </button>
-                      <button
+                      <button className="remove-cart"
                         name={order[0][0].id}
                         value={wine.id}
                         onClick={handleWineRemove}
@@ -161,7 +161,9 @@ const Order = (props) => {
               <div className="element-list">
                 {order[1][0].cheeses.map((cheese) => {
                   //props.order[1][0].cheeses[0].Order_Cheese
-                  cheeseTotal += parseInt(cheese.price)
+                  console.log("qty", cheeseQuantity)
+                  cheeseTotal += parseInt(cheese.price) * cheeseQuantity
+                  console.log("cheese total", cheeseTotal)
                   return (
                     <article key={cheese.id} className="single-element">
                       <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
@@ -192,6 +194,7 @@ const Order = (props) => {
                       </button>
                       <br></br>
                       <button
+                        className="remove-cart"
                         name={order[0][0].id}
                         value={cheese.id}
                         onClick={handleCheeseRemove}
@@ -202,7 +205,7 @@ const Order = (props) => {
                   );
                 })}
               </div>
-              <div>
+              <div className="ch">
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
@@ -249,16 +252,16 @@ const Order = (props) => {
                       </button>
                       <br></br>
                       <button
-                      >
+                      className="remove-cart">
                         Remove from Cart
                       </button>
-                    <button >
+                    <button className="remove-cart">
                       Remove from Cart
                     </button>
                   </article>
                 );
               })}
-              <div>
+              <div className="ch">
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
