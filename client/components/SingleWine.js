@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchWinePair, fetchSingleWine } from "../store/singleWine";
 import { me } from "../store";
-import { addNewWineOrderThunk } from "../store/order";
+import {
+  addNewWineOrderThunk,
+  updateWineQuantityThunk,
+  fetchOrder,
+} from "../store/order";
 import EditWine from "./EditWine";
 import PairedCheese from "./PairedCheese";
 
 const SingleWine = (props) => {
   let pairing;
+  let quantity;
   let [cart, setCart] = useState([]);
-  let [quantity, setQuantity] = useState("");
 
   let localCart = localStorage.getItem("cart");
 
@@ -32,19 +36,39 @@ const SingleWine = (props) => {
 
   useEffect(() => {
     props.fetchSingleWine(props.match.params.id);
+    props.fetchOrder(props.userId);
     localCart = JSON.parse(localCart);
 
     if (localCart) {
       setCart(localCart);
     }
-  }, []);
+  }, [props.userId]);
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     if (props.isLoggedIn) {
       // add a thunk here to add product id and userId
-      const userId = props.userId;
+      const userId = props.userId
+      const orderId = props.order[0][0].id;
       const productId = props.match.params.id;
-      props.addNewWineOrderThunk({ userId, productId });
+      
+      const hasWine = (array) => {
+        for (let i = 0; i < array.length; i++) {
+          let wine = array[i];
+          
+          if (wine.id === parseInt(productId)) {
+            quantity = wine.Order_Wine.quantity + 1
+            return true;
+          } 
+        }
+      };
+
+      if (props.order.length > 1) {
+        if (hasWine(props.order[0][0].wines)) {
+          props.updateWine({ orderId, productId, quantity });
+        } else {
+          props.addNewWineOrderThunk({ userId, productId });
+        }
+      }
     } else {
       addToGuestCart({
         id: props.singleWine.id,
@@ -56,20 +80,15 @@ const SingleWine = (props) => {
     }
   };
 
-  // const handleChange = (event) => {
-  //   if (event.target.className === "quantity-incrementor") {
-  //     setQuantity(event.target.value);
-  //   }
-  // };
   const { singleWine } = props;
   const cheese = singleWine.cheeseId;
-  
+
   if (singleWine.cheeseId) {
     pairing = <PairedCheese cheese={cheese} />;
   } else {
     pairing = <p>Currently, this wine has no pairings.</p>;
   }
-
+  console.log("props", props);
   return (
     <div>
       <div className="big-single">
@@ -110,7 +129,7 @@ const mapState = (state) => {
     userId: state.auth.id,
     isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
-    // winePair: storeState.cheese,
+    order: state.order,
   };
 };
 
@@ -119,7 +138,9 @@ const mapDispatch = (dispatch) => {
     fetchSingleWine: (id) => dispatch(fetchSingleWine(id)),
     addNewWineOrderThunk: (orderInfo) =>
       dispatch(addNewWineOrderThunk(orderInfo)),
-    // fetchWinePair: (id) => dispatch(fetchWinePair(id)),
+    updateWine: (infoToUpdate) =>
+      dispatch(updateWineQuantityThunk(infoToUpdate)),
+    fetchOrder: (userId) => dispatch(fetchOrder(userId)),
   };
 };
 

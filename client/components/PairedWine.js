@@ -2,20 +2,45 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSingleWine } from "../store/singleWine";
-import { addNewWineOrderThunk } from "../store/order";
+import {
+  addNewWineOrderThunk,
+  updateWineQuantityThunk,
+  fetchOrder,
+} from "../store/order";
 
 const PairedWine = (props) => {
+  let quantity;
+
   useEffect(() => {
     props.fetchSingleWine(props.wine);
-  }, [props.wine]);
+    props.fetchOrder(props.userId);
+  }, [props.wine, props.userId]);
 
   const handleClick = () => {
     if (props.isLoggedIn) {
       // add a thunk here to add product id and userId
       const userId = props.userId;
+      const orderId = props.order[0][0].id;
       const productId = props.singleWine.id;
 
-      props.addNewWineOrderThunk({ userId, productId });
+      const hasWine = (array) => {
+        for (let i = 0; i < array.length; i++) {
+          let wine = array[i];
+
+          if (wine.id === parseInt(productId)) {
+            quantity = wine.Order_Wine.quantity + 1;
+            return true;
+          }
+        }
+      };
+
+      if (props.order.length > 1) {
+        if (hasWine(props.order[0][0].wines)) {
+          props.updateWine({ orderId, productId, quantity });
+        } else {
+          props.addNewWineOrderThunk({ userId, productId });
+        }
+      }
     } else {
       addToGuestCart({
         id: props.singleWine.id,
@@ -55,6 +80,7 @@ const mapState = (state) => {
     singleWine: state.singleWineReducer,
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
+    order: state.order,
   };
 };
 
@@ -63,6 +89,9 @@ const mapDispatch = (dispatch) => {
     fetchSingleWine: (wineId) => dispatch(fetchSingleWine(wineId)),
     addNewWineOrderThunk: (orderInfo) =>
       dispatch(addNewWineOrderThunk(orderInfo)),
+    updateWine: (infoToUpdate) =>
+      dispatch(updateWineQuantityThunk(infoToUpdate)),
+    fetchOrder: (userId) => dispatch(fetchOrder(userId)),
   };
 };
 
