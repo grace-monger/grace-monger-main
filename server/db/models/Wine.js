@@ -28,7 +28,7 @@ const Wine = db.define("wine", {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isIn: [["red", "white", "orange", "rosé", "sparkling"]],
+      // isIn: [["red", "white", "orange", "rosé", "sparkling"]],
     },
   },
   typeOfGrape: {

@@ -43,9 +43,15 @@ export const fetchWines = () => {
 };
 
 export const createWine = (wine) => {
+  console.log("wine");
   return async (dispatch) => {
-    const { data: created } = await axios.post("/api/wines", wine);
-    dispatch(_createWine(created));
+    try {
+      const { data } = await axios.post(`/api/wines`, wine);
+      console.log("in create thunk", data);
+      dispatch(_createWine(data));
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
