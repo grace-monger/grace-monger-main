@@ -36,7 +36,6 @@ const Navbar = ({ isLoggedIn, isAdmin }) => {
             <Link to="/cheeses">Cheese</Link>
             <Link to="/wines">Wine</Link>
             {isAdmin ? <Link to="users/all">Users</Link> : null}
-            <i className="bi bi-person"></i>
             <Link to="/order">
               <i className="bi bi-cart4"></i>
             </Link>
@@ -52,7 +51,6 @@ const Navbar = ({ isLoggedIn, isAdmin }) => {
             <Link to="/wines">Wine</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <i className="bi bi-person"></i>
             <Link to="/order">
               <i className="bi bi-cart4"></i>
             </Link>

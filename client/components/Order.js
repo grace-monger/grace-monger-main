@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import {
   fetchOrder,
   removeWineOrderThunk,
-  removeCheeseOrderThunk, fulfillOrder
+  removeCheeseOrderThunk,
+  fulfillOrder,
 } from "../store/order";
 import Checkout from "./Checkout";
 import {
@@ -19,14 +20,28 @@ const Order = (props) => {
   const userId = props.userId;
   const { order } = props;
   let orderWinesAndCheeses;
-  let cheeseTotal = 0
-  let wineTotal = 0
+  let total = 0;
 
   const [wineQuantity, changeWineQuantity] = useState(1);
   const [cheeseQuantity, changeCheeseQuantity] = useState(1);
+  const [productQuantity, changeProductQuantity] = useState(1);
+  const [renderTotal, setRenderTotal] = useState(0)
 
   let [cart, setCart] = useState([]);
   let localCart = window.localStorage.getItem("cart");
+
+  const updateQuantityInGuestCart = (productId, amount) => {
+    let cartCopy = [...cart];
+
+    let existingItem = cartCopy.find((cartItem) => cartItem.id == productId);
+
+    existingItem.quantity = parseInt(amount);
+
+    setCart(cartCopy);
+
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", cartString);
+  };
 
   useEffect(() => {
     if (props.isLoggedIn) {
@@ -37,7 +52,9 @@ const Order = (props) => {
         setCart(localCart);
       }
     }
-  }, [userId, localCart]);
+    calculateTotal(order);
+    setRenderTotal(total)
+  }, [userId, localCart, productQuantity, order.length]);
 
   if (localCart) {
     orderWinesAndCheeses = JSON.parse(localCart);
@@ -51,10 +68,15 @@ const Order = (props) => {
     changeWineQuantity(event.target.value);
   };
 
+  const handleProductQuantityChanges = (event) => {
+    changeProductQuantity(event.target.value);
+  };
+
   const handleCheeseQuantityClick = (event) => {
     const orderId = parseInt(event.target.name);
     const productId = parseInt(event.target.value);
     const quantity = parseInt(cheeseQuantity);
+
     props.updateCheese({ orderId, productId, quantity });
     window.location.reload();
   };
@@ -63,14 +85,22 @@ const Order = (props) => {
     const orderId = parseInt(event.target.name);
     const productId = parseInt(event.target.value);
     const quantity = parseInt(wineQuantity);
+
     props.updateWine({ orderId, productId, quantity });
     window.location.reload();
+  };
+
+  const handleProductQuantityClick = (event) => {
+    const productId = parseInt(event.target.value);
+
+    updateQuantityInGuestCart(productId, productQuantity);
   };
 
   const handleWineRemove = (event) => {
     const orderId = parseInt(event.target.name);
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
+
     props.removeWineOrderThunk(id);
     window.location.reload();
   };
@@ -79,6 +109,7 @@ const Order = (props) => {
     const orderId = parseInt(event.target.name);
     const productId = parseInt(event.target.value);
     const id = `${orderId}-${productId}`;
+
     props.removeCheeseOrderThunk(id);
     window.location.reload();
   };
@@ -95,20 +126,47 @@ const Order = (props) => {
   };
 
   const checkOut = () => {
-    const fulfilled = true
-    props.fulfillOrder({userId, fulfilled})
+    const fulfilled = true;
+    props.fulfillOrder({ userId, fulfilled });
+    window.localStorage.removeItem('cart')
     location.href = "https://grace-monger.onrender.com/checkout";
   };
 
   const hasOrder = (order) => {
-    if (order.length) {
+    if (order.length && order[0] && order[0].length) {
       return true;
     } else {
       return false;
     }
   };
 
-  console.log('PROPS', props)
+  const calculateTotal = (order) => {
+    if (props.isLoggedIn) {
+      if (hasOrder(order)) {
+        let winePricesArray = [];
+        let cheesePricesArray = [];
+        order[0][0].wines.forEach((element) =>
+          winePricesArray.push(parseInt(element.price) * element.Order_Wine.quantity)
+        );
+        order[1][0].cheeses.forEach((element) =>
+          cheesePricesArray.push(parseInt(element.price) * element.Order_Cheese.quantity)
+        );
+        console.log('WINE', winePricesArray)
+        console.log('CHEESE', cheesePricesArray)
+        total =
+          winePricesArray.reduce((a, b) => a + b) +
+          cheesePricesArray.reduce((a, b) => a + b);
+      }
+    } else {
+      let productPricesArray = [];
+      localCart.forEach((element) =>
+        productPricesArray.push(parseInt(element.price * element.quantity))
+      );
+      total = productPricesArray.reduce((a, b) => a + b);
+    }
+  };
+
+  console.log("PROPS", props);
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
@@ -120,7 +178,6 @@ const Order = (props) => {
               <h2>Your Cart</h2>
               <div className="element-list">
                 {order[0][0].wines.map((wine) => {
-                  wineTotal += parseInt(wine.price) * wineQuantity
                   return (
                     <article key={wine.id} className="single-element">
                       <Link key={wine.id} to={`/wines/${wine.id}`}>
@@ -138,8 +195,8 @@ const Order = (props) => {
                         className="quantity-incrementor"
                         placeholder="Change quantity"
                         onChange={handleWineQuantityChanges}
-                        />
-                      <p>${wine.price}</p>
+                      />
+                      <p>Price: ${wine.price}</p>
                       <p> Quantity: {wine.Order_Wine.quantity}</p>
                       <button
                         className="quantity"
@@ -149,7 +206,8 @@ const Order = (props) => {
                       >
                         Change Quantity
                       </button>
-                      <button className="remove-cart"
+                      <button
+                        className="remove-cart"
                         name={order[0][0].id}
                         value={wine.id}
                         onClick={handleWineRemove}
@@ -162,10 +220,6 @@ const Order = (props) => {
               </div>
               <div className="element-list">
                 {order[1][0].cheeses.map((cheese) => {
-                  //props.order[1][0].cheeses[0].Order_Cheese
-                  console.log("qty", cheeseQuantity)
-                  cheeseTotal += parseInt(cheese.price) * cheeseQuantity
-                  console.log("cheese total", cheeseTotal)
                   return (
                     <article key={cheese.id} className="single-element">
                       <Link key={cheese.id} to={`/cheeses/${cheese.id}`}>
@@ -173,7 +227,7 @@ const Order = (props) => {
                           className="product-img"
                           width="150px"
                           src={cheese.imageUrl}
-                          />
+                        />
                         <h2>{cheese.name}</h2>
                       </Link>
                       <input
@@ -183,11 +237,12 @@ const Order = (props) => {
                         className="quantity-incrementor"
                         placeholder="Change quantity"
                         onChange={handleCheeseQuantityChanges}
-                        />
-                        <p>${cheese.price}</p>
+                      />
+                      <p>Price: ${cheese.price}</p>
                       {/* cheese.Order_Cheese.quantity */}
                       <p> Quantity: {cheese.Order_Cheese.quantity}</p>
-                      <button className="quantity"
+                      <button
+                        className="quantity"
                         name={order[1][0].id}
                         value={cheese.id}
                         onClick={handleCheeseQuantityClick}
@@ -208,11 +263,11 @@ const Order = (props) => {
                 })}
               </div>
               <div className="ch">
+              <div className="subtotal">Subtotal: ${renderTotal}</div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
               </div>
-              <div className="subtotal">Subtotal:$ {cheeseTotal + wineTotal}</div>
             </div>
           ) : (
             <div>
@@ -224,7 +279,7 @@ const Order = (props) => {
       ) : (
         <div>
           {orderWinesAndCheeses.length ? (
-            <div>
+            <div className='element-list'>
               {orderWinesAndCheeses.map((product) => {
                 return (
                   <article key={product.id} className="single-element">
@@ -240,34 +295,39 @@ const Order = (props) => {
                       <h2>{product.name}</h2>
                     </Link>
                     <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        className="quantity-incrementor"
-                        placeholder="Change quantity"
-                        />
-                      {/* cheese.Order_Cheese.quantity */}
-                      <p> Quantity: </p>
-                      <button className="quantity"
-                      >
-                        Change Quantity
-                      </button>
-                      <br></br>
-                      <button
-                      className="remove-cart">
-                        Remove from Cart
-                      </button>
-                    <button className="remove-cart">
+                      type="number"
+                      min="0"
+                      step="1"
+                      className="quantity-incrementor"
+                      placeholder="Change quantity"
+                      onChange={handleProductQuantityChanges}
+                    />
+                    {/* cheese.Order_Cheese.quantity */}
+                    <p>Price: ${product.price}</p>
+                    <p> Quantity: {product.quantity} </p>
+                    <button
+                      className="quantity"
+                      value={product.id}
+                      onClick={handleProductQuantityClick}
+                    >
+                      Change Quantity
+                    </button>
+                    <br></br>
+                    <button
+                      className="remove-cart"
+                      value={product.id}
+                      onClick={handleProductRemove}
+                    >
                       Remove from Cart
                     </button>
                   </article>
                 );
               })}
               <div className="ch">
+              <div>Subtotal: ${renderTotal}</div>
                 <button className="checkout" onClick={checkOut}>
                   CHECKOUT
                 </button>
-                <div>Subtotal:</div>
               </div>
             </div>
           ) : (
@@ -302,8 +362,8 @@ const mapDispatch = (dispatch) => {
       dispatch(updateWineQuantityThunk(infoToUpdate));
     },
     fulfillOrder: (infoToUpdate) => {
-      dispatch(fulfillOrder(infoToUpdate))
-    }
+      dispatch(fulfillOrder(infoToUpdate));
+    },
   };
 };
 

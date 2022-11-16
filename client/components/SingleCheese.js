@@ -9,8 +9,9 @@ import PairedWine from "./PairedWine";
 const SingleCheese = (props) => {
 
   let pairing;
-  let quantity;
+  let newQuantity;
   let [cart, setCart] = useState([]);
+  let [quantity, setQuantity] = useState(1)
   let [showMessage, setShowMessage] = useState(false)
 
   let localCart = localStorage.getItem("cart");
@@ -54,7 +55,7 @@ const SingleCheese = (props) => {
           let cheese = array[i];
           
           if (cheese.id === parseInt(productId)) {
-            quantity = cheese.Order_Cheese.quantity + 1
+            newQuantity = cheese.Order_Cheese.quantity + 1
             return true;
           } 
         }
@@ -62,7 +63,7 @@ const SingleCheese = (props) => {
       
       if (props.order.length > 1) {
         if (hasCheese(props.order[1][0].cheeses)) {
-          props.updateCheese({ orderId, productId, quantity });
+          props.updateCheese({ orderId, productId, newQuantity });
         } else {
           props.addNewCheeseOrderThunk({ userId, productId });
         }
@@ -74,6 +75,7 @@ const SingleCheese = (props) => {
         imageUrl: props.singleCheese.imageUrl,
         type: "cheese",
         quantity: parseInt(quantity),
+        price: props.singleCheese.price
       });
     }
     setShowMessage(true)
