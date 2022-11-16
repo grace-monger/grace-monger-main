@@ -342,3 +342,42 @@ p {
   display: block;
   text-align: center;
 }
+
+.signup {
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Slabo 27px", serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.signup:hover {
+  background-color: darkblue;
+  transition: 0.7s;
+}
+
+
+.login {
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Slabo 27px", serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.login:hover {
+  background-color: darkblue;
+  transition: 0.7s;
+}
