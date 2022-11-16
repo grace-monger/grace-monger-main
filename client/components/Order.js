@@ -46,18 +46,21 @@ const Order = (props) => {
   useEffect(() => {
     if (props.isLoggedIn) {
       props.fetchOrder(userId);
+      calculateTotal(order)
     } else {
       localCart = JSON.parse(localCart);
       if (localCart) {
         setCart(localCart);
+        calculateTotal(order);
       }
     }
-    calculateTotal(order);
     setRenderTotal(total)
   }, [userId, localCart, productQuantity, order.length]);
 
   if (localCart) {
     orderWinesAndCheeses = JSON.parse(localCart);
+  } else {
+    orderWinesAndCheeses = [];
   }
 
   const handleCheeseQuantityChanges = (event) => {
@@ -140,6 +143,15 @@ const Order = (props) => {
     }
   };
 
+  const hasOrderWinesAndCheeses = (orderWinesAndCheeses) => {
+    if (orderWinesAndCheeses.length >= 1) {
+      console.log('ORDERWINESANDCHEESES', orderWinesAndCheeses)
+      return true
+    } else {
+      return false
+    }
+  }
+
   const calculateTotal = (order) => {
     if (props.isLoggedIn) {
       if (hasOrder(order)) {
@@ -162,11 +174,14 @@ const Order = (props) => {
       localCart.forEach((element) =>
         productPricesArray.push(parseInt(element.price * element.quantity))
       );
-      total = productPricesArray.reduce((a, b) => a + b);
+      if (productPricesArray.length) {
+        total = productPricesArray.reduce((a, b) => a + b);
+      }
     }
   };
 
   console.log("PROPS", props);
+  console.log('is logged in', props.isLoggedIn)
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
@@ -278,7 +293,7 @@ const Order = (props) => {
         </div>
       ) : (
         <div>
-          {orderWinesAndCheeses.length ? (
+          {hasOrderWinesAndCheeses(orderWinesAndCheeses) ? (
             <div className='element-list'>
               {orderWinesAndCheeses.map((product) => {
                 return (
