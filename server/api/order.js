@@ -215,4 +215,19 @@ orderRouter.put("/updateWine", async (req, res, next) => {
   }
 });
 
+orderRouter.put("/updateOrder", async (req, res, next) => {
+  try {
+    console.log('REQUESTBODY', req.body)
+    const order = await Order.findOne({
+      where: {
+        userId: req.body.userId
+      }
+    });
+    res.send(await order.update(req.body))
+    res.sendStatus(203)
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = orderRouter;

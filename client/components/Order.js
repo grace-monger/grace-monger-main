@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   fetchOrder,
   removeWineOrderThunk,
-  removeCheeseOrderThunk,
+  removeCheeseOrderThunk, fulfillOrder
 } from "../store/order";
 import Checkout from "./Checkout";
 import {
@@ -95,6 +95,8 @@ const Order = (props) => {
   };
 
   const checkOut = () => {
+    const fulfilled = true
+    props.fulfillOrder({userId, fulfilled})
     location.href = "https://grace-monger.onrender.com/checkout";
   };
 
@@ -106,7 +108,7 @@ const Order = (props) => {
     }
   };
 
-
+  console.log('PROPS', props)
   //WE WILL NEED TO CONSIDER HOW TO HANDLE MAPPING OF WINE AND CHEESE ORDERS
   //SHOULD EACH ITEM LINK TO ITS SINGLEPAGE?
   return (
@@ -299,6 +301,9 @@ const mapDispatch = (dispatch) => {
     updateWine: (infoToUpdate) => {
       dispatch(updateWineQuantityThunk(infoToUpdate));
     },
+    fulfillOrder: (infoToUpdate) => {
+      dispatch(fulfillOrder(infoToUpdate))
+    }
   };
 };
 
