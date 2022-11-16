@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getSingleCheeseThunk } from "../store/singleCheese";
 import { me } from "../store";
-import { addNewCheeseOrderThunk } from "../store/order";
+import { addNewCheeseOrderThunk, updateCheeseQuantityThunk, fetchOrder } from "../store/order";
 import EditCheese from "./EditCheese";
 import PairedWine from "./PairedWine";
 
 const SingleCheese = (props) => {
   let pairing;
+  let quantity;
   let [cart, setCart] = useState([]);
-  let [quantity, setQuantity] = useState("");
 
   let localCart = localStorage.getItem("cart");
 
@@ -32,19 +32,39 @@ const SingleCheese = (props) => {
 
   useEffect(() => {
     props.getSingleCheeseThunk(props.match.params.id);
+    props.fetchOrder(props.userId)
     localCart = JSON.parse(localCart);
 
     if (localCart) {
       setCart(localCart);
     }
-  }, []);
-
+  }, [props.userId]);
+ 
   const handleClick = () => {
     if (props.isLoggedIn) {
       // add a thunk here to add product id and userId
       const userId = props.userId;
+      const orderId = props.order[1][0].id
       const productId = props.match.params.id;
-      props.addNewCheeseOrderThunk({ userId, productId });
+
+      const hasCheese = (array) => {
+        for (let i = 0; i < array.length; i++) {
+          let cheese = array[i];
+          
+          if (cheese.id === parseInt(productId)) {
+            quantity = cheese.Order_Cheese.quantity + 1
+            return true;
+          } 
+        }
+      };
+      
+      if (props.order.length > 1) {
+        if (hasCheese(props.order[1][0].cheeses)) {
+          props.updateCheese({ orderId, productId, quantity });
+        } else {
+          props.addNewCheeseOrderThunk({ userId, productId });
+        }
+      }
     } else {
       addToGuestCart({
         id: props.singleCheese.id,
@@ -100,6 +120,7 @@ const mapState = (state) => {
     userId: state.auth.id,
     isAdmin: state.auth.isAdmin,
     isLoggedIn: !!state.auth.id,
+    order: state.order
   };
 };
 
@@ -108,6 +129,8 @@ const mapDispatch = (dispatch) => {
     getSingleCheeseThunk: (id) => dispatch(getSingleCheeseThunk(id)),
     addNewCheeseOrderThunk: (orderInfo) =>
       dispatch(addNewCheeseOrderThunk(orderInfo)),
+      updateCheese: (infoToUpdate) => dispatch(updateCheeseQuantityThunk(infoToUpdate)),
+      fetchOrder: (userId) => dispatch(fetchOrder(userId))
   };
 };
 
