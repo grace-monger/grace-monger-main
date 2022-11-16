@@ -250,3 +250,66 @@ h2 {
   padding: 0 1rem;
   font-size: 1.5rem;
 }
+
+.quantity {
+  background-color: orange;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Slabo 27px", serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.remove-cart {
+  background-color: orange;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Slabo 27px", serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.checkout {
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Slabo 27px", serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.remove-cart:hover {
+  background-color: darkgoldenrod;
+  transition: 0.7s;
+}
+
+.quantity:hover {
+  background-color: darkgoldenrod;
+  transition: 0.7s;
+}
+
+.checkout:hover {
+  background-color: darkblue;
+  transition: 0.7s;
+}
+
+.ch {
+  flex: display;
+  flex-direction: row;
+  justify-content: center;
+}
