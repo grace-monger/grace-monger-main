@@ -42,7 +42,9 @@ wineRouter.put("/:id", async (req, res, next) => {
 
 wineRouter.post("/", async (req, res, next) => {
   try {
+    console.log("req..body", req.body)
     const newWine = await Wine.create(req.body);
+    console.log("newwine", newWine)
     res.status(201).send(newWine);
   } catch (error) {
     next(error);

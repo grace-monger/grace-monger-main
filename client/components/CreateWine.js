@@ -14,6 +14,7 @@ const CreateWine = (props) => {
   const [quantity, setQuantity] = useState(20);
   const [imageUrl, setImageUrl] = useState("");
 
+  console.log("props in create wine", props)
   const handleChange = (event) => {
     if (event.target.name === "name") {
       setName(event.target.value);
