@@ -44,7 +44,7 @@ const Wine = db.define("wine", {
   price: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
-    defaultValue: 19.99,
+    defaultValue: 20,
     validate: {
       isDecimal: true,
     },
@@ -64,4 +64,4 @@ const Wine = db.define("wine", {
   },
 });
 
-module.exports = Wine
+module.exports = Wine;

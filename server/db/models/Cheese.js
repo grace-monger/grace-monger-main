@@ -44,7 +44,7 @@ const Cheese = db.define("cheese", {
   price: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
-    defaultValue: 19.99,
+    defaultValue: 20,
     validate: {
       isDecimal: true,
     },
@@ -67,4 +67,4 @@ const Cheese = db.define("cheese", {
   },
 });
 
-module.exports = Cheese
+module.exports = Cheese;
