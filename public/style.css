@@ -339,8 +339,6 @@ p {
   flex: display;
   flex-direction: row;
   justify-content: center;
-  display: block;
-  text-align: center;
 }
 
 .signup {
